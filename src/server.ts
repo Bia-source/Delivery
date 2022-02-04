@@ -1,7 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
 import "express-async-errors";
 import "dotenv/config";
-import { routes } from './routes';
+import { routes } from './index.routes';
 
 const app = express();
 app.use(express.json());
@@ -13,10 +13,11 @@ app.use((err: Error, request: Request, response: Response, next: NextFunction) =
             message: err.message
         });
     }
+    next();
     return response.status(500).json({
         status: "error",
         message: "Internal server error"
     });
-    next()
+    
 })
 app.listen(2022, () => console.log("Server is running"));

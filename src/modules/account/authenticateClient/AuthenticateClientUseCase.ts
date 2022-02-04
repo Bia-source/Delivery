@@ -1,29 +1,21 @@
 import { prisma } from "../../../database/prismaClient";
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken"
-
-interface IRequestAuthenticate{
-    username: string;
-    password: string;
-}
+import { IRequestCreate } from "../../../share/interfaces";
+import { passwordInvalid, userAlreadyExists } from "../../../share/validators";
 
 export class AuthenticateClientUseCase{
-    async execute({username, password}: IRequestAuthenticate) {
+    async execute({username, password}: IRequestCreate) {
         const client = await prisma.clients.findFirst({
             where: {
                 username
             }
         });
+        userAlreadyExists(client);
+
+        const passwordMatch = await compare(password, client.password)
+        passwordInvalid(passwordMatch)
         
-        if(!client) {
-            throw new Error("Username or password invalid")
-        }
-
-        const passwordMatch = await compare(password,client.password)
-        if(!passwordMatch) {
-            throw new Error("Username or password invalid")
-        }
-
         const token = sign({username}, `${process.env.TOKEN_KEY}`, {
             subject: client.id,
             expiresIn: "1d"
