@@ -5,6 +5,9 @@
   "repository": "https://github.com/Bia-source/Ignite2022.git",
   "author": "bfsantos <bfsantos@rd.com.br>",
   "license": "MIT",
+  "scripts": {
+    "dev": "ts-node-dev --exit-child --transpile-only --ignore-watch node_modules src/server.ts"
+  },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/express": "^4.17.13",
