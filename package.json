@@ -1,0 +1,22 @@
+{
+  "name": "Ignite2022",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Bia-source/Ignite2022.git",
+  "author": "bfsantos <bfsantos@rd.com.br>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/express": "^4.17.13",
+    "@types/jsonwebtoken": "^8.5.8",
+    "prisma": "^3.9.1",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "@prisma/client": "^3.9.1",
+    "bcrypt": "^5.0.1",
+    "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1"
+  }
+}
