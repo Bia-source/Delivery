@@ -1,11 +1,8 @@
-import express, { request } from "express";
+import express from "express";
+// import "dotenv/config";
+import { routes } from './routes';
 
 const app = express();
-
-app.get("/", (request, response) => {
-    return response.json({
-        message: "Hello World",
-    });
-});
-
-app.listen(3000, () => console.log("Server is running"));
+app.use(express.json());
+app.use(routes);
+app.listen(2022, () => console.log("Server is running"));
