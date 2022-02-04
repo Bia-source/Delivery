@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { CreateClientController } from "./modules/clients/useCases/createClient/CreateClientController";
+import { authenticate } from "./modules/account/routes";
+import { client } from "./modules/clients/routes";
 
 const routes = Router();
 
-const createClientController = new CreateClientController();
-
-routes.post("/client/", createClientController.handle);
+routes.use("/client",client);
+routes.use("/authenticate", authenticate);
 
 export { routes }
