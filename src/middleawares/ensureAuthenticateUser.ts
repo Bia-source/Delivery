@@ -6,8 +6,9 @@ interface IPayload {
     sub: string;
 }
 
-export async function ensureAuthenticateClient(req: Request, res: Response, next: NextFunction) {
+export async function ensureAuthenticateUser(req: Request, res: Response, next: NextFunction) {
     const authHeader = req.headers.authorization;
+    const { type_user } = req.query;
     if(!authHeader) {
         return res.status(401).json({
             message: "Token missing!"
@@ -15,16 +16,19 @@ export async function ensureAuthenticateClient(req: Request, res: Response, next
     }
 
     const [, token] = authHeader.split(" ");
+    let findUser = null;
+    if(type_user === 'client' || !type_user) { findUser = prisma.clients; }
+    if(type_user === 'deliveryman') { findUser = prisma.deliveryman; }
 
     try {
         const { sub } = verify(token, `${process.env.TOKEN_KEY}`) as IPayload;
-        const client = await prisma.clients.findFirst({
+        const user = await findUser.findFirst({
             where: {
                 id: sub
             }
         })
         req.id = sub;
-        req.username = client.username;
+        req.username = user.username;
         next();
     } catch (error) {
         return res.status(401).json({
