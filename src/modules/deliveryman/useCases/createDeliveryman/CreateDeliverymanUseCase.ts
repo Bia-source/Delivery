@@ -10,9 +10,7 @@ export class CreateDeliverymanUseCase {
     async execute({username, password}: IRequestDeliveryman): Promise<any> {
         const deliveryman = await prisma.deliveryman.findFirst({
             where: {
-                username: {
-                    mode: "insensitive"
-                }
+                username
             }
         });
 
