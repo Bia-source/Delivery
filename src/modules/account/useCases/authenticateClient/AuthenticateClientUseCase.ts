@@ -1,8 +1,8 @@
-import { prisma } from "../../../database/prismaClient";
+import { prisma } from "../../../../database/prismaClient";
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken"
-import { IRequestCreate } from "../../../share/interfaces";
-import { passwordInvalid, userAlreadyExists } from "../../../share/validators";
+import { IRequestCreate } from "../../../../share/interfaces";
+import { passwordInvalid, userAlreadyExists } from "../../../../share/validators";
 
 export class AuthenticateClientUseCase{
     async execute({username, password}: IRequestCreate) {

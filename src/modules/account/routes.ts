@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { AuthenticateClientController } from "./authenticateClient/AuthenticateClientController";
-import { AuthenticateDeliverymanController } from "./authenticateDeliveryman/AuthenticateDeliverymanController";
+import { AuthenticateClientController } from "./useCases/authenticateClient/AuthenticateClientController";
+import { AuthenticateDeliverymanController } from "./useCases/authenticateDeliveryman/AuthenticateDeliverymanController";
 
 const authenticate = Router();
 const authenticateClientController = new AuthenticateClientController();

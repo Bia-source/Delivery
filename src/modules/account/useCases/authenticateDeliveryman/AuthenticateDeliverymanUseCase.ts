@@ -1,8 +1,8 @@
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
-import { prisma } from "../../../database/prismaClient";
-import { IRequestCreate } from "../../../share/interfaces";
-import { passwordInvalid, userAlreadyExists } from "../../../share/validators";
+import { prisma } from "../../../../database/prismaClient";
+import { IRequestCreate } from "../../../../share/interfaces";
+import { passwordInvalid, userAlreadyExists } from "../../../../share/validators";
 
 
 export class AuthenticateDeliverymanUseCase {
