@@ -1,5 +1,6 @@
 import { Status } from "@prisma/client";
 import { prisma } from "../../../../database/prismaClient";
+import { mapDelivery } from "../../../../share/FormatReturn/map";
 
 
 export class FindByStatusUseCase {
@@ -7,8 +8,17 @@ export class FindByStatusUseCase {
        const deliveries = await prisma.deliveries.findMany({
            where: {
                status: status
+           },
+           select: {
+               id: true,
+               client: true,
+               item_name: true,
+               id_deliveryman: true,
+               created_at: true,
+               end_at: true,
+               status: true,
            }
        });
-       return deliveries;
+       return mapDelivery(deliveries);
     }
 }
