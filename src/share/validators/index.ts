@@ -1,3 +1,4 @@
+import { Deliveries } from "@prisma/client";
 import { IUser } from "../interfaces";
 
 export function userAlreadyExists(user: IUser | null) {
@@ -10,4 +11,8 @@ export function passwordInvalid(password: boolean) {
     if(!password) {
             throw new Error("Username or password invalid")
     }
+}
+
+export function deliveryAlreadyExist(){
+        throw new Error("Delivery not found!");
 }

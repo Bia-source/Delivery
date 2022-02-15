@@ -1,3 +1,5 @@
+import { Clients } from "@prisma/client";
+
 export interface IRequestCreate{
     username: string;
     password: string;

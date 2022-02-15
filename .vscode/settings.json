@@ -1,3 +1,3 @@
 {
-    "typescript.tsdk": "/Users/bfsantos/Desktop/ignite2022/Ignite2022/node_modules/typescript/lib"
+    "typescript.tsdk": "node_modules/typescript/lib"
 }

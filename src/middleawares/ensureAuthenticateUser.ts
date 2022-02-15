@@ -27,6 +27,7 @@ export async function ensureAuthenticateUser(req: Request, res: Response, next: 
                 id: sub
             }
         })
+
         req.id = sub;
         req.username = user.username;
         next();

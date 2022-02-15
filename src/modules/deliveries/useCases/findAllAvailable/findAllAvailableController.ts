@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { FindAllAvailableUseCase } from "./findAllAvailableUseCase";
+import { FindAllAvailableUseCase } from "./FindAllAvailableUseCase";
 
 
 export class FindAllAvailableController {
