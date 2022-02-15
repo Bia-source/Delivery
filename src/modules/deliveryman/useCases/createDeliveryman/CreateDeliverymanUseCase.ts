@@ -23,6 +23,10 @@ export class CreateDeliverymanUseCase {
             data: {
                 username,
                 password: hashPassword
+            },
+            select:{
+                id: true,
+                username: true
             }
         });
 
