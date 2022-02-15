@@ -36,6 +36,12 @@ model Deliveries {
   deliveryman    Deliveryman? @relation(fields: [id_deliveryman], references: [id])
   created_at     DateTime     @default(now())
   end_at         DateTime?   
-
+  status         Status       @default(AGUARDANDO)
   @@map("deliveries")
+}
+
+enum Status {
+  AGUARDANDO
+  TRANSITO
+  ENTREGUE
 }

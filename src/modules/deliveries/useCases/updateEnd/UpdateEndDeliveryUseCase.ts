@@ -1,19 +1,19 @@
 import { prisma } from "../../../../database/prismaClient";
-import { deliveryAlreadyExist } from "../../../../share/validators";
 import { IRequestUpdateDelivery } from "../../../../share/interfaces";
+import { deliveryAlreadyExist } from "../../../../share/validators";
 
-export class UpdateDeliverymanUseCase {
+export class UpdateEndDeliveryUseCase {
     async execute({id_delivery, id_deliveryman}: IRequestUpdateDelivery){
         try {
             const delivery = await prisma.deliveries.update({
-                where:{
+                where: {
                     id: id_delivery
                 },
                 data: {
-                    id_deliveryman,
-                    status: "TRANSITO"
+                    end_at: new Date(),
+                    status: "ENTREGUE"
                 }
-            })
+            });
             return delivery;
         } catch (error) {
             deliveryAlreadyExist();

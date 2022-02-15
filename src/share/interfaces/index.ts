@@ -1,4 +1,3 @@
-import { Clients } from "@prisma/client";
 
 export interface IRequestCreate{
     username: string;
@@ -9,4 +8,10 @@ export interface IUser {
     id: string;
     username: string;
     password: string;
+}
+
+
+export interface IRequestUpdateDelivery{
+    id_delivery: string;
+    id_deliveryman: string;
 }
