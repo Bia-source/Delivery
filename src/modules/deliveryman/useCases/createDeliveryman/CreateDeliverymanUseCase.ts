@@ -1,5 +1,6 @@
 import { hash } from "bcrypt";
 import { prisma } from "../../../../database/prismaClient";
+import { MessageNewUser, TitleNewUser } from "../../../../share/sendEmail/messages";
 import { sendMail } from "../../../../share/sendEmail/SendEmail";
 
 interface IRequestDeliveryman {
@@ -34,7 +35,7 @@ export class CreateDeliverymanUseCase {
                 username: true
             }
         });
-        sendMail({email, username, type_user:"DELIVERYMAN"});
+        sendMail({email, username, messageText: MessageNewUser.DELIVERYMAN_USER, titleEmail: TitleNewUser.DELIVERYMAN_USER});
 
         return clientDeliveryman;
     }

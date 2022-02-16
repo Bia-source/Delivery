@@ -1,6 +1,7 @@
 import { prisma } from '../../../../database/prismaClient';
 import { hash } from "bcrypt"
 import { sendMail } from '../../../../share/sendEmail/SendEmail';
+import { MessageNewUser, TitleNewUser } from '../../../../share/sendEmail/messages';
 
 interface IRequestClient {
     username: string;
@@ -35,7 +36,7 @@ export class CreateClientUseCase {
             }
         });
 
-        sendMail({email, username, type_user: "CLIENT"});
+        sendMail({email, username, messageText: MessageNewUser.CLIENT_USER, titleEmail: TitleNewUser.CLIENT_USER});
         return newClient;
    }
 } 
