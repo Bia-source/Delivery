@@ -1,5 +1,5 @@
 # Ignite2022
 
-## TODO mandar notificacao de status via email
+## TODO atualizar filtros de acordo com tipo de usuario 
 ## TODO criar testes unitários 
 ## https://git.heroku.com/delivery-fees.git
