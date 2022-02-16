@@ -30,6 +30,7 @@ export async function ensureAuthenticateUser(req: Request, res: Response, next: 
 
         req.id = sub;
         req.username = user.username;
+        req.email = user.email;
         next();
     } catch (error) {
         return res.status(401).json({

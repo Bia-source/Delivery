@@ -14,4 +14,6 @@ export interface IUser {
 export interface IRequestUpdateDelivery{
     id_delivery: string;
     id_deliveryman: string;
+    email?: string;
+    username?: string; 
 }

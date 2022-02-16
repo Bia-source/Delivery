@@ -19,3 +19,7 @@ export enum MessageStatusDelivery {
     TRANSITO = "Seu pedido está a caminho, fique atento!",
     ENTREGUE = "Seu pedido foi entregue com sucesso!",
 }
+
+export enum TitleStatusDelivery {
+    STATUS = "Status do meu pedido",
+}
