@@ -19,10 +19,10 @@ export class UpdateEndDeliveryUseCase {
             sendMail({
                 email,
                 username,
-                messageText: MessageStatusDelivery.ENTREGUE, 
+                messageText: `seu pedido código ${id_delivery} ${MessageStatusDelivery.ENTREGUE}`, 
                 titleEmail: TitleStatusDelivery.STATUS  
             })
-            return delivery;
+            return {user: username, data: delivery};
         } catch (error) {
             deliveryAlreadyExist();
         }

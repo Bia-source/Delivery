@@ -21,10 +21,10 @@ export class CreateDeliverymanUseCase {
             sendMail({
                  email,
                  username,
-                 messageText: MessageStatusDelivery.ARGUARDANDO, 
+                 messageText: `seu pedido código ${delivery.id} ${MessageStatusDelivery.ARGUARDANDO} `, 
                  titleEmail: TitleStatusDelivery.STATUS  
             })
-            return delivery;
+            return {user: username, data:delivery};
         } catch (error) {
             
         }

@@ -23,8 +23,12 @@ export class AuthenticateDeliverymanUseCase {
             subject: deliveryman?.id,
             expiresIn: "1d"
         });
-        
-        return {deliveryman: deliveryman, token: token}
+        const formatDeliveryman = {
+            id: deliveryman.id,
+            username: deliveryman.username,
+            email: deliveryman.email
+        };
+        return {deliveryman: formatDeliveryman, token: token}
 
     }
 }

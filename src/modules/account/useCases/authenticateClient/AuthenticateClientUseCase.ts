@@ -20,7 +20,12 @@ export class AuthenticateClientUseCase{
             subject: client.id,
             expiresIn: "1d"
         });
-        return {client:client, token: token}
+        const formatClient = {
+            id: client.id,
+            username: client.username,
+            email: client.email
+        };
+        return {client:formatClient, token: token}
    }
 }
 

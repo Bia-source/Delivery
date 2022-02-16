@@ -19,10 +19,10 @@ export class UpdateDeliverymanUseCase {
             sendMail({
                 email,
                 username,
-                messageText: MessageStatusDelivery.TRANSITO, 
+                messageText: `seu pedido código ${id_delivery} ${MessageStatusDelivery.TRANSITO}`, 
                 titleEmail: TitleStatusDelivery.STATUS  
             })
-            return delivery;
+            return {user: username, data: delivery};
         } catch (error) {
             deliveryAlreadyExist();
         }

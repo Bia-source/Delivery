@@ -1,7 +1,5 @@
 export async function mapDelivery(deliveries: any[]){
     const deliveriesFormat = deliveries.map((client)=>{
-        console.log(client.id)
-        console.log(client.client.username)
         return {
             user:{
                 id_client: client.client.id,

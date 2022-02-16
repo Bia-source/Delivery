@@ -15,11 +15,11 @@ export enum TitleNewUser{
 }
 
 export enum MessageStatusDelivery {
-    ARGUARDANDO = "Seu pedido foi criado e está aguardando um entregador!",
-    TRANSITO = "Seu pedido está a caminho, fique atento!",
-    ENTREGUE = "Seu pedido foi entregue com sucesso!",
+    ARGUARDANDO = "foi criado e está aguardando um entregador!",
+    TRANSITO = "está a caminho, fique atento(a)!",
+    ENTREGUE = "foi entregue com sucesso!",
 }
 
 export enum TitleStatusDelivery {
-    STATUS = "Status do meu pedido",
+    STATUS = "Status do meu pedido delivery",
 }
