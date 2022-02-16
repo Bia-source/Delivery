@@ -13,6 +13,7 @@ model Deliveryman {
   id       String @id @default(uuid())
   username String @unique
   password String
+  email    String  @default("")
 
   @@map("deliveryman")
   Deliveries Deliveries[]
@@ -22,6 +23,7 @@ model Clients {
   id       String @id @default(uuid())
   username String @unique
   password String  
+  email    String  @default("")
 
   @@map("clients")
   Deliveries Deliveries[]
@@ -45,3 +47,4 @@ enum Status {
   TRANSITO
   ENTREGUE
 }
+

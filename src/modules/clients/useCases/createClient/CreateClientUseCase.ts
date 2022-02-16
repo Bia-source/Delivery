@@ -1,16 +1,20 @@
 import { prisma } from '../../../../database/prismaClient';
 import { hash } from "bcrypt"
+import { sendMail } from '../../../../share/sendEmail/SendEmail';
 
 interface IRequestClient {
     username: string;
     password: string;
+    email?: string;
 }
 
 export class CreateClientUseCase {
-    async execute({username, password}: IRequestClient) {
+    async execute({username, password, email}: IRequestClient) {
         const clienExist = await prisma.clients.findFirst({
             where: {
-                username
+                username :{
+                    equals: username
+                }
            }
         })
         
@@ -22,7 +26,8 @@ export class CreateClientUseCase {
         const newClient = await prisma.clients.create({
             data: {
                 username,
-                password: hashPassword
+                password: hashPassword,
+                email
             },
             select:{
                 id: true,
@@ -30,6 +35,7 @@ export class CreateClientUseCase {
             }
         });
 
+        sendMail({email, username, type_user: "CLIENT"});
         return newClient;
    }
 } 
