@@ -7,6 +7,7 @@ Um sistema backend de entregas, onde o cliente pré cadastrado e logado faz seu 
 ### Cliente👩🏾‍🦱
 ✅ Cadastro de usuário <br>
 ✅ Criptografia de senha <br>
+✅ Envio de email ao criar usuario <br>
 ✅ Autenticação por token <br>
 ✅ Login <br>
 ✅ Criar pedido <br>
@@ -19,6 +20,7 @@ Um sistema backend de entregas, onde o cliente pré cadastrado e logado faz seu 
 ### Deliveryman🛵
 ✅ Cadastro de usuário <br>
 ✅ Criptografia de senha <br>
+✅ Envio de email ao criar usuario <br>
 ✅ Autenticação por token <br>
 ✅ Login <br>
 ✅ Busca de todos os pedidos disponiveis <br>
@@ -26,6 +28,7 @@ Um sistema backend de entregas, onde o cliente pré cadastrado e logado faz seu 
 ✅ Busca de pedidos por status<br>
 ✅ Busca de informações não sensiveis sobre os deliverymans por id <br>
 ✅ Alteração de status do pedido <br>
+✅ Envio de email para o usuario da alteração do status do pedido<br>
 ✅ Deletar o proprio usuario deliveryman <br>
 
 
@@ -60,6 +63,7 @@ Beatriz Ferreira dos Santos
 
 ## Melhorias futuras
 ☑️ TODO atualizar filtros de acordo com tipo de usuario <br>
+☑️ TODO impedir de deletar pedido que esta com status diferente de aguardando <br>
 ☑️ TODO criar testes unitários <br>
 ☑️ TODO implementar GraphQL <br>
 ☑️ TODO implementar Swagger<br>
