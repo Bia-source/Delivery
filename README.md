@@ -1,5 +1,66 @@
-# Ignite2022
+# Deliveryman 
 
-## TODO atualizar filtros de acordo com tipo de usuario 
-## TODO criar testes unitários 
-## https://git.heroku.com/delivery-fees.git
+## Sobre o projeto🔖
+Um sistema backend de entregas, onde o cliente pré cadastrado e logado faz seu pedido dentro da plataforma, onde o deliveryman pega o pedido e entrega ao cliente.
+
+## Funcionalidade implementadas
+### Cliente👩🏾‍🦱
+✅ Cadastro de usuário <br>
+✅ Criptografia de senha <br>
+✅ Autenticação por token <br>
+✅ Login <br>
+✅ Criar pedido <br>
+✅ Busca de todos os pedidos feitos pelo cliente solicitante<br>
+✅ Busca de informações não sensiveis sobre os cliente por id <br>
+✅ Pedidos feitos pelo solicitante busca pelo pedido por data <br>
+✅ Pedidos feitos pelo solicitante busca pelo pedido por status<br>
+✅ Deletar pedido feito <br>
+
+### Deliveryman🛵
+✅ Cadastro de usuário <br>
+✅ Criptografia de senha <br>
+✅ Autenticação por token <br>
+✅ Login <br>
+✅ Busca de todos os pedidos disponiveis <br>
+✅ Busca de pedidos por data <br>
+✅ Busca de pedidos por status<br>
+✅ Busca de informações não sensiveis sobre os deliverymans por id <br>
+✅ Alteração de status do pedido <br>
+✅ Deletar o proprio usuario deliveryman <br>
+
+
+## Version Engines
+
+![Yarn](https://img.shields.io/badge/yarn-%232C8EBB.svg?style=for-the-badge&logo=yarn&logoColor=white)  1.22.11
+
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)  12.22.5
+
+## Tecnologias utilizadas
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
+![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+## Banco de Dados utilizado
+![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
+
+## Como executar
+### Comandos: 
+- yarn install
+- docker-compose up -d 
+- yarn dev
+
+## Porta utilizada
+http://localhost:2022/{router}
+
+## URL Deploy
+https://git.heroku.com/delivery-fees.git
+ 
+# Autora
+Beatriz Ferreira dos Santos  
+
+## Melhorias futuras
+☑️ TODO atualizar filtros de acordo com tipo de usuario <br>
+☑️ TODO criar testes unitários <br>
+☑️ TODO implementar GraphQL <br>
+☑️ TODO implementar Swagger<br>
+
