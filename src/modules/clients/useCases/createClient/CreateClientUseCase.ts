@@ -32,7 +32,8 @@ export class CreateClientUseCase {
             },
             select:{
                 id: true,
-                username: true
+                username: true,
+                email: true
             }
         });
 

@@ -1,0 +1,402 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Delivery Documentation",
+        "version": "1.0.0",
+        "contact": {
+            "email": "fernandesferreirinha9@gmail.com"
+        }
+    },
+    "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "description": "JWT Authorization header using the Bearer scheme.",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      },
+    "paths": {
+        "/client": {
+            "security":[{"api_key":[]}],
+            "post": {
+                "tags":["Client"],
+                "summary": "Create new client",
+                "description": "Create a new client in application",
+                "requestBody": {
+                    "content":{
+                        "application/json": {
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password":{
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                
+            
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                                   "client": {
+                                                       "type": "object",
+                                                       "properties": {
+                                                           "id": {
+                                                               "type": "string"
+                                                           },
+                                                           "username": {
+                                                               "type": "string"
+                                                           },
+                                                           "email": {
+                                                               "type": "string"
+                                                           }
+                                                       }
+                                                   }          
+                                               }
+                                           }  
+                            }
+                        }    
+                    },
+                    "400": {
+                        "description": "Client already exists",
+                        "content": { 
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                
+                "security":[{"api_key":[]}]
+                
+            }
+        },
+
+        "/authenticate/client": {
+            
+            "post": {
+                "tags":["Client"],
+                "summary": "Authentication client in application",
+                "description": "Generate client session token",
+                "requestBody": {
+                    "content":{
+                        "application/json": {
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password":{
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                                   "client": {
+                                                       "type": "object",
+                                                       "properties": {
+                                                           "id": {
+                                                               "type": "string"
+                                                           },
+                                                           "username": {
+                                                               "type": "string"
+                                                           },
+                                                           "email": {
+                                                               "type": "string"
+                                                           }
+                                                       }
+                                                   },
+                                                   "token": {
+                                                       "type": "string"
+                                                   }
+                                               }
+                                           }  
+                            }
+                        }    
+                    },
+                    "400": {
+                        "description": "Not found client error",
+                        "content": { 
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/deliveryman": {
+            "post": {
+                "tags":["Deliveryman"],
+                "summary": "Create a new deliveryman",
+                "description": "Create a new deliveryman in application",
+                "requestBody": {
+                    "content":{
+                        "application/json": {
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password":{
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                                   "deliveryman": {
+                                                       "type": "object",
+                                                       "properties": {
+                                                           "id": {
+                                                               "type": "string"
+                                                           },
+                                                           "username": {
+                                                               "type": "string"
+                                                           },
+                                                           "email": {
+                                                               "type": "string"
+                                                           }
+                                                       }
+                                                   }          
+                                               }
+                                           }  
+                            }
+                        }    
+                    },
+                    "400": {
+                        "description": "Deliveryman already exists",
+                        "content": { 
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/authenticate/deliveryman": {
+            "post": {
+                "tags":["Deliveryman"],
+                "summary": "Authentication deliveryman in application",
+                "description": "Generate deliveryman session token",
+                "requestBody": {
+                    "content":{
+                        "application/json": {
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password":{
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                                   "deliveryman": {
+                                                       "type": "object",
+                                                       "properties": {
+                                                           "id": {
+                                                               "type": "string"
+                                                           },
+                                                           "username": {
+                                                               "type": "string"
+                                                           },
+                                                           "email": {
+                                                               "type": "string"
+                                                           }
+                                                       }
+                                                   },
+                                                   "token": {
+                                                       "type": "string"
+                                                   }
+                                               }
+                                           }  
+                            }
+                        }    
+                    },
+                    "400": {
+                        "description": "Not found deliveryman error",
+                        "content": { 
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "/delivery": {
+            "post": {
+                "tags":["Delivery"],
+                "summary": "Create a new delivery",
+                "description": "Create a new delivery in application",
+                "requestBody": {
+                    "content":{
+                        "application/json": {
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "item_name": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                                   "delivery": {
+                                                       "type": "object",
+                                                       "properties": {
+                                                           "user": {
+                                                               "type": "string"                                                      
+                                                           },
+                                                           "data": {
+                                                               "type": "object",
+                                                               "properties": {
+                                                                    "id": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "item_name": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "id_client": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "id_deliveryman": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "created_at": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "end_at": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "status": {
+                                                                        "type": "string"
+                                                                    }
+                                                               }
+                                                           }
+                                                       }
+                                                   }          
+                                               }
+                                           }  
+                            }
+                        }    
+                    },
+                    "400": {
+                        "description": "Token invalid",
+                        "content": { 
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                      "bearerAuth": []
+                    }
+                  ]
+            }
+        }
+    }
+    
+    
+
+}

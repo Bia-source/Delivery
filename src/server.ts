@@ -1,10 +1,13 @@
 import express, { NextFunction, Request, Response } from "express";
 import "express-async-errors";
 import "dotenv/config";
+import swaggerUi from 'swagger-ui-express';
+import swaggerFile from './swagger.json';
 import { routes } from './index.routes';
 
 const app = express();
 app.use(express.json());
+app.use("/delivery-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use(routes);
 
 app.use((err: Error, request: Request, response: Response, next: NextFunction) => {
