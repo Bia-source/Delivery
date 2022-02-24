@@ -62,9 +62,6 @@ https://git.heroku.com/delivery-fees.git
 http://localhost:2022/delivery-docs <br> <br>
 <img width="1350" alt="Captura de Tela 2022-02-24 às 04 31 00" src="https://user-images.githubusercontent.com/60610706/155478635-0ac205c4-0d5b-4c5d-94ea-d389ea437352.png">
 
-# Autora
-Beatriz Ferreira dos Santos  
-
 ## Melhorias futuras
 ☑️ TODO atualizar filtros de acordo com tipo de usuario <br>
 ☑️ TODO impedir de deletar pedido que esta com status diferente de aguardando <br>
@@ -72,3 +69,5 @@ Beatriz Ferreira dos Santos
 ☑️ TODO implementar GraphQL <br>
 ☑️ TODO implementar Swagger<br>
 
+# Autora
+Beatriz Ferreira dos Santos  
