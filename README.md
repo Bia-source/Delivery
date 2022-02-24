@@ -57,6 +57,9 @@ http://localhost:2022/{router}
 
 ## URL Deploy
 https://git.heroku.com/delivery-fees.git
+
+## Documentação
+http://localhost:2022/delivery-docs
  
 # Autora
 Beatriz Ferreira dos Santos  
