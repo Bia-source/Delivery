@@ -59,8 +59,9 @@ http://localhost:2022/{router}
 https://git.heroku.com/delivery-fees.git
 
 ## Documentação
-http://localhost:2022/delivery-docs
- 
+http://localhost:2022/delivery-docs <br> <br>
+<img width="1350" alt="Captura de Tela 2022-02-24 às 04 31 00" src="https://user-images.githubusercontent.com/60610706/155478635-0ac205c4-0d5b-4c5d-94ea-d389ea437352.png">
+
 # Autora
 Beatriz Ferreira dos Santos  
 
