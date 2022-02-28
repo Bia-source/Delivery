@@ -66,11 +66,12 @@ http://localhost:2022/delivery-docs <br> <br>
 
 ## Melhorias futuras
 ☑️ TODO personalizar retornos de filtros de acordo com tipo de usuario <br>
-☑️ TODO impedir de deletar pedido que esta com status diferente de aguardando <br>
+☑️ TODO impedir de deletar pedido que esta com status diferente de AGUARDANDO <br>
 ☑️ TODO criar testes unitários <br>
 ☑️ TODO implementar GraphQL <br>
 ☑️ TODO terminar a implementação do Swagger<br>
 ☑️ TODO inserir avatar de usuario<br>
+☑️ TODO permitir atualização de pedido pelo cliente enquanto status estiver AGUARDANDO<br>
 
 ## Melhorias feitas
 ✅ atualizar informaçoes de cadastro dos usuarios <br>
