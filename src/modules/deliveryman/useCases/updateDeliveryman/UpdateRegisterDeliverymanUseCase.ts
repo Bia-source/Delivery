@@ -17,6 +17,11 @@ export class UpdateRegisterDeliverymanUseCase {
               data: {
                   username: updateDeliveryman?.username,
                   email: updateDeliveryman?.email
+              },
+              select: {
+                  id: true,
+                  username: true,
+                  email: true
               }
           });
 

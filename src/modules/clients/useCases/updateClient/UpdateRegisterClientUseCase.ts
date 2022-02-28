@@ -17,6 +17,11 @@ export class UpdateRegisterClientUseCase {
             data: {
                 username: updateClient?.username,
                 email: updateClient?.email
+            },
+            select: {
+                id: true,
+                username: true,
+                email: true
             }
         });
 
