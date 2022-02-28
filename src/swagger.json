@@ -90,6 +90,39 @@
                     }
                 }
                 
+            },
+            "put": {
+                "tags": ["Client"],
+                "summary": "Update Register Customer",
+                "description": "Update Register customer",
+                "security": [{ "bearerAuth": []}],
+                "parameters":[{"name":"type_user","in":"query"}],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "username": {
+                                        "type": "string",
+                                        "required": false
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "required": false
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "update-client": {
+                                    "value": {
+                                        "username": "bferreiranovo"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
 
@@ -243,6 +276,39 @@
                                         "message": {
                                             "type": "string"
                                         }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": ["Deliveryman"],
+                "summary": "Update Register Deliveryman",
+                "description": "Update Register deliveryman",
+                "security": [{ "bearerAuth": []}],
+                "parameters":[{"name":"type_user","in":"query"}],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "username": {
+                                        "type": "string",
+                                        "required": false
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "required": false
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "update-deliveryman": {
+                                    "value": {
+                                        "username": "bferreiranovo"
                                     }
                                 }
                             }
