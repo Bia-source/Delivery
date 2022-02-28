@@ -65,14 +65,14 @@ http://localhost:2022/delivery-docs <br> <br>
 <img width="903" alt="Captura de Tela 2022-02-28 às 00 09 06" src="https://user-images.githubusercontent.com/60610706/155917727-9ac1b0c4-56ef-4993-af89-43201008c611.png">
 
 ## Melhorias futuras
-☑️ TODO atualizar filtros de acordo com tipo de usuario <br>
+☑️ TODO personalizar retornos de filtros de acordo com tipo de usuario <br>
 ☑️ TODO impedir de deletar pedido que esta com status diferente de aguardando <br>
 ☑️ TODO criar testes unitários <br>
 ☑️ TODO implementar GraphQL <br>
-☑️ TODO implementar Swagger<br>
+☑️ TODO terminar a implementação do Swagger<br>
 
 ## Melhorias feitas
-✅ atualizar informaçoes de cadastro do usuario <br>
+✅ atualizar informaçoes de cadastro dos usuarios <br>
 
 # Autora
 Beatriz Ferreira dos Santos  
