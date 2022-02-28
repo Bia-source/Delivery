@@ -16,6 +16,7 @@ Um sistema backend de entregas, onde o cliente pré cadastrado e logado faz seu 
 ✅ Pedidos feitos pelo solicitante busca pelo pedido por data <br>
 ✅ Pedidos feitos pelo solicitante busca pelo pedido por status<br>
 ✅ Deletar pedido feito <br>
+✅ Update dos dados cadastrais<br>
 
 ### Deliveryman🛵
 ✅ Cadastro de usuário <br>
@@ -30,6 +31,7 @@ Um sistema backend de entregas, onde o cliente pré cadastrado e logado faz seu 
 ✅ Alteração de status do pedido <br>
 ✅ Envio de email para o usuario da alteração do status do pedido<br>
 ✅ Deletar o proprio usuario deliveryman <br>
+✅ Update dos dados cadastrais<br>
 
 
 ## Version Engines
