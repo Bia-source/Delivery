@@ -1,9 +1,3 @@
-
-export enum Type_User{
-    CLIENT= "CLIENT",
-    DELIVERYMAN= "DELIVERYMAN"
-}
-
 export enum MessageNewUser{
     CLIENT_USER = "seja muito bem vindo(a) a bordo🚀 usuário criado com sucesso! Faça agora seu primeiro pedido🔥",
     DELIVERYMAN_USER = "seja muito bem vindo(a) a bordo🚀 deliveryman cadastrado com sucesso! Faça agora sua primeira entrega🔥"

@@ -1,5 +1,5 @@
 import { prisma } from "../../../../database/prismaClient";
-import { mapDelivery } from "../../../../share/FormatReturn/map";
+import { mapDeliveryFindClient } from "../../../../share/FormatReturn/map";
 
 
 export class FindByIdClientUseCase {
@@ -28,6 +28,6 @@ export class FindByIdClientUseCase {
             });
             
            
-        return mapDelivery(deliveries);
+        return mapDeliveryFindClient(deliveries);
     }
 }

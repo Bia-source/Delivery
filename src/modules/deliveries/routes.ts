@@ -22,15 +22,13 @@ const findByStatus = new FindByStatusController();
 const deleteDelivery = new DeleteDeliveryController();
 
 delivery.post("/", ensureAuthenticateUser, createDelivery.handle);
-
-
 delivery.get("/", ensureAuthenticateUser, getAllDelivery.handle);
 delivery.put("/updateDeliveryman", ensureAuthenticateUser, updateDelivery.handle);
-delivery.get("/findByIdClient", ensureAuthenticateUser, findByIdClient.handle);
+delivery.get("/findOrdersByIdClient", ensureAuthenticateUser, findByIdClient.handle);
 delivery.get("/finByDate", ensureAuthenticateUser, findByDate.handle);
 delivery.get("/finByIdDeliveryman", ensureAuthenticateUser, findByIdDeliveryman.handle);
 delivery.put("/updateEnd", ensureAuthenticateUser, endDelivery.handle);
 delivery.get("/findByStatus", ensureAuthenticateUser, findByStatus.handle);
-delivery.delete("/", ensureAuthenticateUser, deleteDelivery.handle);
+delivery.delete("/:id", ensureAuthenticateUser, deleteDelivery.handle);
 
 export { delivery }

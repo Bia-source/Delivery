@@ -2,22 +2,15 @@
     "openapi": "3.0.0",
     "info": {
         "title": "Delivery Documentation",
+        "description": "This is a simple documentation of the backend delivery application. To access the routes, the project must be running on your local machine.",
         "version": "1.0.0",
         "contact": {
             "email": "fernandesferreirinha9@gmail.com"
         }
     },
-    "securitySchemes": {
-        "bearerAuth": {
-          "type": "http",
-          "description": "JWT Authorization header using the Bearer scheme.",
-          "scheme": "bearer",
-          "bearerFormat": "JWT"
-        }
-      },
+    
     "paths": {
         "/client": {
-            "security":[{"api_key":[]}],
             "post": {
                 "tags":["Client"],
                 "summary": "Create new client",
@@ -36,6 +29,15 @@
                                     },
                                     "password":{
                                         "type": "string"
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "client": {
+                                    "value": {
+                                        "username": "bferreira",
+                                        "email": "bia.ferreirads.santos@gmail.com",
+                                        "password": "bia123"
                                     }
                                 }
                             }
@@ -86,15 +88,12 @@
                             }
                         }
                     }
-                },
-                
-                "security":[{"api_key":[]}]
+                }
                 
             }
         },
 
-        "/authenticate/client": {
-            
+        "/authenticate/client": {           
             "post": {
                 "tags":["Client"],
                 "summary": "Authentication client in application",
@@ -110,6 +109,14 @@
                                     },
                                     "password":{
                                         "type": "string"
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "auth-client": {
+                                    "value": {
+                                        "username": "bferreira",
+                                        "password": "bia123"
                                     }
                                 }
                             }
@@ -164,6 +171,7 @@
                 }
             }
         },
+
         "/deliveryman": {
             "post": {
                 "tags":["Deliveryman"],
@@ -183,6 +191,15 @@
                                     },
                                     "password":{
                                         "type": "string"
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "deliveryman": {
+                                    "value": {
+                                        "username": "Dbferreira",
+                                        "email": "bia.ferreirads.santos@gmail.com",
+                                        "password": "Dbia123"
                                     }
                                 }
                             }
@@ -234,6 +251,7 @@
                 }
             }
         },
+
         "/authenticate/deliveryman": {
             "post": {
                 "tags":["Deliveryman"],
@@ -250,6 +268,14 @@
                                     },
                                     "password":{
                                         "type": "string"
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "deliveryman": {
+                                    "value": {
+                                        "username": "Dbferreira",
+                                        "password": "Dbia123"
                                     }
                                 }
                             }
@@ -310,6 +336,7 @@
                 "tags":["Delivery"],
                 "summary": "Create a new delivery",
                 "description": "Create a new delivery in application",
+                "security":[{ "bearerAuth": []}],
                 "requestBody": {
                     "content":{
                         "application/json": {
@@ -318,6 +345,13 @@
                                 "properties":{
                                     "item_name": {
                                         "type": "string"
+                                    }
+                                }
+                            },
+                            "examples":{
+                                "delivery": {
+                                    "value": {
+                                        "item-name": "x-bacon"
                                     }
                                 }
                             }
@@ -387,16 +421,310 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                      "bearerAuth": []
+                }  
+            },
+            "get": {
+                "tags":["Delivery"],
+                "summary": "Get all available",
+                "description": "Get all delivery available",
+                "security":[{ "bearerAuth": []}],
+                "parameters":[{"name":"type_user","in":"query"}],
+                "responses":{
+                    "200": {
+                        "description": "Return delivery available",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "deliveries":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties":{
+                                                    "user": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id_client": {
+                                                                "type": "string"
+                                                            },
+                                                            "username":{
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    },
+                                                    "delivery": {
+                                                        "type":"object",
+                                                        "properties":{
+                                                            "id": {
+                                                                "type":"string"
+                                                            },
+                                                            "item_name": {
+                                                                "type": "string"
+                                                            },
+                                                            "id_deliveryman": {
+                                                                "type": "string"
+                                                            },
+                                                            "created_at": {
+                                                                "type": "string"
+                                                            },
+                                                            "end_at": {
+                                                                "type": "string"
+                                                            },
+                                                            "status": {
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401":{
+                        "description": "Error",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
-                  ]
+                }
+            },
+            "delete": {
+                 "tags": ["Delivery"],
+                 "summary": "Delete order by ID",
+                 "description": "Delete order created by ID",
+                 "parameters":[
+                     {"name":"type_user","in":"query"},
+                     {"name":"id","in":"params"}
+                    ],
+                 "security": [{ "bearerAuth": []}],
+                 "responses": {
+                     "200": {
+                         "description": "Delete Success",
+                         "content": {
+                            "application/json":{
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "delivery":{
+                                                "type": "object",
+                                                "properties": {
+                                                     "id": {
+                                                         "type": "string"
+                                                     },
+                                                     "item_name": {
+                                                         "type": "string"
+                                                     },
+                                                     "id_client": {
+                                                         "type": "string"
+                                                     },
+                                                     "id_deliveryman": {
+                                                         "type": "string"
+                                                     },
+                                                     "created_at": {
+                                                         "type": "string"
+                                                     },
+                                                     "end_at": {
+                                                         "type": "string"
+                                                     },
+                                                     "status": {
+                                                         "type": "string"
+                                                     }
+                                                }
+                                            }
+                                        }
+                                }
+                            }
+                        }
+                     },
+                     "401": {
+                        "description": "Error",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                     }
+                 }
+            }
+        },
+        "/delivery/updateDeliveryman":{
+            "put": {
+                "tags": ["Delivery"],
+                "summary": "Taking order",
+                "description": "Deliveryman taking order",
+                "security": [{ "bearerAuth": []}],
+                "parameters":[{"name":"type_user","in":"query"}],
+                "requestBody": {
+                    "content":{
+                        "application/json": {
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "id_delivery": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "examples":{
+                                "updateDelivery": {
+                                    "value": {
+                                        "id_delivery": "181d78c7-2e04-4793-b20b-e71c1878033f"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+               
+                "responses":{
+                    "200": {
+                        "description": "Update Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                                   "delivery": {
+                                                       "type": "object",
+                                                       "properties": {
+                                                           "user": {
+                                                               "type": "string"                                                      
+                                                           },
+                                                           "data": {
+                                                               "type": "object",
+                                                               "properties": {
+                                                                    "id": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "item_name": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "id_client": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "id_deliveryman": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "created_at": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "end_at": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "status": {
+                                                                        "type": "string"
+                                                                    }
+                                                               }
+                                                           }
+                                                       }
+                                                   }          
+                                    }  
+                                }
+                            }
+                        }         
+                    },
+                    "401": {
+                        "description": "Error",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/delivery/findOrdersByIdClient":{
+            "get": {
+                "tags": ["Delivery"],
+                "summary": "Get orders client",
+                "description":"Get all orders client",
+                "security": [{ "bearerAuth": []}],
+                "parameters":[{"name":"type_user","in":"query"}],
+                "responses": {
+                    "200":{
+                       "description": "All orders customer",
+                       "content": {
+                           "application/json": {
+                               "schema": {
+                                   "type": "object",
+                                   "properties": {
+                                     "deliveries": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties":{                                                
+                                                "delivery": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                         "id": {
+                                                             "type": "string"
+                                                         },
+                                                         "item_name": {
+                                                             "type": "string"
+                                                         },
+                                                         "id_deliveryman": {
+                                                             "type": "string"
+                                                         },
+                                                         "created_at": {
+                                                             "type": "string"
+                                                         },
+                                                         "end_at": {
+                                                             "type": "string"
+                                                         },
+                                                         "status": {
+                                                             "type": "string"
+                                                         }
+                                                    }
+                                                }
+                                            }
+                                            
+                                        }
+                                    }     
+                                   }
+                               }
+                           }
+                       }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes":{
+            "bearerAuth":{
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
             }
         }
     }
-    
-    
-
 }
