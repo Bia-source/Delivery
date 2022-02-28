@@ -70,6 +70,7 @@ http://localhost:2022/delivery-docs <br> <br>
 ☑️ TODO criar testes unitários <br>
 ☑️ TODO implementar GraphQL <br>
 ☑️ TODO terminar a implementação do Swagger<br>
+☑️ TODO inserir avatar de usuario<br>
 
 ## Melhorias feitas
 ✅ atualizar informaçoes de cadastro dos usuarios <br>
