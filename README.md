@@ -60,7 +60,7 @@ https://git.heroku.com/delivery-fees.git
 
 ## Documentação
 http://localhost:2022/delivery-docs <br> <br>
-<img width="1350" alt="Captura de Tela 2022-02-24 às 04 31 00" src="https://user-images.githubusercontent.com/60610706/155478635-0ac205c4-0d5b-4c5d-94ea-d389ea437352.png">
+<img width="903" alt="Captura de Tela 2022-02-28 às 00 09 06" src="https://user-images.githubusercontent.com/60610706/155917727-9ac1b0c4-56ef-4993-af89-43201008c611.png">
 
 ## Melhorias futuras
 ☑️ TODO atualizar filtros de acordo com tipo de usuario <br>
