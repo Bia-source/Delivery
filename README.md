@@ -66,11 +66,13 @@ http://localhost:2022/delivery-docs <br> <br>
 
 ## Melhorias futuras
 ☑️ TODO atualizar filtros de acordo com tipo de usuario <br>
-☑️ TODO atualizar informaçoes de cadastro do usuario <br>
 ☑️ TODO impedir de deletar pedido que esta com status diferente de aguardando <br>
 ☑️ TODO criar testes unitários <br>
 ☑️ TODO implementar GraphQL <br>
 ☑️ TODO implementar Swagger<br>
+
+## Melhorias feitas
+✅ atualizar informaçoes de cadastro do usuario <br>
 
 # Autora
 Beatriz Ferreira dos Santos  
