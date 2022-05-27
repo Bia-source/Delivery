@@ -31,6 +31,7 @@
     "nodemailer": "^6.7.2",
     "nodemon": "^2.0.15",
     "swagger-ui": "^4.5.2",
-    "swagger-ui-express": "^4.3.0"
+    "swagger-ui-express": "^4.3.0",
+    "yup": "^0.32.11"
   }
 }

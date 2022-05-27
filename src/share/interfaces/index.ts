@@ -18,3 +18,9 @@ export interface IRequestUpdateDelivery{
     email?: string;
     username?: string; 
 }
+
+export interface IRequestValidationUser{
+    username: string;
+    password: string;
+    email: string;
+}

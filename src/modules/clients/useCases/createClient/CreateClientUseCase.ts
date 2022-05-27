@@ -2,6 +2,7 @@ import { prisma } from '../../../../database/prismaClient';
 import { hash } from "bcrypt"
 import { sendMail } from '../../../../share/sendEmail/SendEmail';
 import { MessageNewUser, TitleNewUser } from '../../../../share/sendEmail/messages';
+import { validationFields } from '../../../../share/validators';
 
 interface IRequestClient {
     username: string;
