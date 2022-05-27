@@ -75,6 +75,7 @@ http://localhost:2022/delivery-docs <br> <br>
 
 ## Melhorias feitas
 ✅ atualizar informaçoes de cadastro dos usuarios <br>
+✅ Validação dos campos de criação de usuario <br>
 
 # Autora
 Beatriz Ferreira dos Santos  
