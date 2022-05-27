@@ -26,7 +26,7 @@ export async function validationFields(item: IRequestValidationUser){
         });
 
         if(!(await schema.isValid(item))){
-               throw new Error("Validation fails!");
+               throw new Error("Fails validation!");
         }
         return true;
 }

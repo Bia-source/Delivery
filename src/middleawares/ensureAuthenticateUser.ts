@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 import { prisma } from "../database/prismaClient";
+import { validationFields } from "../share/validators";
 
 interface IPayload {
     sub: string;
