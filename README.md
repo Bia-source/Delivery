@@ -72,10 +72,13 @@ http://localhost:2022/delivery-docs <br> <br>
 ☑️ TODO terminar a implementação do Swagger<br>
 ☑️ TODO inserir avatar de usuario<br>
 ☑️ TODO permitir atualização de pedido pelo cliente enquanto status estiver AGUARDANDO<br>
+☑️ TODO criar dashboard store<br>
 
 ## Melhorias feitas
 ✅ atualizar informaçoes de cadastro dos usuarios <br>
 ✅ Validação dos campos de criação de usuario <br>
+✅ Proteção contra bot de robo<br>
+✅ Armazenamento de log de requisições<br>
 
 # Autora
 Beatriz Ferreira dos Santos  
