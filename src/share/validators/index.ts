@@ -1,4 +1,3 @@
-import { Deliveries } from "@prisma/client";
 import { IUser, IRequestValidationUser } from "../interfaces";
 import * as yup from 'yup';
 

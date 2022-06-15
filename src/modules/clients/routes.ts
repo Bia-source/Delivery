@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { ensureAuthenticateUser } from "../../middleawares/ensureAuthenticateUser";
 import { ensureValidationFields } from "../../middleawares/ensureValidationFields";
-import { validationFields } from "../../share/validators";
 import { CreateClientController } from "./useCases/createClient/CreateClientController";
 import { UpdateRegisterClientController } from "./useCases/updateClient/UpdateRegisterClientController";
 
