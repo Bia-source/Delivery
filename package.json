@@ -30,7 +30,7 @@
     "express-rate-limit": "^6.4.0",
     "helmet": "^5.1.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.3.8",
+    "mongoose": "^6.4.6",
     "nodemailer": "^6.7.2",
     "nodemon": "^2.0.15",
     "rate-limit-mongo": "^2.3.2",
