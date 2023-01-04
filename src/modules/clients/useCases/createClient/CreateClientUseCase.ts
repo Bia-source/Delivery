@@ -38,7 +38,7 @@ export class CreateClientUseCase {
             }
         });
 
-        sendMail({email, username, messageText: MessageNewUser.CLIENT_USER, titleEmail: TitleNewUser.CLIENT_USER});
+        //sendMail({email, username, messageText: MessageNewUser.CLIENT_USER, titleEmail: TitleNewUser.CLIENT_USER});
         return newClient;
    }
 } 
