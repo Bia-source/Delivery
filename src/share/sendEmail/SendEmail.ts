@@ -18,7 +18,8 @@ export async function sendMail({ email, username, messageText, titleEmail}:IRequ
                pass: process.env.PASSWORD_EMAIL.toString()
            },
            tls: {
-               rejectUnauthorized: false
+               rejectUnauthorized: false,
+               minVersion: "TLSv1.2"
            }
        });
 

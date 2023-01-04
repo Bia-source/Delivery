@@ -6,6 +6,9 @@
   "author": "bfsantos <bfsantos@rd.com.br>",
   "license": "MIT",
   "scripts": {
+    "start-postgres": "docker-compose up -d",
+    "stop-postgres": "docker-compose stop",
+    "clean-postgres": "docker-compose down",
     "dev": "ts-node-dev --exit-child --transpile-only --ignore-watch node_modules src/server.ts"
   },
   "devDependencies": {

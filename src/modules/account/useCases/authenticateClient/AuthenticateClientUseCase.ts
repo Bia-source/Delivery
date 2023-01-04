@@ -19,11 +19,12 @@ export class AuthenticateClientUseCase{
         const token = sign({username}, `${process.env.TOKEN_KEY}`, {
             subject: client.id,
             expiresIn: "1d"
-        });
+        });       
         const formatClient = {
             id: client.id,
             username: client.username,
-            email: client.email
+            email: client.email,
+            token: token
         };
         return {client:formatClient, token: token}
    }

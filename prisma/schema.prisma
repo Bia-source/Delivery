@@ -42,6 +42,16 @@ model Deliveries {
   @@map("deliveries")
 }
 
+model Product {
+  id       String @id @default(uuid())
+  product_nome String 
+  product_category String  
+  quantity_stock  Int  @default(0)
+  discount Int
+
+  @@map("products")
+}
+
 enum Status {
   AGUARDANDO
   TRANSITO

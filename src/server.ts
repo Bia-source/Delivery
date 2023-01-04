@@ -24,9 +24,9 @@ app.use(helmet({
 
 app.use(rateLimit({
     store: (process.env.NODE_ENVIRONMENT === 'production') ? new MongoStore({
-       uri: 'mongodb+srv://<username>:<password>@delivery.kf63v.mongodb.net/?retryWrites=true&w=majority',
-       user: 'admin',
-       password: 'admin',
+       uri: `mongodb+srv://<${process.env.MONGO_USER}>:<${process.env.MONGO_USER}>@delivery.kf63v.mongodb.net/?retryWrites=true&w=majority`,
+       user: process.env.MONGO_USER,
+       password: process.env.MONGO_KEY,
        expireTimeMs: 15 * 60 * 1000,
        errorHandler: console.error.bind(null, 'rate-limit-mongo')
     }) : null,
