@@ -24,7 +24,7 @@ model Clients {
   username String @unique
   password String  
   email    String  @default("")
-
+  adm      Boolean @default(false)
   @@map("clients")
   Deliveries Deliveries[]
 }
@@ -44,11 +44,11 @@ model Deliveries {
 
 model Product {
   id       String @id @default(uuid())
-  product_nome String 
+  product_name String 
   product_category String  
   quantity_stock  Int  @default(0)
-  discount Int
-
+  discount Int @default(0)
+  value Int
   @@map("products")
 }
 

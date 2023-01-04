@@ -8,10 +8,11 @@ interface IRequestClient {
     username: string;
     password: string;
     email?: string;
+    adm?: boolean;
 }
 
 export class CreateClientUseCase {
-    async execute({username, password, email}: IRequestClient) {
+    async execute({username, password, email, adm}: IRequestClient) {
         const clienExist = await prisma.clients.findFirst({
             where: {
                 username :{
@@ -29,7 +30,8 @@ export class CreateClientUseCase {
             data: {
                 username,
                 password: hashPassword,
-                email
+                email,
+                adm
             },
             select:{
                 id: true,

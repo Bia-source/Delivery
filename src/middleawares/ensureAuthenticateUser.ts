@@ -31,6 +31,7 @@ export async function ensureAuthenticateUser(req: Request, res: Response, next: 
         req.id = sub;
         req.username = user.username;
         req.email = user.email;
+        req.adm = user.adm;
         next();
     } catch (error) {
         return res.status(401).json({
