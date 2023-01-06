@@ -29,3 +29,12 @@ export async function validationFields(item: IRequestValidationUser){
         }
         return true;
 }
+
+export async function validationStatusDelivery(status: string) {
+        if(status === "TRANSITO"){
+                throw new Error('Pedido nao pode mais ser cancelado, pois já está em transito!');
+        }
+        if(status === "ENTREGUE"){
+                throw new Error('Pedido nao pode mais ser cancelado, pois já foi entregue!');
+        }
+}

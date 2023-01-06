@@ -6,7 +6,6 @@ export class AuthenticateDeliverymanController {
     async handle(req: Request, res: Response): Promise<Response> {
         try {
             const { username, password } = req.body;
-            console.log(username, password);
             const authenticateDeliveryman = new AuthenticateDeliverymanUseCase();
             const result = await authenticateDeliveryman.execute({ username, password });
             return res.json(result);

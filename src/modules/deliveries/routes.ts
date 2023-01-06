@@ -29,6 +29,6 @@ delivery.get("/finByDate", ensureAuthenticateUser, findByDate.handle);
 delivery.get("/finByIdDeliveryman", ensureAuthenticateUser, findByIdDeliveryman.handle);
 delivery.put("/updateEnd", ensureAuthenticateUser, endDelivery.handle);
 delivery.get("/findByStatus", ensureAuthenticateUser, findByStatus.handle);
-delivery.delete("/:id", ensureAuthenticateUser, deleteDelivery.handle);
+delivery.delete("/", ensureAuthenticateUser, deleteDelivery.handle);
 
 export { delivery }

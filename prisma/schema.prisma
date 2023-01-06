@@ -10,45 +10,59 @@ generator client {
 }
 
 model Deliveryman {
-  id       String @id @default(uuid())
-  username String @unique
-  password String
-  email    String  @default("")
+  id         String       @id @default(uuid())
+  username   String       @unique
+  password   String
+  email      String       @default("")
+  Deliveries Deliveries[]
 
   @@map("deliveryman")
-  Deliveries Deliveries[]
 }
 
 model Clients {
-  id       String @id @default(uuid())
-  username String @unique
-  password String  
-  email    String  @default("")
-  adm      Boolean @default(false)
-  @@map("clients")
+  id         String       @id @default(uuid())
+  username   String       @unique
+  password   String
+  email      String       @default("")
+  adm        Boolean      @default(false)
   Deliveries Deliveries[]
+
+  @@map("clients")
 }
 
 model Deliveries {
   id             String       @id @default(uuid())
-  item_name      String
+  item_name      Itens_Info_Product[]
   id_client      String
   client         Clients      @relation(fields: [id_client], references: [id])
   id_deliveryman String?
   deliveryman    Deliveryman? @relation(fields: [id_deliveryman], references: [id])
   created_at     DateTime     @default(now())
-  end_at         DateTime?   
+  end_at         DateTime?
   status         Status       @default(AGUARDANDO)
+
   @@map("deliveries")
+
+}
+
+model Itens_Info_Product {
+  id   String @id @default(uuid())
+  id_product  String?
+  id_delivery  String?
+  quantity    Int?
+  produto  Product?  @relation(fields: [id_product], references: [id])
+  delivery Deliveries? @relation(fields: [id_delivery], references: [id])
+  @@map("itens_info_product")
 }
 
 model Product {
-  id       String @id @default(uuid())
-  product_name String 
-  product_category String  
-  quantity_stock  Int  @default(0)
-  discount Int @default(0)
-  value Int
+  id               String @id @default(uuid())
+  product_name     String
+  product_category String
+  quantity_stock   Int    @default(0)
+  discount         Int    @default(0)
+  value            Int
+  itens_info_product  Itens_Info_Product[]
   @@map("products")
 }
 
@@ -57,4 +71,3 @@ enum Status {
   TRANSITO
   ENTREGUE
 }
-

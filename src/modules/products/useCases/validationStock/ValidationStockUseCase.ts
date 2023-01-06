@@ -23,7 +23,7 @@ export class ValidationStockUseCase {
 
         if(alreadyExistProduct.quantity_stock < quantity){
             throw new Error('Quantidade indisponivel!');
-        }
+       }
     }
 
     async executeInfo(product_name: string){

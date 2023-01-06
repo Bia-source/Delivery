@@ -22,20 +22,20 @@ app.use(helmet({
     }
 }));
 
-app.use(rateLimit({
-    store: (process.env.NODE_ENVIRONMENT === 'production') ? new MongoStore({
-       uri: `mongodb+srv://<${process.env.MONGO_USER}>:<${process.env.MONGO_USER}>@delivery.kf63v.mongodb.net/?retryWrites=true&w=majority`,
-       user: process.env.MONGO_USER,
-       password: process.env.MONGO_KEY,
-       expireTimeMs: 15 * 60 * 1000,
-       errorHandler: console.error.bind(null, 'rate-limit-mongo')
-    }) : null,
-    windowMs: 15 * 60 * 1000,
-    max: 7,
-    standardHeaders: true,
-    legacyHeaders: false,
-    message: 'Too many accounts created from this IP, please try again after an hour',
-}))
+// app.use(rateLimit({
+//     store: (process.env.NODE_ENVIRONMENT === 'production') ? new MongoStore({
+//        uri: `mongodb+srv://<${process.env.MONGO_USER}>:<${process.env.MONGO_USER}>@delivery.kf63v.mongodb.net/?retryWrites=true&w=majority`,
+//        user: process.env.MONGO_USER,
+//        password: process.env.MONGO_KEY,
+//        expireTimeMs: 15 * 60 * 1000,
+//        errorHandler: console.error.bind(null, 'rate-limit-mongo')
+//     }) : null,
+//     windowMs: 15 * 60 * 1000,
+//     max: 7,
+//     standardHeaders: true,
+//     legacyHeaders: false,
+//     message: 'Too many accounts created from this IP, please try again after an hour',
+// }))
 
 app.use("/delivery-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use(routes);

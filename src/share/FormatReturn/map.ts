@@ -7,7 +7,7 @@ export async function mapDelivery(deliveries: any[]){
             },
             delivery: {
                id: client.id,
-               item_name: client.item_name,
+               itens: client.item_name,
                id_deliveryman: client.id_deliveryman,
                created_at: client.created_at,
                end_at: client.end_at,

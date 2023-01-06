@@ -33,7 +33,6 @@ export class CreateProductUseCase {
             discount: product_info.discount
         }
        })
-       console.log(newProduct);
        return newProduct;
     }
 }

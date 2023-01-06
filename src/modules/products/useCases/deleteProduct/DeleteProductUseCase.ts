@@ -21,7 +21,7 @@ export class DeleteProductUseCase{
             throw new Error('Produto não encontrado!');
         }
 
-        return prisma.product.delete({where: {id: id_product}})
+        return await prisma.product.delete({where: {id: id_product}})
 
     }
 }
