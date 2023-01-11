@@ -4,6 +4,7 @@ import { sendMail } from "../../../../share/sendEmail/SendEmail";
 import { product } from "../../../products/routes";
 import { FindProductByName } from "../../../products/useCases/findProductByName/findProductByNameUseCase";
 import { UpdateProductUseCase } from "../../../products/useCases/updateProduct/UpdateProductUseCase";
+import { ValidationStockUseCase } from "../../../products/useCases/validationStock/ValidationStockUseCase";
 import { FindByIdDeliveryUseCase } from "../findByIdDelivery/FindByIdDeliveryUseCase";
 
 interface IRequestDelivery {
@@ -18,6 +19,23 @@ interface IRequestDelivery {
 export class CreateDeliveryUseCase {
     async execute({ item, id_client, username }: IRequestDelivery) {
         try {
+          console.log("itens", item)
+            let produtos = [item]
+            const validationStockProductUseCase = new ValidationStockUseCase();
+            //console.log(item)
+            let error;
+            for(let i=0; i < produtos.length; i++){
+                error = await validationStockProductUseCase.executeBuy([{ name: item[i].name, quantity: item[i].quantity }]);
+            }
+           // const error = await validationStockProductUseCase.executeBuy([{ name: item.name, quantity: item.quantity }]);
+
+            const alreadyError = error.find(erro => erro.messageError != undefined)
+            //console.log(error)
+            if (alreadyError) {
+                error.map((erro, index) => {
+                    throw new Error(`Produto: ${error[index].product}, ${error[index].messageError}`);
+                })
+            }
 
             //criando pedido/order
             const delivery = await prisma.deliveries.create({
@@ -28,8 +46,14 @@ export class CreateDeliveryUseCase {
 
             // pegando produto
             const getProductUseCase = new FindProductByName();
-            const product = await getProductUseCase.execute(item.name);
-
+            console.log("item",item[0].name)
+            
+            let getProduct
+            for(let i = 0; i < produtos.length; i++){
+                getProduct = await getProductUseCase.execute(item[0].name);
+            }
+            
+             console.log("product")
             // inserindo produtos no pedido/order
             const insertProductDelivery = await prisma.itens_Info_Product.create({
                 data: {
@@ -40,7 +64,7 @@ export class CreateDeliveryUseCase {
                     },
                     produto: {
                         connect: {
-                            id: product.id
+                            id: getProduct.id
                         }
                     },
                     quantity: item.quantity
@@ -58,7 +82,12 @@ export class CreateDeliveryUseCase {
             // atualizando quantidade no estoque
             const updateProductUseCase = new UpdateProductUseCase();
             if (delivery) {
-                await updateProductUseCase.execute({ buy: true, product_info: { id: product.id, quantity_stock: product.quantity_stock - item.quantity } })
+                //console.log(produtos)
+                for(let i = 0; i < produtos.length; i++){
+                    //console.log(product)
+                    await updateProductUseCase.execute({ buy: true, product_info: { id: getProduct.id, quantity_stock: getProduct.quantity_stock - item[i].quantity } })
+                }
+                
             }
 
             // sendMail({
@@ -69,7 +98,7 @@ export class CreateDeliveryUseCase {
             // })
             return { user: username, order: insertProductDelivery };
         } catch (error) {
-           return error.message;
+            return error.message;
         }
 
     }

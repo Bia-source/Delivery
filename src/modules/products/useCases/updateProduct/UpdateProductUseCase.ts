@@ -15,6 +15,7 @@ interface IRequestUpdateProduct {
 
 export class UpdateProductUseCase {
     async execute({ status_adm, buy, product_info }: IRequestUpdateProduct) {
+        console.log(product_info)
         if (!status_adm && !buy) {
             throw new Error('Usuario não autorizado para fazer esta alteração');
         }

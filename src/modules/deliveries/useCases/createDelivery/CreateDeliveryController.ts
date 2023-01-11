@@ -6,16 +6,17 @@ import { CreateDeliveryUseCase } from "./CreateDeliveryUseCase";
 export class CreateDeliveryController {
     async handle(req: Request, res: Response): Promise<Response> {
        try {
-           const { item } = req.body;
+           const { item_name } = req.body;
            const id_client = req.id;
            const username = req.username;
+           const email = req.email;
            const createDelivery = new CreateDeliveryUseCase();
-           const validationStockProductUseCase = new ValidationStockUseCase();
-           await validationStockProductUseCase.executeBuy({product_name: item.name, quantity: item.quantity});
-           const result = await createDelivery.execute({ item: {name: item.name, quantity: item.quantity}, id_client, username});
+        //    const validationStockProductUseCase = new ValidationStockUseCase();
+        //    await validationStockProductUseCase.executeBuy([item_name]);
+           const result = await createDelivery.execute({ item: item_name, id_client, username });
            return res.status(201).json({ delivery: result });
        } catch (error) {
-           return res.json({ message: error.message });
+           return res.status(400).json({ message: error.message });
        }
     }
 }

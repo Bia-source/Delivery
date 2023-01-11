@@ -1,12 +1,31 @@
 import { prisma } from "../../../../database/prismaClient";
 
-interface IRequestStockProduct{
+interface IRequestStockProduct {
     product_name: string;
     quantity: number;
 }
 
+export interface ItemProps {
+    name: string;
+    quantity: number;
+}
+interface IRequestStockProduct {
+    itens: ItemProps[]
+}
+
 export class ValidationStockUseCase {
-    async executeBuy({product_name, quantity}: IRequestStockProduct) {
+    async executeBuy(itens) {
+       
+        const result = await Promise.all(itens.map(async (product, index) => {
+            const errors = await this.executeBuyOne(product.name, product.quantity)
+            //.then(data => {return data})
+            return {messageError: errors, product: product.name };
+        }))
+        return result;
+    }
+
+
+    async executeBuyOne(product_name, quantity) {
         const alreadyExistProduct = await prisma.product.findFirst({
             where: {
                 product_name: product_name
@@ -14,19 +33,19 @@ export class ValidationStockUseCase {
         })
 
         if (!alreadyExistProduct) {
-            throw new Error('Produto não encontrado!');
+            return 'Produto não encontrado!';
         }
 
         if (alreadyExistProduct.quantity_stock === 0) {
-            throw new Error('Produto indisponivel!');
+            return 'Produto indisponivel!';
         }
 
-        if(alreadyExistProduct.quantity_stock < quantity){
-            throw new Error('Quantidade indisponivel!');
-       }
+        if (alreadyExistProduct.quantity_stock < quantity) {
+            return 'Quantidade indisponivel!';
+        }
     }
 
-    async executeInfo(product_name: string){
+    async executeInfo(product_name: string) {
         const product = await prisma.product.findFirst({
             where: {
                 product_name: product_name
