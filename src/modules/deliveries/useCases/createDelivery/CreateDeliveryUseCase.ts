@@ -46,34 +46,37 @@ export class CreateDeliveryUseCase {
 
             // pegando produto
             const getProductUseCase = new FindProductByName();
-            console.log("item",item[0].name)
             
-            let getProduct
-            for(let i = 0; i < produtos.length; i++){
-                getProduct = await getProductUseCase.execute(item[0].name);
+            let getProduct = []
+            for(let i = 0; i <= produtos.length; i++){
+                console.log("aqui", item[i].name)
+                getProduct.push(await getProductUseCase.execute(item[i].name));
             }
             
              console.log("product")
             // inserindo produtos no pedido/order
-            const insertProductDelivery = await prisma.itens_Info_Product.create({
-                data: {
-                    delivery: {
-                        connect: {
-                            id: delivery.id
-                        }
+            const insertProductDelivery = await Promise.all(getProduct.map(async(product)=> {
+                const returnProducts = await prisma.itens_Info_Product.create({
+                    data: {
+                        delivery: {
+                            connect: {
+                                id: delivery.id
+                            }
+                        },
+                        produto: {
+                            connect: {
+                                id: product.id
+                            }
+                        },
+                        quantity: item.quantity
                     },
-                    produto: {
-                        connect: {
-                            id: getProduct.id
-                        }
-                    },
-                    quantity: item.quantity
-                },
-                select: {
-                    id_product: true,
-                    quantity: true
-                }
-            })
+                    select: {
+                        id_product: true
+                    }
+                })
+                return returnProducts
+            }))
+           //  
 
             // buscando pedido para retornar
             const getDelivery = new FindByIdDeliveryUseCase();
@@ -83,9 +86,9 @@ export class CreateDeliveryUseCase {
             const updateProductUseCase = new UpdateProductUseCase();
             if (delivery) {
                 //console.log(produtos)
-                for(let i = 0; i < produtos.length; i++){
+                for(let i = 0; i <= produtos.length; i++){
                     //console.log(product)
-                    await updateProductUseCase.execute({ buy: true, product_info: { id: getProduct.id, quantity_stock: getProduct.quantity_stock - item[i].quantity } })
+                    await updateProductUseCase.execute({ buy: true, product_info: { id: getProduct[i].id, quantity_stock: getProduct[i].quantity_stock - item[i].quantity } })
                 }
                 
             }
