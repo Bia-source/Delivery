@@ -55,7 +55,7 @@ export class CreateDeliveryUseCase {
             
              console.log("product")
             // inserindo produtos no pedido/order
-            const insertProductDelivery = await Promise.all(getProduct.map(async(product)=> {
+            await Promise.all(getProduct.map(async(product)=> {
                 const returnProducts = await prisma.itens_Info_Product.create({
                     data: {
                         delivery: {
@@ -71,7 +71,7 @@ export class CreateDeliveryUseCase {
                         quantity: item.quantity
                     },
                     select: {
-                        id_product: true
+                        id_product: true,
                     }
                 })
                 return returnProducts
@@ -99,7 +99,7 @@ export class CreateDeliveryUseCase {
             //      messageText: `seu pedido código ${delivery.id} ${MessageStatusDelivery.ARGUARDANDO} `, 
             //      titleEmail: TitleStatusDelivery.STATUS  
             // })
-            return { user: username, order: insertProductDelivery };
+            return { user: username, order: returnDelivery };
         } catch (error) {
             return error.message;
         }
