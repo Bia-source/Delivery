@@ -1,4 +1,5 @@
-export async function mapDelivery(deliveries: any[]){
+export async function mapDelivery(deliveries: any[], products: any[]){
+    console.log(products);
     const deliveriesFormat = deliveries.map((client)=>{
         return {
             user:{
