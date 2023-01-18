@@ -13,6 +13,10 @@ interface IRequestClient {
 
 export class CreateClientUseCase {
     async execute({username, password, email, adm}: IRequestClient) {
+        
+        // validacao para teste unitario
+        //validationFields({username, password, email})
+
         const clienExist = await prisma.clients.findFirst({
             where: {
                 username :{
