@@ -11,8 +11,6 @@ export class CreateDeliveryController {
            const username = req.username;
            const email = req.email;
            const createDelivery = new CreateDeliveryUseCase();
-        //    const validationStockProductUseCase = new ValidationStockUseCase();
-        //    await validationStockProductUseCase.executeBuy([item_name]);
            const result = await createDelivery.execute({ item: item_name, id_client, username });
            return res.status(201).json({ delivery: result });
        } catch (error) {
