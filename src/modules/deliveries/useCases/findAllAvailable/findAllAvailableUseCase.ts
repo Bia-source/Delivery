@@ -1,9 +1,13 @@
 import { prisma } from "../../../../database/prismaClient";
 import { mapDelivery } from "../../../../share/FormatReturn/map";
 import { FindByIdProductUseCase } from "../../../products/useCases/findByIdProduct/FindByIdProductUseCase";
-import { FindProductByName } from "../../../products/useCases/findProductByName/findProductByNameUseCase";
 
-
+interface IPropsGetProducts {
+    id: string;
+    id_product: string;
+    id_delivery: string;
+    quantity: number;
+}
 
 export class FindAllAvailableUseCase {
     async execute(id_user: string) {
@@ -40,21 +44,23 @@ export class FindAllAvailableUseCase {
             }
         });
 
-        const getInfoProducts = await Promise.all(deliveriesDeliveryman.map(async (order, index) => {
-            return await Promise.all(order.item_name.map(async (item, index) => {
-                const getProductUseCase = new FindByIdProductUseCase();
-                let produtos = await getProductUseCase.execute(item.id_product);
-                return produtos;
-            }));
-        }))
-       
         if (deliveriesClient.length === 0) {
-            return mapDelivery(deliveriesDeliveryman, getInfoProducts[0]);
+            return await mapDelivery(deliveriesDeliveryman);
+
         }
 
-        return mapDelivery(deliveriesClient, getInfoProducts[0])
-        
+        return mapDelivery(deliveriesClient);
+
 
     }
-}
 
+    async getInfoProducts(itens: [IPropsGetProducts]) {
+        const getProductUseCase = new FindByIdProductUseCase();
+        return await Promise.all(itens.map(async (item) => {
+            let produtos = await getProductUseCase.execute(item.id_product)
+            return produtos;
+        }))
+    }
+
+
+}
