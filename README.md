@@ -14,8 +14,8 @@ Um sistema backend de entregas, onde o cliente pré cadastrado e logado faz seu 
 ✅ Busca de todos os pedidos feitos pelo cliente solicitante<br>
 ✅ Busca de informações não sensiveis sobre os cliente por id <br>
 ✅ Pedidos feitos pelo solicitante busca pelo pedido por data <br>
-✅ Pedidos feitos pelo solicitante busca pelo pedido por status<br>
-✅ Deletar pedido feito <br>
+✅ Pedidos feitos pelo solicitante busca pelo pedido por status <br>
+✅ Deletar pedido feito apenas com status AGUARDANDO<br>
 ✅ Update dos dados cadastrais<br>
 
 ### Deliveryman🛵
@@ -66,7 +66,6 @@ http://localhost:2022/delivery-docs <br> <br>
 
 ## Melhorias futuras
 ☑️ TODO personalizar retornos de filtros de acordo com tipo de usuario <br>
-☑️ TODO impedir de deletar pedido que esta com status diferente de AGUARDANDO <br>
 ☑️ TODO criar testes unitários <br>
 ☑️ TODO implementar GraphQL <br>
 ☑️ TODO terminar a implementação do Swagger<br>
@@ -75,10 +74,11 @@ http://localhost:2022/delivery-docs <br> <br>
 ☑️ TODO criar dashboard store<br>
 
 ## Melhorias feitas
-✅ atualizar informaçoes de cadastro dos usuarios <br>
-✅ Validação dos campos de criação de usuario <br>
-✅ Proteção contra bot de robo<br>
-✅ Armazenamento de log de requisições<br>
+✅ Validações de estoque na criação do pedido (Produto indisponivel/ Produto inexistente/ Quantidade indisponivel) <br>
+✅ Validação no cancelamento do pedido (somente se ainda estiver em aguardo) <br>
+✅ Retornando mais detalhes dos produtos nas buscas pelos pedidos <br>
+✅ Atualização das versões das dependencias <br>
+✅ Impedir de deletar pedido que esta com status diferente de AGUARDANDO <br>
 
 # Autora
 Beatriz Ferreira dos Santos  
