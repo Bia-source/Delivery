@@ -78,7 +78,8 @@ http://localhost:2022/delivery-docs <br> <br>
 ✅ Validação no cancelamento do pedido (somente se ainda estiver em aguardo) <br>
 ✅ Retornando mais detalhes dos produtos nas buscas pelos pedidos <br>
 ✅ Atualização das versões das dependencias <br>
-✅ Impedir de deletar pedido que esta com status diferente de AGUARDANDO <br>
+✅ Tratamento de respostas de erro e criação de erros personalizados <br>
+
 
 # Autora
 Beatriz Ferreira dos Santos  
