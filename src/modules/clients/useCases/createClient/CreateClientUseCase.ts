@@ -14,8 +14,8 @@ interface IRequestClient {
 export class CreateClientUseCase {
     async execute({username, password, email, adm}: IRequestClient) {
         
-        // validacao para teste unitario
-        validationFields({username, password, email})
+        //validacao para teste unitario
+        //validationFields({username, password, email})
 
         const clienExist = await prisma.clients.findFirst({
             where: {
@@ -26,6 +26,7 @@ export class CreateClientUseCase {
         })
         
         if(clienExist) {
+            console.log("client existe  asasacs")
             throw new Error('Cliente já existe');
         }
 

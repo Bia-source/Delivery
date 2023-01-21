@@ -2,7 +2,7 @@ import { prisma } from "../../../../database/prismaClient";
 import { mapDeliveryFindClient } from "../../../../share/FormatReturn/map";
 
 
-export class FindByIdClientUseCase {
+export class FindDeliveryByIdClientUseCase {
     async execute(id_client: string){
         const user = await prisma.clients.findUnique({
             where: {
