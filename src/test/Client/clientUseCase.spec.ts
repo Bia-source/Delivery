@@ -46,8 +46,6 @@ describe("Criar novo usuario", () => {
         const result = await createUserUseCase.execute(newUser);
         if(result.id){newUserId = result.id};
         expect(result).toHaveProperty("email");
-        //expect(result).not.toThrow(new Error('Cliente já existe'));
-        //expect(result).not.toThrow(new Error('Fails validation!'));
     });
 });
 
