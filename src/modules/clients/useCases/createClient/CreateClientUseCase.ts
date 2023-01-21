@@ -26,7 +26,6 @@ export class CreateClientUseCase {
         })
         
         if(clienExist) {
-            console.log("client existe  asasacs")
             throw new Error('Cliente já existe');
         }
 

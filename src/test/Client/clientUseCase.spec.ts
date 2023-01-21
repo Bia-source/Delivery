@@ -44,8 +44,17 @@ describe("Criar novo usuario", () => {
             adm: false
         };
         const result = await createUserUseCase.execute(newUser);
-        if(result.id){newUserId = result.id};
+        if (result.id) { newUserId = result.id };
+        expect(result).not.toBeNull();
+        expect(result).not.toBeUndefined();
         expect(result).toHaveProperty("email");
+        expect.objectContaining({
+            client: {
+                id: expect.any(String),
+                username: expect.any(String),
+                email: expect.any(String)
+            }
+        });
     });
 });
 
@@ -58,7 +67,8 @@ describe("Alterar cliente existente", () => {
                 email: "novo email"
             }
         });
-
+        expect(result).not.toBeNull();
+        expect(result).not.toBeUndefined();
         expect(result).toHaveProperty('username', 'novo nome');
     })
 });
@@ -67,6 +77,8 @@ describe("Buscando dados do cliente", () => {
     test("Espera-se os dados de um cliente", async () => {
         const findClientUseCase = new FindByIdClientUseCase();
         const result = await findClientUseCase.execute(Client.id);
+        expect(result).not.toBeNull();
+        expect(result).not.toBeUndefined();
         expect(result).toHaveProperty("id");
     })
 });
@@ -79,5 +91,6 @@ describe("Deletar um cliente", () => {
         await deleteClientUseCase.execute(Client.id);
         const result = await findByIdClientUseCase.execute(Client.id);
         expect(result).toBeNull();
+        expect(result).not.toBeUndefined();
     });
 });
