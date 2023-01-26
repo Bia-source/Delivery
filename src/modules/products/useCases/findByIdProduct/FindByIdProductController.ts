@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { FindByIdProductUseCase } from "./FindByIdProductUseCase";
 
 export class FindByIdProductController {
-    async handle(req: Request, res: Response) {
+    async handle(req: Request, res: Response): Promise<Response> {
         try {
             const { id_product } = req.body;
             const findByIdProductUseCase = new FindByIdProductUseCase();

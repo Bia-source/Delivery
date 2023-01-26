@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { UpdateRegisterClientUseCase } from "./UpdateRegisterClientUseCase";
 
 export class UpdateRegisterClientController{
-    async handle(req: Request, res: Response){
+    async handle(req: Request, res: Response): Promise<Response>{
        try {
            const { username, email } = req.body;
            const id_client = req.id;

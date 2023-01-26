@@ -3,7 +3,7 @@ import { FindByCreatedUseCase } from "./FindByCreatedUseCase";
 
 
 export class FindByCreatedController {
-    async handle(req: Request, res: Response){
+    async handle(req: Request, res: Response): Promise<Response>{
         try {
             const { dateInitial, dateEnd } = req.body;
             const findByDate = new FindByCreatedUseCase();

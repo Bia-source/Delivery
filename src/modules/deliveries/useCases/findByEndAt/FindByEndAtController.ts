@@ -3,7 +3,7 @@ import { FindByEndAtUseCase } from "./FindByEndAtUseCase";
 
 
 export class FindByEndAtController {
-    async handle(req: Request, res: Response){
+    async handle(req: Request, res: Response): Promise<Response>{
         try {
             const { dateInitial, dateEnd } = req.body;
             const findByDate = new FindByEndAtUseCase();

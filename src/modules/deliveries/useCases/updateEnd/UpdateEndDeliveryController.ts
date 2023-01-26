@@ -4,7 +4,7 @@ import { UpdateEndDeliveryUseCase } from "./UpdateEndDeliveryUseCase";
 
 
 export class UpdateEndDeliveryController{
-    async handle(req: Request, res: Response){
+    async handle(req: Request, res: Response): Promise<Response>{
         try {
             const { id_delivery } = req.body;
             const id_deliveryman = req.id;

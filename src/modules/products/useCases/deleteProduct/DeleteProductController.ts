@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { DeleteProductUseCase } from "./DeleteProductUseCase";
 
 export class DeleteProductController {
-    async handle(req: Request, res: Response) {
+    async handle(req: Request, res: Response): Promise<Response> {
         try {
             const { id_product } = req.body;
             const status_adm = req.adm;

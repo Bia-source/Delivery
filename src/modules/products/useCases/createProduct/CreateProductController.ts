@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { CreateProductUseCase } from "./CreateProductUseCase";
 
 export class CreateProductController {
-    async handle(req: Request, res: Response){
+    async handle(req: Request, res: Response): Promise<Response>{
        try {
         const {value, product_category, product_name, quantity_stock,discount} = req.body;
         const status_adm = req.adm;

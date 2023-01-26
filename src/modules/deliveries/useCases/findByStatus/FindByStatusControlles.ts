@@ -3,7 +3,7 @@ import { FindByStatusUseCase } from "./FindByStatusUseCase";
 
 
 export class  FindByStatusController {
-    async handle(req: Request, res: Response){
+    async handle(req: Request, res: Response): Promise<Response>{
        try {
           const { status } = req.body;
           const findByStatusUseCase = new FindByStatusUseCase();

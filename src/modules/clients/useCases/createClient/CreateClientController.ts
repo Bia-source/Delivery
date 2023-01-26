@@ -3,7 +3,7 @@ import { validationFields } from "../../../../share/validators";
 import { CreateClientUseCase } from "./CreateClientUseCase";
 
 export class CreateClientController {
-    async handle(req: Request, res: Response) {
+    async handle(req: Request, res: Response): Promise<Response>{
         try {
             const { username, password, email, adm } = req.body;
             const createClientUseCase = new CreateClientUseCase();

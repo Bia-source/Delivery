@@ -1,4 +1,4 @@
-import { FindAllAvailableUseCase } from "../../modules/deliveries/useCases/findAllAvailable/FindAllAvailableUseCase";
+import { FindAllAvailableUseCase } from "../../modules/deliveries/useCases/findAllAvailable/findAllAvailableUseCase";
 
 export async function mapDelivery(deliveries: any[]) {
     const deliveriesFormat = await Promise.all(deliveries.map(async (client) => {

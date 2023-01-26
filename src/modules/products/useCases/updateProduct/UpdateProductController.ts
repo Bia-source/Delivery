@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { UpdateProductUseCase } from "./UpdateProductUseCase";
 
 export class UpdateProductController {
-    async handle(req: Request, res: Response) {
+    async handle(req: Request, res: Response): Promise<Response> {
         try {
             const { id, value, product_category, product_name, quantity_stock, discount } = req.body;
             const status_adm = req.adm;

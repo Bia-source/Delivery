@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { FindAllProductsUseCase } from "./FindAllProductsUseCase";
 
 export class FindAllProductsController{
-    async handle(req: Request, res: Response){
+    async handle(req: Request, res: Response): Promise<Response>{
         try {
             const findAllProductUseCase = new FindAllProductsUseCase()
             const products = await findAllProductUseCase.execute();

@@ -3,7 +3,7 @@ import { FindByIdDeliverymanUseCase } from "./FindByIdDeliverymanUseCase";
 
 
 export class FindByIdDeliverymanController {
-    async handle(req: Request, res: Response){
+    async handle(req: Request, res: Response): Promise<Response>{
         try {
             const id = req.id;
             const findByIdDeliverymanUseCase = new FindByIdDeliverymanUseCase();
