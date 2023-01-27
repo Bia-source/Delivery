@@ -9,10 +9,11 @@ interface IRequestClient {
     password: string;
     email?: string;
     adm?: boolean;
+    adress?: string;
 }
 
 export class CreateClientUseCase {
-    async execute({username, password, email, adm}: IRequestClient) {
+    async execute({username, password, email, adm, adress}: IRequestClient) {
         
         //validacao para teste unitario
         //validationFields({username, password, email})
@@ -35,12 +36,14 @@ export class CreateClientUseCase {
                 username,
                 password: hashPassword,
                 email,
-                adm
+                adm,
+                adress          
             },
             select:{
                 id: true,
                 username: true,
-                email: true
+                email: true,
+                adress: true,
             }
         });
 

@@ -10,12 +10,12 @@ import { UpdateDeliverymanUseCase } from "../../modules/deliveries/useCases/upda
 import { UpdateEndDeliveryUseCase } from "../../modules/deliveries/useCases/updateEnd/UpdateEndDeliveryUseCase";
 
 let Client = {
-    id: "1fc6481e-28ac-426f-8f30-da8fbbec6d4c",
-    username: "testeDelivery",
-    email: "bia_ferre32irads@yahoo.com"
+    id: "ab68c1bd-85f9-4334-b883-cf84d0526a2b",
+    username: "biasouce123",
+    email: "bia_ferreirads@yahoo.com"
 };
 let Deliveryman = {
-   id: "5d4289c9-b622-4a75-8635-93566ad0d32c"
+    id: "e18f8ad1-510c-40be-9c0f-d16eda75bda6"
 }
 
 let DeliveryInfo = {
@@ -77,7 +77,7 @@ describe("Buscando deliveries", () => {
         }));
     });
 
-    test("Espera-se receber todos os deliveries entregues entre duas datas", async ()=> {
+    test("Espera-se receber todos os deliveries entregues entre duas datas", async () => {
         const findByEndAtUseCase = new FindByEndAtUseCase();
         const dateInitial = "2023-01-01";
         const dateEnd = "2023-01-27";
@@ -92,20 +92,20 @@ describe("Buscando deliveries", () => {
         }));
     });
 
-    test("Espera-se receber todos os deliveries feitos por um cliente", async ()=>{
-       const findByIdClientUseCase = new FindByIdClientUseCase();
-       await findByIdClientUseCase.execute(Client.id);
-       expect.arrayContaining(expect.objectContaining({
-        id: expect.any(String),
-        id_client: expect.any(String),
-        id_deliveryman: expect.any(String),
-        created_at: expect.any(Date),
-        end_at: expect.any(Date),
-        status: expect.any(String)
-    }));
+    test("Espera-se receber todos os deliveries feitos por um cliente", async () => {
+        const findByIdClientUseCase = new FindByIdClientUseCase();
+        await findByIdClientUseCase.execute(Client.id);
+        expect.arrayContaining(expect.objectContaining({
+            id: expect.any(String),
+            id_client: expect.any(String),
+            id_deliveryman: expect.any(String),
+            created_at: expect.any(Date),
+            end_at: expect.any(Date),
+            status: expect.any(String)
+        }));
     });
 
-    test("Espera-se receber todos os deliveries entregues por um deliveryman", async()=> {
+    test("Espera-se receber todos os deliveries entregues por um deliveryman", async () => {
         const findByIdDeliverymanUseCase = new FindByIdDeliverymanUseCase();
         await findByIdDeliverymanUseCase.execute(Deliveryman.id);
         expect.arrayContaining(expect.objectContaining({
@@ -118,22 +118,22 @@ describe("Buscando deliveries", () => {
         }));
     });
 
-    test("Espera-se receber informações de um delivery especifico", async()=>{
-      const findByIdDeliveryUseCase = new FindByIdDeliveryUseCase();
-      await findByIdDeliveryUseCase.execute(DeliveryInfo.id);
-      expect.objectContaining({
-        item_name: {
-            id: expect.any(String),
-            id_product: expect.any(String),
-            id_delivery: expect.any(String),
-            quantity: expect.any(Number),
-        },
-        id_client: expect.any(String),
-        deliveryman: expect.any(String),
-        created_at: expect.any(Date),
-        end_at: expect.any(Date),
-        status: expect.any(String)
-    })
+    test("Espera-se receber informações de um delivery especifico", async () => {
+        const findByIdDeliveryUseCase = new FindByIdDeliveryUseCase();
+        await findByIdDeliveryUseCase.execute(DeliveryInfo.id);
+        expect.objectContaining({
+            item_name: {
+                id: expect.any(String),
+                id_product: expect.any(String),
+                id_delivery: expect.any(String),
+                quantity: expect.any(Number),
+            },
+            id_client: expect.any(String),
+            deliveryman: expect.any(String),
+            created_at: expect.any(Date),
+            end_at: expect.any(Date),
+            status: expect.any(String)
+        })
     });
 
     // test("Espera-se receber todos os deliveries com o mesmo status", async ()=> {
@@ -143,10 +143,10 @@ describe("Buscando deliveries", () => {
     // });
 });
 
-describe("Alterar status do delivery", ()=> {
-    test("Espera-se conseguir alterar status do delivery", async()=> {
+describe("Alterar status do delivery", () => {
+    test("Espera-se conseguir alterar status do delivery", async () => {
         const updateDeliverymanUseCase = new UpdateDeliverymanUseCase();
-        await updateDeliverymanUseCase.execute({id_delivery: DeliveryInfo.id, id_deliveryman:Deliveryman.id, username:Client.username,email:Client.email});
+        await updateDeliverymanUseCase.execute({ id_delivery: DeliveryInfo.id, id_deliveryman: Deliveryman.id, username: Client.username, email: Client.email });
         expect.objectContaining({
             user: expect.any(String),
             data: {
@@ -156,15 +156,15 @@ describe("Alterar status do delivery", ()=> {
                 created_at: expect.any(Date),
                 end_at: expect.any(Date),
                 status: expect.any(String)
-            }      
+            }
         });
     });
 });
 
-describe("Definir entrega de delivery", ()=> {
-    test("Espera-se alterar status para ENTREGUE", async()=> {
+describe("Definir entrega de delivery", () => {
+    test("Espera-se alterar status para ENTREGUE", async () => {
         const updateEndDeliverymanUseCase = new UpdateEndDeliveryUseCase();
-        await updateEndDeliverymanUseCase.execute({id_delivery: DeliveryInfo.id, id_deliveryman:Deliveryman.id, username:Client.username,email:Client.email});
+        await updateEndDeliverymanUseCase.execute({ id_delivery: DeliveryInfo.id, id_deliveryman: Deliveryman.id, username: Client.username, email: Client.email });
         expect.objectContaining({
             user: expect.any(String),
             data: {
@@ -174,7 +174,7 @@ describe("Definir entrega de delivery", ()=> {
                 created_at: expect.any(Date),
                 end_at: expect.any(Date),
                 status: expect.any(String)
-            }      
+            }
         });
     });
 });

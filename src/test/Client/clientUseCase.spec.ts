@@ -8,7 +8,9 @@ import { UpdateRegisterClientUseCase } from "../../modules/clients/useCases/upda
 let Client = {
     id: "",
     username: "",
-    email: ""
+    email: "",
+    adress: "",
+    avatar: ""
 };
 let TokenUser = "";
 let newUserId = "";
@@ -19,7 +21,9 @@ beforeAll(async () => {
         username: `teste1`,
         password: `teste1`,
         email: "bia_ferre32irads@yahoo.com",
-        adm: false
+        adm: false,
+        adress: "Rua olavo egidio de souza aranha,1928",
+        avatar: "perfil.png"
     };
     const client = await createClientUseCase.execute(newUser);
     Client = client;
@@ -41,7 +45,9 @@ describe("Criar novo cliente", () => {
             username: `testde${Math.random()}`,
             password: `teste${Math.random()}`,
             email: "bia_ferrle32irads@yahoo.com",
-            adm: false
+            adm: false,
+            adress: "Rua olavo egidio de souza aranha,1928",
+            avatar: "perfil.png"
         };
         const result = await createUserUseCase.execute(newUser);
         if (result.id) { newUserId = result.id };
@@ -52,7 +58,9 @@ describe("Criar novo cliente", () => {
             client: {
                 id: expect.any(String),
                 username: expect.any(String),
-                email: expect.any(String)
+                email: expect.any(String),
+                adress: expect.any(String),
+                avatar: expect.any(String),
             }
         });
     });
