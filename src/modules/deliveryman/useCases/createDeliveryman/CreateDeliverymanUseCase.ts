@@ -35,7 +35,7 @@ export class CreateDeliverymanUseCase {
                 username: true
             }
         });
-        sendMail({email, username, messageText: MessageNewUser.DELIVERYMAN_USER, titleEmail: TitleNewUser.DELIVERYMAN_USER});
+        //sendMail({email, username, messageText: MessageNewUser.DELIVERYMAN_USER, titleEmail: TitleNewUser.DELIVERYMAN_USER});
 
         return clientDeliveryman;
     }
