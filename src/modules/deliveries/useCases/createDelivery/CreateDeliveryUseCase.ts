@@ -17,10 +17,10 @@ interface IRequestDelivery {
 }
 
 export class CreateDeliveryUseCase {
-    async execute({ item, id_client, username }: IRequestDelivery) {
+    async execute({ item, id_client, username }: IRequestDelivery | any) {
         try {
             let produtos = [item];
-
+            
             const validationStockProductUseCase = new ValidationStockUseCase();
             let error;
             for(let i=0; i < produtos.length; i++){
@@ -45,7 +45,7 @@ export class CreateDeliveryUseCase {
             const getProductUseCase = new FindProductByName();
             
             let getProduct = []
-            for(let i = 0; i <= produtos.length; i++){
+            for(let i = 0; i < produtos.length; i++){
                 getProduct.push(await getProductUseCase.execute(item[i].name));
             }
 
@@ -79,7 +79,7 @@ export class CreateDeliveryUseCase {
             // atualizando quantidade no estoque
             const updateProductUseCase = new UpdateProductUseCase();
             if (delivery) {
-                for(let i = 0; i <= produtos.length; i++){
+                for(let i = 0; i < produtos.length; i++){
                     await updateProductUseCase.execute({ buy: true, product_info: { id: getProduct[i].id, quantity_stock: getProduct[i].quantity_stock - item[i].quantity } })
                 }
                 

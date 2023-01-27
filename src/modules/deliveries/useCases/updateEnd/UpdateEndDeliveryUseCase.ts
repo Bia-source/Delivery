@@ -16,12 +16,12 @@ export class UpdateEndDeliveryUseCase {
                     status: "ENTREGUE"
                 }
             });
-            sendMail({
-                email,
-                username,
-                messageText: `seu pedido código ${id_delivery} ${MessageStatusDelivery.ENTREGUE}`, 
-                titleEmail: TitleStatusDelivery.STATUS  
-            })
+            // sendMail({
+            //     email,
+            //     username,
+            //     messageText: `seu pedido código ${id_delivery} ${MessageStatusDelivery.ENTREGUE}`, 
+            //     titleEmail: TitleStatusDelivery.STATUS  
+            // })
             return {user: username, data: delivery};
         } catch (error) {
             deliveryAlreadyExist();

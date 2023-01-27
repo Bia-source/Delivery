@@ -34,8 +34,8 @@ afterAll(async () => {
     return deleteClientUseCase.execute(newUserId);
 })
 
-describe("Criar novo usuario", () => {
-    test("Espera-se conseguir criar um novo usuario", async () => {
+describe("Criar novo cliente", () => {
+    test("Espera-se conseguir criar um novo cliente", async () => {
         const createUserUseCase = new CreateClientUseCase();
         let newUser = {
             username: `testde${Math.random()}`,

@@ -16,12 +16,12 @@ export class UpdateDeliverymanUseCase {
                     status: "TRANSITO"
                 }
             })
-            sendMail({
-                email,
-                username,
-                messageText: `seu pedido código ${id_delivery} ${MessageStatusDelivery.TRANSITO}`, 
-                titleEmail: TitleStatusDelivery.STATUS  
-            })
+            // sendMail({
+            //     email,
+            //     username,
+            //     messageText: `seu pedido código ${id_delivery} ${MessageStatusDelivery.TRANSITO}`, 
+            //     titleEmail: TitleStatusDelivery.STATUS  
+            // })
             return {user: username, data: delivery};
         } catch (error) {
             deliveryAlreadyExist();

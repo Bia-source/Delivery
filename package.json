@@ -10,7 +10,7 @@
     "stop-postgres": "docker-compose stop",
     "clean-postgres": "docker-compose down",
     "dev": "ts-node-dev --exit-child --transpile-only --ignore-watch node_modules src/server.ts",
-    "test": "jest"
+    "test": "jest --detectOpenHandles"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",

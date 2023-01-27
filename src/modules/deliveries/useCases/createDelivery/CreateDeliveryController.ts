@@ -9,7 +9,6 @@ export class CreateDeliveryController {
            const { item_name } = req.body;
            const id_client = req.id;
            const username = req.username;
-           const email = req.email;
            const createDelivery = new CreateDeliveryUseCase();
            const result = await createDelivery.execute({ item: item_name, id_client, username });
            return res.status(201).json({ delivery: result });
