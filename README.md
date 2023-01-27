@@ -66,11 +66,8 @@ http://localhost:2022/delivery-docs <br> <br>
 
 ## Melhorias futuras
 ☑️ TODO personalizar retornos de filtros de acordo com tipo de usuario <br>
-☑️ TODO criar testes unitários <br>
 ☑️ TODO implementar GraphQL <br>
 ☑️ TODO terminar a implementação do Swagger<br>
-☑️ TODO inserir avatar de usuario<br>
-☑️ TODO permitir atualização de pedido pelo cliente enquanto status estiver AGUARDANDO<br>
 ☑️ TODO criar dashboard store<br>
 
 ## Melhorias feitas
@@ -79,6 +76,8 @@ http://localhost:2022/delivery-docs <br> <br>
 ✅ Retornando mais detalhes dos produtos nas buscas pelos pedidos <br>
 ✅ Atualização das versões das dependencias <br>
 ✅ Tratamento de respostas de erro e criação de erros personalizados <br>
+✅ Criado testes unitários <br>
+✅ Inserir avatar de usuario<br>
 
 
 # Autora
