@@ -55,7 +55,7 @@ Um sistema backend de entregas, onde o cliente pré cadastrado e logado faz seu 
 - yarn dev
 
 ## Porta utilizada
-http://localhost:2022/{router}
+http://localhost:2023/{router}
 
 ## URL Deploy
 https://git.heroku.com/delivery-fees.git
