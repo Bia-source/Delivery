@@ -6,8 +6,6 @@ export class CreateClientController {
     async handle(req: Request, res: Response): Promise<Response>{
         try {
             const { username, password, email, adm, adress } = req.body;
-            const { originalname: name, size } = req.file;
-            console.log(name, size);
             const createClientUseCase = new CreateClientUseCase();
             const result = await createClientUseCase.execute({username, password, email, adm, adress});
             return res.json({client: result});

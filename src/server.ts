@@ -8,8 +8,13 @@ import MongoStore from 'rate-limit-mongo';
 import swaggerUi from 'swagger-ui-express';
 import swaggerFile from './swagger.json';
 import { routes } from './index.routes';
+import { ApolloServer, gql } from 'apollo-server';
+import { typeDefs } from './graphql/schemas';
+import { resolvers } from './graphql/resolvers';
+import { string } from "yup";
 
 const app = express();
+const server = new ApolloServer({typeDefs, resolvers});
 
 app.use(express.json());
 app.use(cors());
@@ -52,6 +57,9 @@ app.use((err: Error, request: Request, response: Response, next: NextFunction) =
         message: "Internal server error"
     });
     
+})
+server.listen().then(({url}:{url: string})=> {
+    console.log(`Server apollo ${url}`);
 })
 app.listen(2023, () => console.log("Server is running"));
 
