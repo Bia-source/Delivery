@@ -20,7 +20,7 @@ export class FindByStatusUseCase {
                status: true,
            }
        });
-       console.log(deliveries.find(item=> item.item_name));
+
        return mapDelivery(deliveries);
     }
 }

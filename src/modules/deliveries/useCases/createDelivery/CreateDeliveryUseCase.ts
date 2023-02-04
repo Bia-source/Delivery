@@ -45,7 +45,7 @@ export class CreateDeliveryUseCase {
             const getProductUseCase = new FindProductByName();
             
             let getProduct = []
-            for(let i = 0; i < produtos.length; i++){
+            for(let i = 0; i <= produtos.length; i++){
                 getProduct.push(await getProductUseCase.execute(item[i].name));
             }
 
@@ -71,7 +71,7 @@ export class CreateDeliveryUseCase {
                         quantity: true
                     }
                 })
-                return returnProducts
+                return returnProducts;
             }))
 
             // buscando pedido para retornar
