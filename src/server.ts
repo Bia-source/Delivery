@@ -11,7 +11,6 @@ import { routes } from './index.routes';
 import { ApolloServer, gql } from 'apollo-server';
 import { typeDefs } from './graphql/schemas';
 import { resolvers } from './graphql/resolvers';
-import { string } from "yup";
 
 const app = express();
 const server = new ApolloServer({typeDefs, resolvers});

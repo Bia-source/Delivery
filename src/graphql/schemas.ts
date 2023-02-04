@@ -1,6 +1,8 @@
-import { gql } from 'apollo-server';
+import { gql } from "apollo-server";
 
 export const typeDefs = gql`
+scalar Date
+
  type Product {
     id:String             
     product_name:String
@@ -40,17 +42,51 @@ export const typeDefs = gql`
  }
 
  type Deliveries {
-    id:String           
+  id:String           
   item_name:[Itens_Info_Product]
   id_client:String
   client:Clients   
   id_deliveryman:String
   deliveryman:Deliveryman  
-  created_at:String           
+  created_at:Date           
   end_at:String
   status:Status 
  }
- 
+
+ type UserInfo {
+   id_client:String
+   username:String
+ }
+
+ type ItensDelivery {
+    id:ID!
+    id_product:String
+    id_delivery:String
+    quantity:Int
+    productInfo:ProductInfoDelivery
+ }
+
+ type ProductInfoDelivery {
+   name:String
+	category:String
+	value:Int
+	discount:Int
+ }
+
+ type DeliveryInfo {
+   id:String
+   itens:[ItensDelivery]
+   id_deliveryman:String
+   created_at:Date
+   end_at:String
+   status:String
+ }
+
+ type ReturnDeliveries {
+   userInfo:UserInfo
+   deliveryInfo: DeliveryInfo
+ }
+
  enum Status {
     AGUARDANDO
     TRANSITO
@@ -59,6 +95,7 @@ export const typeDefs = gql`
 
  type Query {
     products: [Product],
-    deliveries: [Deliveries]
+    deliveries(id_user: String!): [ReturnDeliveries],
+    getDeliveryStatus(status: Status!): [ReturnDeliveries]
  }
 `;
