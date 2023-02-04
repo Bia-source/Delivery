@@ -100,12 +100,18 @@ export type ProductInfoDelivery = {
 export type Query = {
   __typename?: 'Query';
   deliveries?: Maybe<Array<Maybe<ReturnDeliveries>>>;
+  getDeliveryStatus?: Maybe<Array<Maybe<ReturnDeliveries>>>;
   products?: Maybe<Array<Maybe<Product>>>;
 };
 
 
 export type QueryDeliveriesArgs = {
   id_user: Scalars['String'];
+};
+
+
+export type QueryGetDeliveryStatusArgs = {
+  status: Status;
 };
 
 export type ReturnDeliveries = {
@@ -322,6 +328,7 @@ export type ProductInfoDeliveryResolvers<ContextType = any, ParentType extends R
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   deliveries?: Resolver<Maybe<Array<Maybe<ResolversTypes['ReturnDeliveries']>>>, ParentType, ContextType, RequireFields<QueryDeliveriesArgs, 'id_user'>>;
+  getDeliveryStatus?: Resolver<Maybe<Array<Maybe<ResolversTypes['ReturnDeliveries']>>>, ParentType, ContextType, RequireFields<QueryGetDeliveryStatusArgs, 'status'>>;
   products?: Resolver<Maybe<Array<Maybe<ResolversTypes['Product']>>>, ParentType, ContextType>;
 };
 
