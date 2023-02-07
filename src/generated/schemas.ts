@@ -125,6 +125,7 @@ export type Query = {
   getAllProducts?: Maybe<Array<Maybe<Product>>>;
   getDeliveryStatus?: Maybe<Array<Maybe<ReturnDeliveries>>>;
   getProductById?: Maybe<Product>;
+  getProductByName?: Maybe<Product>;
 };
 
 
@@ -140,6 +141,11 @@ export type QueryGetDeliveryStatusArgs = {
 
 export type QueryGetProductByIdArgs = {
   id_product: Scalars['String'];
+};
+
+
+export type QueryGetProductByNameArgs = {
+  product_name: Scalars['String'];
 };
 
 export type ReturnDeliveries = {
@@ -366,6 +372,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   getAllProducts?: Resolver<Maybe<Array<Maybe<ResolversTypes['Product']>>>, ParentType, ContextType>;
   getDeliveryStatus?: Resolver<Maybe<Array<Maybe<ResolversTypes['ReturnDeliveries']>>>, ParentType, ContextType, RequireFields<QueryGetDeliveryStatusArgs, 'status'>>;
   getProductById?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<QueryGetProductByIdArgs, 'id_product'>>;
+  getProductByName?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<QueryGetProductByNameArgs, 'product_name'>>;
 };
 
 export type ReturnDeliveriesResolvers<ContextType = any, ParentType extends ResolversParentTypes['ReturnDeliveries'] = ResolversParentTypes['ReturnDeliveries']> = {

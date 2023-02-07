@@ -97,7 +97,8 @@ scalar Date
     getAllProducts: [Product],
     getAllDeliveries(id_user: String!): [ReturnDeliveries],
     getDeliveryStatus(status: Status!): [ReturnDeliveries],
-    getProductById(id_product: String!): Product
+    getProductById(id_product: String!): Product,
+    getProductByName(product_name: String!): Product,
  }
 
  type Mutation {
