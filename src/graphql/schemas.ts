@@ -1,4 +1,4 @@
-import { Product } from './../generated/schemas';
+import { Product, Clients } from './../generated/schemas';
 import { gql } from "apollo-server";
 
 export const typeDefs = gql`
@@ -39,6 +39,16 @@ scalar Date
     adm:Boolean  
     adress:String
     avatar:String
+    Deliveries:[Deliveries]
+ }
+
+ type ReturnClient {
+    id:String 
+    username:String       
+    email:String   
+    adress:String
+    avatar:String
+    adm: Boolean
     Deliveries:[Deliveries]
  }
 
@@ -100,26 +110,35 @@ scalar Date
     getDeliveryStatus(status: Status!): [ReturnDeliveries],
     getProductById(id_product: String!): Product,
     getProductByName(product_name: String!): Product,
+    getClientById(id_client: String!): Clients,
  }
 
  type Mutation {
    createProduct(
-           product_name:String!
-           product_category:String!
-           quantity_stock:Int!    
-           discount:Int!    
-           value:Int!, status_adm: Boolean!
+      product_name:String!
+      product_category:String!
+      quantity_stock:Int!    
+      discount:Int!    
+      value:Int!, status_adm: Boolean!
    ): Product,
    deleteProduct(status_adm: Boolean!, id_product: String!): Product,
    updateProductAdm(
-            status_adm: Boolean!,
-            id_product: String!,
-            value: Int,
-            product_category: String,
-            product_name: String,
-            quantity_stock: Int,
-            discount: Int
+      status_adm: Boolean!,
+      id_product: String!,
+      value: Int,
+      product_category: String,
+      product_name: String,
+      quantity_stock: Int,
+      discount: Int
    ): Product,
-   
+   createClient(
+      username: String!,
+      password: String!,
+      email: String!,
+      adm: Boolean,
+      adress: String!
+   ): ReturnClient,
+   deleteClient(id_client: String!): ReturnClient,
+   updateRegisterClient(id_client: String!, username: String, email: String): ReturnClient
  }
 `;

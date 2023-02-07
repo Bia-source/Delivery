@@ -44,6 +44,7 @@ export class CreateClientUseCase {
                 username: true,
                 email: true,
                 adress: true,
+                adm: true
             }
         });
 
