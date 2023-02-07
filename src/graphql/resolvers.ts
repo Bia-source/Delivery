@@ -1,3 +1,4 @@
+import { UpdateProductUseCase } from './../modules/products/useCases/updateProduct/UpdateProductUseCase';
 import {
     MutationCreateProductArgs,
     MutationDeleteProductArgs,
@@ -25,6 +26,7 @@ const findProductByName = instanceProviders(FindProductByNameUseCase);
 // MUTATIONS 
 const createProductUseCase = instanceProviders(CreateProductUseCase);
 const deleteProductUseCase = instanceProviders(DeleteProductUseCase);
+const updateProductUseCase = instanceProviders(UpdateProductUseCase);
 
 export const resolvers = {
     Query: {
@@ -46,11 +48,32 @@ export const resolvers = {
             quantity_stock,
             discount,
             value,
-            status_adm }: MutationCreateProductArgs) => await createProductUseCase.useCase.execute({
-                product_info: { product_name, product_category, quantity_stock, discount, value },
-                status_adm
-            }),
+            status_adm }: MutationCreateProductArgs) => {
+                return await createProductUseCase.useCase.execute({
+                    product_info: { product_name, product_category, quantity_stock, discount, value },
+                    status_adm
+                })
+        },
         deleteProduct: async (_, { status_adm, id_product }: MutationDeleteProductArgs) => await deleteProductUseCase.useCase.execute({ status_adm, id_product }),
-
+        updateProductAdm: async (_, {
+            status_adm,
+            id_product,
+            value,
+            product_category,
+            product_name,
+            quantity_stock,
+            discount }) => {
+            return await updateProductUseCase.useCase.execute({
+                status_adm,
+                product_info: {
+                    id:id_product,
+                    value,
+                    product_category,
+                    product_name,
+                    quantity_stock,
+                    discount
+                }
+            })
+        },
     }
 }

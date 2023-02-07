@@ -1,3 +1,4 @@
+import { Product } from './../generated/schemas';
 import { gql } from "apollo-server";
 
 export const typeDefs = gql`
@@ -103,12 +104,22 @@ scalar Date
 
  type Mutation {
    createProduct(
-    product_name:String!
-    product_category:String!
-    quantity_stock:Int!    
-    discount:Int!    
-    value:Int!, status_adm: Boolean!
-    ): Product,
-    deleteProduct(status_adm: Boolean!, id_product: String!): Product,
+           product_name:String!
+           product_category:String!
+           quantity_stock:Int!    
+           discount:Int!    
+           value:Int!, status_adm: Boolean!
+   ): Product,
+   deleteProduct(status_adm: Boolean!, id_product: String!): Product,
+   updateProductAdm(
+            status_adm: Boolean!,
+            id_product: String!,
+            value: Int,
+            product_category: String,
+            product_name: String,
+            quantity_stock: Int,
+            discount: Int
+   ): Product,
+   
  }
 `;
