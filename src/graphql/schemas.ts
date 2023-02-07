@@ -94,8 +94,18 @@ scalar Date
   }
 
  type Query {
-    products: [Product],
-    deliveries(id_user: String!): [ReturnDeliveries],
-    getDeliveryStatus(status: Status!): [ReturnDeliveries]
+    getAllProducts: [Product],
+    getAllDeliveries(id_user: String!): [ReturnDeliveries],
+    getDeliveryStatus(status: Status!): [ReturnDeliveries],
+    getProductById(id_product: String!): Product
+ }
+
+ type Mutation {
+   createProduct(product_name:String!
+    product_category:String!
+    quantity_stock:Int!    
+    discount:Int!    
+    value:Int!, status_adm: Boolean!): Product
+
  }
 `;

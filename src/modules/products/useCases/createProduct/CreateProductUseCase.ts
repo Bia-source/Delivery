@@ -24,6 +24,11 @@ export class CreateProductUseCase {
        if(alreadyExistProduct) {
         throw new Error('Produto já existe');
        }
+
+       if(status_adm === false) {
+        throw new Error('Usuario sem permissão');
+       }
+       
         const newProduct = await prisma.product.create({
         data: {
             value: product_info.value,
