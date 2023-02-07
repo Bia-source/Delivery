@@ -101,11 +101,13 @@ scalar Date
  }
 
  type Mutation {
-   createProduct(product_name:String!
+   createProduct(
+    product_name:String!
     product_category:String!
     quantity_stock:Int!    
     discount:Int!    
-    value:Int!, status_adm: Boolean!): Product
-
+    value:Int!, status_adm: Boolean!
+    ): Product,
+    deleteProduct(status_adm: Boolean!, id_product: String!): Product,
  }
 `;

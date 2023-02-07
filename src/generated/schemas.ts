@@ -78,6 +78,28 @@ export type Itens_Info_Product = {
   quantity?: Maybe<Scalars['Int']>;
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  createProduct?: Maybe<Product>;
+  deleteProduct?: Maybe<Product>;
+};
+
+
+export type MutationCreateProductArgs = {
+  discount: Scalars['Int'];
+  product_category: Scalars['String'];
+  product_name: Scalars['String'];
+  quantity_stock: Scalars['Int'];
+  status_adm: Scalars['Boolean'];
+  value: Scalars['Int'];
+};
+
+
+export type MutationDeleteProductArgs = {
+  id_product: Scalars['String'];
+  status_adm: Scalars['Boolean'];
+};
+
 export type Product = {
   __typename?: 'Product';
   discount?: Maybe<Scalars['Int']>;
@@ -99,19 +121,25 @@ export type ProductInfoDelivery = {
 
 export type Query = {
   __typename?: 'Query';
-  deliveries?: Maybe<Array<Maybe<ReturnDeliveries>>>;
+  getAllDeliveries?: Maybe<Array<Maybe<ReturnDeliveries>>>;
+  getAllProducts?: Maybe<Array<Maybe<Product>>>;
   getDeliveryStatus?: Maybe<Array<Maybe<ReturnDeliveries>>>;
-  products?: Maybe<Array<Maybe<Product>>>;
+  getProductById?: Maybe<Product>;
 };
 
 
-export type QueryDeliveriesArgs = {
+export type QueryGetAllDeliveriesArgs = {
   id_user: Scalars['String'];
 };
 
 
 export type QueryGetDeliveryStatusArgs = {
   status: Status;
+};
+
+
+export type QueryGetProductByIdArgs = {
+  id_product: Scalars['String'];
 };
 
 export type ReturnDeliveries = {
@@ -211,6 +239,7 @@ export type ResolversTypes = {
   Int: ResolverTypeWrapper<Scalars['Int']>;
   ItensDelivery: ResolverTypeWrapper<ItensDelivery>;
   Itens_Info_Product: ResolverTypeWrapper<Itens_Info_Product>;
+  Mutation: ResolverTypeWrapper<{}>;
   Product: ResolverTypeWrapper<Product>;
   ProductInfoDelivery: ResolverTypeWrapper<ProductInfoDelivery>;
   Query: ResolverTypeWrapper<{}>;
@@ -232,6 +261,7 @@ export type ResolversParentTypes = {
   Int: Scalars['Int'];
   ItensDelivery: ItensDelivery;
   Itens_Info_Product: Itens_Info_Product;
+  Mutation: {};
   Product: Product;
   ProductInfoDelivery: ProductInfoDelivery;
   Query: {};
@@ -307,6 +337,11 @@ export type Itens_Info_ProductResolvers<ContextType = any, ParentType extends Re
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  createProduct?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<MutationCreateProductArgs, 'discount' | 'product_category' | 'product_name' | 'quantity_stock' | 'status_adm' | 'value'>>;
+  deleteProduct?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<MutationDeleteProductArgs, 'id_product' | 'status_adm'>>;
+};
+
 export type ProductResolvers<ContextType = any, ParentType extends ResolversParentTypes['Product'] = ResolversParentTypes['Product']> = {
   discount?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -327,9 +362,10 @@ export type ProductInfoDeliveryResolvers<ContextType = any, ParentType extends R
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  deliveries?: Resolver<Maybe<Array<Maybe<ResolversTypes['ReturnDeliveries']>>>, ParentType, ContextType, RequireFields<QueryDeliveriesArgs, 'id_user'>>;
+  getAllDeliveries?: Resolver<Maybe<Array<Maybe<ResolversTypes['ReturnDeliveries']>>>, ParentType, ContextType, RequireFields<QueryGetAllDeliveriesArgs, 'id_user'>>;
+  getAllProducts?: Resolver<Maybe<Array<Maybe<ResolversTypes['Product']>>>, ParentType, ContextType>;
   getDeliveryStatus?: Resolver<Maybe<Array<Maybe<ResolversTypes['ReturnDeliveries']>>>, ParentType, ContextType, RequireFields<QueryGetDeliveryStatusArgs, 'status'>>;
-  products?: Resolver<Maybe<Array<Maybe<ResolversTypes['Product']>>>, ParentType, ContextType>;
+  getProductById?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<QueryGetProductByIdArgs, 'id_product'>>;
 };
 
 export type ReturnDeliveriesResolvers<ContextType = any, ParentType extends ResolversParentTypes['ReturnDeliveries'] = ResolversParentTypes['ReturnDeliveries']> = {
@@ -352,6 +388,7 @@ export type Resolvers<ContextType = any> = {
   Deliveryman?: DeliverymanResolvers<ContextType>;
   ItensDelivery?: ItensDeliveryResolvers<ContextType>;
   Itens_Info_Product?: Itens_Info_ProductResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
   Product?: ProductResolvers<ContextType>;
   ProductInfoDelivery?: ProductInfoDeliveryResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
