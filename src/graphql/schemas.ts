@@ -1,4 +1,4 @@
-import { Product, Clients, Deliveryman } from './../generated/schemas';
+import { Product, Clients, Deliveryman, Deliveries } from './../generated/schemas';
 import { gql } from "apollo-server";
 
 export const typeDefs = gql`
@@ -116,6 +116,17 @@ scalar Date
    deliveryInfo: DeliveryInfo
  }
 
+type ItensReturnCreateDelivery {
+  quantity: Int
+  produto: Product
+  delivery: Deliveries
+}
+
+ type ReturnCreateDelivery {
+   user: String
+   order: [ItensReturnCreateDelivery]
+ }
+
  enum Status {
     AGUARDANDO
     TRANSITO
@@ -161,6 +172,7 @@ scalar Date
    authenticateClient(username: String!, password: String!): ReturnAuthenticate,
    authenticateDeliveryman(username: String!, password: String!): ReturnAuthenticate,
    createDeliveryman(username: String!,password: String!,email: String!): ReturnDeliveryman,
-   updateRegisterDeliveryman(id_deliveryman: String!, username: String, email: String): ReturnDeliveryman
+   updateRegisterDeliveryman(id_deliveryman: String!, username: String, email: String): ReturnDeliveryman,
+   createDelivery(name: String!, quantity: Int!, id_client: String!, username: String!): ReturnCreateDelivery
  }
 `;

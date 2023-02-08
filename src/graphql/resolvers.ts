@@ -1,3 +1,4 @@
+import { CreateDeliveryUseCase } from './../modules/deliveries/useCases/createDelivery/CreateDeliveryUseCase';
 import {
     MutationAuthenticateClientArgs,
     MutationAuthenticateDeliverymanArgs, MutationCreateClientArgs, MutationCreateProductArgs, MutationDeleteClientArgs, MutationDeleteProductArgs,
@@ -43,6 +44,7 @@ const authenticateClient = instanceProviders(AuthenticateClientUseCase);
 const authenticateDeliveryman = instanceProviders(AuthenticateDeliverymanUseCase);
 const createDeliveryman = instanceProviders(CreateDeliverymanUseCase);
 const updateRegisterDeliveryman = instanceProviders(UpdateRegisterDeliverymanUseCase);
+const createDelivery = instanceProviders(CreateDeliveryUseCase);
 
 export const resolvers = {
     Query: {
@@ -119,6 +121,20 @@ export const resolvers = {
         },
         updateRegisterDeliveryman: async (_, { id_deliveryman, username, email }) => await updateRegisterDeliveryman.useCase.execute({ id_deliveryman, updateDeliveryman: { username, email } }),
 
+        // DELIVERIES
+        createDelivery: async (_, { name, quantity, id_client, username }) => {
+            const item_name = [{name: name, quantity: quantity}]
+            const res = await createDelivery.useCase.execute({
+                item: item_name, id_client, username
+            });
+            console.log(res)
+            return res;
+        }
+        // "item_name": [
+		// 	{"name":"sabonete","quantity":1},
+		// 	{"name":"frauda","quantity":1}
+		
+		// ]
 
     }
 }

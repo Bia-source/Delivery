@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { ValidationStockUseCase } from "../../../products/useCases/validationStock/ValidationStockUseCase";
 import { CreateDeliveryUseCase } from "./CreateDeliveryUseCase";
 
 
