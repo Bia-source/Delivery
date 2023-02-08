@@ -17,14 +17,6 @@ interface IRequestDelivery {
 }
 
 export class CreateDeliveryUseCase {
-    // Exclude keys from user
-    exclude(campo, keys): Omit<any, any> {
-        for (let key of keys) {
-            delete campo[key]
-        }
-        return campo
-    }
-
     async execute({ item, id_client, username }: IRequestDelivery | any) {
         try {
             let produtos = [item];
@@ -59,9 +51,6 @@ export class CreateDeliveryUseCase {
                 getProduct.push(await getProductUseCase.execute(item[i].name));
 
             }
-
-            //console.log(getProduct)
-
 
             // // inserindo produtos no pedido/order
             const insertProduct = await Promise.all(getProduct.map(async (product, index) => {
@@ -105,7 +94,7 @@ export class CreateDeliveryUseCase {
                     }
 
                 });
-                const teste = Object.assign(returnProducts, {
+                Object.assign(returnProducts, {
                     delivery: {
                         id: returnProducts.delivery.id,
                         client: {
@@ -118,20 +107,10 @@ export class CreateDeliveryUseCase {
                         status: returnProducts.delivery.status,
                         deliveryman: {
                            username: returnProducts.delivery.deliveryman ? returnProducts.delivery.deliveryman.username : null
-                        },
-                        item_name: {
-                            produto: {
-                                id: returnProducts.produto.id,
-                                product_category: returnProducts.produto.product_category,
-                                product_name: returnProducts.produto.product_name,
-                                value: returnProducts.produto.value,
-                                discount: returnProducts.produto.discount,
-                            }
                         }
                     }
 
                 })
-                console.log(teste)
                 return returnProducts;
             }))
 
@@ -152,7 +131,7 @@ export class CreateDeliveryUseCase {
             // //      messageText: `seu pedido código ${delivery.id} ${MessageStatusDelivery.ARGUARDANDO} `, 
             // //      titleEmail: TitleStatusDelivery.STATUS  
             // // })
-            // console.log(insertProduct);
+
             return { user: username, order: insertProduct };
         } catch (error) {
             return error.message;

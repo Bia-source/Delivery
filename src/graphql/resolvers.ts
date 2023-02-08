@@ -123,18 +123,9 @@ export const resolvers = {
 
         // DELIVERIES
         createDelivery: async (_, { name, quantity, id_client, username }) => {
-            const item_name = [{name: name, quantity: quantity}]
-            const res = await createDelivery.useCase.execute({
-                item: item_name, id_client, username
+            return await createDelivery.useCase.execute({
+                item: [{name: name, quantity: quantity}], id_client, username
             });
-            console.log(res)
-            return res;
         }
-        // "item_name": [
-		// 	{"name":"sabonete","quantity":1},
-		// 	{"name":"frauda","quantity":1}
-		
-		// ]
-
     }
 }

@@ -122,9 +122,44 @@ type ItensReturnCreateDelivery {
   delivery: Deliveries
 }
 
+type ReturnOrderCreateDelivery {
+   id_product: String
+   id_delivery: String
+   quantity: Int
+   delivery: DeliveryInfoReturnCreateDelivery
+   produto: DeliveryProductInfoReturnCreateDelivery
+ }
+
+ type DeliveryProductInfoReturnCreateDelivery {
+   id: String
+   product_category: String
+   product_name: String
+	discount: Int
+   value: Int
+ }
+
+ type DeliveryDeliverymanInfoReturnCreateDelivery {
+   username: String
+ }
+
+ type DeliveryInfoReturnCreateDelivery {
+   id: String
+   client: DeliveryClientInfoReturnCreateDelivery
+   created_at: Date
+   end_at: Date
+   status: String
+   deliveryman: DeliveryDeliverymanInfoReturnCreateDelivery
+ }
+
+ type DeliveryClientInfoReturnCreateDelivery {
+   username: String
+   email: String
+   adress: String
+ }
+
  type ReturnCreateDelivery {
    user: String
-   order: [ItensReturnCreateDelivery]
+   order: [ReturnOrderCreateDelivery]
  }
 
  enum Status {
