@@ -1,6 +1,5 @@
 import { prisma } from "../../../../database/prismaClient"
 
-
 export class FindByCreatedUseCase {
     async execute(findDateInitial: string, findDateEnd: string){
         const deliveries = await prisma.deliveries.findMany({ where:{

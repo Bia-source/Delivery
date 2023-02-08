@@ -171,6 +171,15 @@ type ReturnOrderCreateDelivery {
     status: String
   }
 
+  type ReturnDeliveryByCreated {
+     id: String
+     id_client: String
+     id_deliveryman: String
+     created_at: Date
+     end_at: Date 
+     status: String
+  }
+
  enum Status {
     AGUARDANDO
     TRANSITO
@@ -184,6 +193,7 @@ type ReturnOrderCreateDelivery {
     getProductById(id_product: String!): Product,
     getProductByName(product_name: String!): Product,
     getClientById(id_client: String!): Clients,
+    getDeliveryByCreated(findDateInitial: String!, findDateEnd: String!): [ReturnDeliveryByCreated]
  }
 
  type Mutation {

@@ -1,3 +1,4 @@
+import { FindByCreatedUseCase } from './../modules/deliveries/useCases/findByCreated/FindByCreatedUseCase';
 import { DeleteDeliveryUseCase } from './../modules/deliveries/useCases/deleteDelivery/DeleteDeliveryUseCase';
 import { CreateDeliveryUseCase } from './../modules/deliveries/useCases/createDelivery/CreateDeliveryUseCase';
 import {
@@ -17,7 +18,7 @@ import { FindAllProductsUseCase } from "../modules/products/useCases/findAllProd
 import { FindByIdProductUseCase } from "../modules/products/useCases/findByIdProduct/FindByIdProductUseCase";
 import { FindProductByNameUseCase } from "../modules/products/useCases/findProductByName/findProductByNameUseCase";
 import { instanceProviders } from "../share/providers";
-import { MutationCreateDeliverymanArgs } from './../generated/schemas';
+import { MutationCreateDeliverymanArgs, MutationUpdateRegisterDeliverymanArgs, MutationCreateDeliveryArgs, MutationDeleteDeliveryArgs, QueryGetDeliveryByCreatedArgs } from './../generated/schemas';
 import { AuthenticateClientUseCase } from './../modules/account/useCases/authenticateClient/AuthenticateClientUseCase';
 import { CreateClientUseCase } from './../modules/clients/useCases/createClient/CreateClientUseCase';
 import { DeleteClientUseCase } from './../modules/clients/useCases/deleteClient/DeleteClientUseCase';
@@ -33,6 +34,7 @@ const findByStatus = instanceProviders(FindByStatusUseCase);
 const findProductById = instanceProviders(FindByIdProductUseCase);
 const findProductByName = instanceProviders(FindProductByNameUseCase);
 const findClientById = instanceProviders(FindByIdClientUseCase);
+const findByCreated = instanceProviders(FindByCreatedUseCase);
 
 // MUTATIONS 
 const createProduct = instanceProviders(CreateProductUseCase);
@@ -58,6 +60,9 @@ export const resolvers = {
         // DELIVERY
         getAllDeliveries: async (_, { id_user }: QueryGetAllDeliveriesArgs) => await findAllAvailable.useCase.execute(id_user),
         getDeliveryStatus: async (_, { status }: QueryGetDeliveryStatusArgs) => await findByStatus.useCase.execute(status),
+        getDeliveryByCreated: async (_, { findDateInitial, findDateEnd }: QueryGetDeliveryByCreatedArgs) => {
+           return await findByCreated.useCase.execute(findDateInitial, findDateEnd);
+        },
 
         // CLIENT
         getClientById: async (_, { id_client }: QueryGetClientByIdArgs) => await findClientById.useCase.execute(id_client)
@@ -121,15 +126,15 @@ export const resolvers = {
                 username, password, email
             })
         },
-        updateRegisterDeliveryman: async (_, { id_deliveryman, username, email }) => await updateRegisterDeliveryman.useCase.execute({ id_deliveryman, updateDeliveryman: { username, email } }),
+        updateRegisterDeliveryman: async (_, { id_deliveryman, username, email }: MutationUpdateRegisterDeliverymanArgs) => await updateRegisterDeliveryman.useCase.execute({ id_deliveryman, updateDeliveryman: { username, email } }),
 
         // DELIVERIES
-        createDelivery: async (_, { name, quantity, id_client, username }) => {
+        createDelivery: async (_, { name, quantity, id_client, username }: MutationCreateDeliveryArgs) => {
             return await createDelivery.useCase.execute({
                 item: [{name: name, quantity: quantity}], id_client, username
             });
         },
-        deleteDelivery: async (_, { id_delivery, id_client }) => {
+        deleteDelivery: async (_, { id_delivery, id_client }: MutationDeleteDeliveryArgs) => {
            return await deleteDelivery.useCase.execute(id_delivery, id_client)
         }
 
