@@ -79,7 +79,7 @@ scalar Date
   deliveryman:Deliveryman  
   created_at:Date           
   end_at:String
-  status:Status 
+  status:String
  }
 
  type UserInfo {
@@ -162,6 +162,19 @@ type ReturnOrderCreateDelivery {
    order: [ReturnOrderCreateDelivery]
  }
 
+ type ReturnDeleteDelivery {
+   delete: DeleteDeliveryInfoReturn
+ }
+
+  type DeleteDeliveryInfoReturn {
+    id: String
+    id_client: String
+    id_deliveryman: String
+    created_at: Date
+    end_at: Date
+    status: String
+  }
+
  enum Status {
     AGUARDANDO
     TRANSITO
@@ -209,5 +222,6 @@ type ReturnOrderCreateDelivery {
    createDeliveryman(username: String!,password: String!,email: String!): ReturnDeliveryman,
    updateRegisterDeliveryman(id_deliveryman: String!, username: String, email: String): ReturnDeliveryman,
    createDelivery(name: String!, quantity: Int!, id_client: String!, username: String!): ReturnCreateDelivery
+   deleteDelivery(id_delivery: String!): Deliveries
  }
 `;

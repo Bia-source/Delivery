@@ -1,3 +1,4 @@
+import { DeleteDeliveryUseCase } from './../modules/deliveries/useCases/deleteDelivery/DeleteDeliveryUseCase';
 import { CreateDeliveryUseCase } from './../modules/deliveries/useCases/createDelivery/CreateDeliveryUseCase';
 import {
     MutationAuthenticateClientArgs,
@@ -45,6 +46,7 @@ const authenticateDeliveryman = instanceProviders(AuthenticateDeliverymanUseCase
 const createDeliveryman = instanceProviders(CreateDeliverymanUseCase);
 const updateRegisterDeliveryman = instanceProviders(UpdateRegisterDeliverymanUseCase);
 const createDelivery = instanceProviders(CreateDeliveryUseCase);
+const deleteDelivery = instanceProviders(DeleteDeliveryUseCase);
 
 export const resolvers = {
     Query: {
@@ -126,6 +128,10 @@ export const resolvers = {
             return await createDelivery.useCase.execute({
                 item: [{name: name, quantity: quantity}], id_client, username
             });
+        },
+        deleteDelivery: async (_, { id_delivery }) => {
+           return await deleteDelivery.useCase.execute(id_delivery)
         }
+
     }
 }
