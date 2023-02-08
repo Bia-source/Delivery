@@ -1,4 +1,5 @@
 import { prisma } from "../../../../database/prismaClient";
+import { ReturnCreateDelivery } from "../../../../generated/schemas";
 import { MessageStatusDelivery, TitleStatusDelivery } from "../../../../share/sendEmail/messages";
 import { sendMail } from "../../../../share/sendEmail/SendEmail";
 import { product } from "../../../products/routes";
@@ -17,7 +18,7 @@ interface IRequestDelivery {
 }
 
 export class CreateDeliveryUseCase {
-    async execute({ item, id_client, username }: IRequestDelivery | any) {
+    async execute({ item, id_client, username }: IRequestDelivery | any): Promise<ReturnCreateDelivery> {
         try {
             let produtos = [item];
 

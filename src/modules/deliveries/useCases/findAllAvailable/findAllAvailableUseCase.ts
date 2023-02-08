@@ -1,3 +1,4 @@
+import { Deliveries, ReturnDeliveries } from './../../../../generated/schemas';
 import { prisma } from "../../../../database/prismaClient";
 import { mapDelivery } from "../../../../share/FormatReturn/map";
 import { FindByIdProductUseCase } from "../../../products/useCases/findByIdProduct/FindByIdProductUseCase";
@@ -10,7 +11,7 @@ interface IPropsGetProducts {
 }
 
 export class FindAllAvailableUseCase {
-    async execute(id_user: string) {
+    async execute(id_user: string): Promise<ReturnDeliveries[]> {
         const deliveriesClient = await prisma.deliveries.findMany({
             where: {
                 end_at: null,

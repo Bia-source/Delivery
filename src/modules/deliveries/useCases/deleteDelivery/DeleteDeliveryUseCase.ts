@@ -2,10 +2,10 @@ import { FindByIdClientUseCase } from './../../../clients/useCases/findByIdClien
 import { prisma } from "../../../../database/prismaClient";
 import { validationStatusDelivery } from "../../../../share/validators";
 import { FindByIdDeliveryUseCase } from "../findByIdDelivery/FindByIdDeliveryUseCase";
-
+import { ReturnDeleteDelivery } from '../../../../generated/schemas';
 
 export class DeleteDeliveryUseCase {
-    async execute(id_delivery: string, id_client: string) {
+    async execute(id_delivery: string, id_client: string): Promise<ReturnDeleteDelivery> {
         const getDelivery = new FindByIdDeliveryUseCase();
         const delivery = await getDelivery.execute(id_delivery);
         

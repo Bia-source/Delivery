@@ -1,8 +1,6 @@
 import { Request, Response } from "express";
 import { FindAllAvailableUseCase } from "./findAllAvailableUseCase";
 
-
-
 export class FindAllAvailableController {
     async handle(req: Request, res: Response): Promise<Response> {
         try {
