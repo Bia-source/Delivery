@@ -1,3 +1,4 @@
+import { Product } from "@prisma/client";
 import { prisma } from "../../../../database/prismaClient";
 
 interface IRequestDeleteProduct{
@@ -6,7 +7,7 @@ interface IRequestDeleteProduct{
 }
 
 export class DeleteProductUseCase{
-    async execute({status_adm, id_product}: IRequestDeleteProduct){
+    async execute({status_adm, id_product}: IRequestDeleteProduct): Promise<Product>{
         if (!status_adm) {
             throw new Error('Usuario não autorizado para fazer esta alteração');
         }

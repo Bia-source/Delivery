@@ -1,3 +1,4 @@
+import { Product } from "@prisma/client";
 import { prisma } from "../../../../database/prismaClient";
 
 interface IRequestProduct {
@@ -12,7 +13,7 @@ interface IRequestProduct {
 }
 
 export class CreateProductUseCase {
-    async execute({product_info, status_adm}: IRequestProduct){
+    async execute({product_info, status_adm}: IRequestProduct): Promise<Product>{
        const alreadyExistProduct = await prisma.product.findFirst({
         where: {
             product_name: {

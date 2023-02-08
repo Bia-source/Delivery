@@ -1,3 +1,4 @@
+import { Product } from './../../../../generated/schemas';
 import { prisma } from "../../../../database/prismaClient";
 
 interface IRequestUpdateProduct {
@@ -14,7 +15,7 @@ interface IRequestUpdateProduct {
 }
 
 export class UpdateProductUseCase {
-    async execute({ status_adm, buy, product_info }: IRequestUpdateProduct) {
+    async execute({ status_adm, buy, product_info }: IRequestUpdateProduct): Promise<Product> {
         if (!status_adm && !buy) {
             throw new Error('Usuario não autorizado para fazer esta alteração');
         }

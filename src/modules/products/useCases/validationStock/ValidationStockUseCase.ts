@@ -1,16 +1,9 @@
 import { prisma } from "../../../../database/prismaClient";
 
-interface IRequestStockProduct {
-    product_name: string;
-    quantity: number;
-}
 
 export interface ItemProps {
     name: string;
     quantity: number;
-}
-interface IRequestStockProduct {
-    itens: ItemProps[]
 }
 
 export class ValidationStockUseCase {
