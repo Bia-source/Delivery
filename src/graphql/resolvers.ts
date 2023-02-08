@@ -1,12 +1,15 @@
-import { FindByCreatedUseCase } from './../modules/deliveries/useCases/findByCreated/FindByCreatedUseCase';
-import { DeleteDeliveryUseCase } from './../modules/deliveries/useCases/deleteDelivery/DeleteDeliveryUseCase';
-import { CreateDeliveryUseCase } from './../modules/deliveries/useCases/createDelivery/CreateDeliveryUseCase';
 import {
+    Clients,
     MutationAuthenticateClientArgs,
-    MutationAuthenticateDeliverymanArgs, MutationCreateClientArgs, MutationCreateProductArgs, MutationDeleteClientArgs, MutationDeleteProductArgs,
-    MutationUpdateProductAdmArgs, MutationUpdateRegisterClientArgs, QueryGetAllDeliveriesArgs, QueryGetClientByIdArgs, QueryGetDeliveryStatusArgs,
+    MutationAuthenticateDeliverymanArgs, MutationCreateClientArgs, MutationCreateDeliveryArgs, MutationCreateDeliverymanArgs, MutationCreateProductArgs, MutationDeleteClientArgs, MutationDeleteDeliveryArgs, MutationDeleteProductArgs,
+    MutationUpdateProductAdmArgs, MutationUpdateRegisterClientArgs, MutationUpdateRegisterDeliverymanArgs, Product, QueryGetAllDeliveriesArgs, QueryGetClientByIdArgs, QueryGetDeliveryByCreatedArgs, QueryGetDeliveryStatusArgs,
     QueryGetProductByIdArgs,
-    QueryGetProductByNameArgs
+    QueryGetProductByNameArgs,
+    ReturnAuthenticate,
+    ReturnClient,
+    ReturnCreateDelivery,
+    ReturnDeleteDelivery, ReturnDeliveries, ReturnDeliveryByCreated,
+    ReturnDeliveryman
 } from "../generated/schemas";
 import { AuthenticateDeliverymanUseCase } from '../modules/account/useCases/authenticateDeliveryman/AuthenticateDeliverymanUseCase';
 import { FindAllAvailableUseCase } from "../modules/deliveries/useCases/findAllAvailable/findAllAvailableUseCase";
@@ -18,12 +21,14 @@ import { FindAllProductsUseCase } from "../modules/products/useCases/findAllProd
 import { FindByIdProductUseCase } from "../modules/products/useCases/findByIdProduct/FindByIdProductUseCase";
 import { FindProductByNameUseCase } from "../modules/products/useCases/findProductByName/findProductByNameUseCase";
 import { instanceProviders } from "../share/providers";
-import { MutationCreateDeliverymanArgs, MutationUpdateRegisterDeliverymanArgs, MutationCreateDeliveryArgs, MutationDeleteDeliveryArgs, QueryGetDeliveryByCreatedArgs } from './../generated/schemas';
 import { AuthenticateClientUseCase } from './../modules/account/useCases/authenticateClient/AuthenticateClientUseCase';
 import { CreateClientUseCase } from './../modules/clients/useCases/createClient/CreateClientUseCase';
 import { DeleteClientUseCase } from './../modules/clients/useCases/deleteClient/DeleteClientUseCase';
 import { FindByIdClientUseCase } from './../modules/clients/useCases/findByIdClient/FindByIdClientUseCase';
 import { UpdateRegisterClientUseCase } from './../modules/clients/useCases/updateClient/UpdateRegisterClientUseCase';
+import { CreateDeliveryUseCase } from './../modules/deliveries/useCases/createDelivery/CreateDeliveryUseCase';
+import { DeleteDeliveryUseCase } from './../modules/deliveries/useCases/deleteDelivery/DeleteDeliveryUseCase';
+import { FindByCreatedUseCase } from './../modules/deliveries/useCases/findByCreated/FindByCreatedUseCase';
 import { CreateDeliverymanUseCase } from './../modules/deliveryman/useCases/createDeliveryman/CreateDeliverymanUseCase';
 import { UpdateProductUseCase } from './../modules/products/useCases/updateProduct/UpdateProductUseCase';
 
@@ -53,29 +58,29 @@ const deleteDelivery = instanceProviders(DeleteDeliveryUseCase);
 export const resolvers = {
     Query: {
         // PRODUCT
-        getAllProducts: async () => await findAllProducts.useCase.execute(),
-        getProductById: async (_, { id_product }: QueryGetProductByIdArgs) => await findProductById.useCase.execute(id_product),
-        getProductByName: async (_, { product_name }: QueryGetProductByNameArgs) => await findProductByName.useCase.execute(product_name),
+        getAllProducts: async (): Promise<[Product]> => await findAllProducts.useCase.execute(),
+        getProductById: async (_, { id_product }: QueryGetProductByIdArgs): Promise<Product> => await findProductById.useCase.execute(id_product),
+        getProductByName: async (_, { product_name }: QueryGetProductByNameArgs): Promise<Product> => await findProductByName.useCase.execute(product_name),
 
         // DELIVERY
-        getAllDeliveries: async (_, { id_user }: QueryGetAllDeliveriesArgs) => await findAllAvailable.useCase.execute(id_user),
-        getDeliveryStatus: async (_, { status }: QueryGetDeliveryStatusArgs) => await findByStatus.useCase.execute(status),
-        getDeliveryByCreated: async (_, { findDateInitial, findDateEnd }: QueryGetDeliveryByCreatedArgs) => {
-           return await findByCreated.useCase.execute(findDateInitial, findDateEnd);
+        getAllDeliveries: async (_, { id_user }: QueryGetAllDeliveriesArgs): Promise<[ReturnDeliveries]> => await findAllAvailable.useCase.execute(id_user),
+        getDeliveryStatus: async (_, { status }: QueryGetDeliveryStatusArgs): Promise<[ReturnDeliveries]> => await findByStatus.useCase.execute(status),
+        getDeliveryByCreated: async (_, { findDateInitial, findDateEnd }: QueryGetDeliveryByCreatedArgs): Promise<[ReturnDeliveryByCreated]> => {
+            return await findByCreated.useCase.execute(findDateInitial, findDateEnd);
         },
 
         // CLIENT
-        getClientById: async (_, { id_client }: QueryGetClientByIdArgs) => await findClientById.useCase.execute(id_client)
+        getClientById: async (_, { id_client }: QueryGetClientByIdArgs): Promise<Clients> => await findClientById.useCase.execute(id_client)
     },
     Mutation: {
         // CLIENT 
-        createClient: async (_, { username, password, email, adm, adress }: MutationCreateClientArgs) => {
+        createClient: async (_, { username, password, email, adm, adress }: MutationCreateClientArgs): Promise<ReturnClient> => {
             return await createClient.useCase.execute({
                 username, password, email, adm, adress
             })
         },
-        deleteClient: async (_, { id_client }: MutationDeleteClientArgs) => await deleteClient.useCase.execute(id_client),
-        updateRegisterClient: async (_, { id_client, username, email }: MutationUpdateRegisterClientArgs) => {
+        deleteClient: async (_, { id_client }: MutationDeleteClientArgs): Promise<ReturnClient> => await deleteClient.useCase.execute(id_client),
+        updateRegisterClient: async (_, { id_client, username, email }: MutationUpdateRegisterClientArgs): Promise<ReturnClient> => {
             return await updateRegisterClient.useCase.execute({
                 id_client, updateClient: { username, email }
             })
@@ -88,13 +93,13 @@ export const resolvers = {
             quantity_stock,
             discount,
             value,
-            status_adm }: MutationCreateProductArgs) => {
+            status_adm }: MutationCreateProductArgs): Promise<Product> => {
             return await createProduct.useCase.execute({
                 product_info: { product_name, product_category, quantity_stock, discount, value },
                 status_adm
             })
         },
-        deleteProduct: async (_, { status_adm, id_product }: MutationDeleteProductArgs) => await deleteProduct.useCase.execute({ status_adm, id_product }),
+        deleteProduct: async (_, { status_adm, id_product }: MutationDeleteProductArgs): Promise<Product> => await deleteProduct.useCase.execute({ status_adm, id_product }),
         updateProductAdm: async (_, {
             status_adm,
             id_product,
@@ -102,7 +107,7 @@ export const resolvers = {
             product_category,
             product_name,
             quantity_stock,
-            discount }: MutationUpdateProductAdmArgs) => {
+            discount }: MutationUpdateProductAdmArgs): Promise<Product> => {
             return await updateProduct.useCase.execute({
                 status_adm,
                 product_info: {
@@ -117,25 +122,25 @@ export const resolvers = {
         },
 
         // ACCOUNT
-        authenticateClient: async (_, { username, password }: MutationAuthenticateClientArgs) => await authenticateClient.useCase.execute({ username, password }),
-        authenticateDeliveryman: async (_, { username, password }: MutationAuthenticateDeliverymanArgs) => await authenticateDeliveryman.useCase.execute({ username, password }),
+        authenticateClient: async (_, { username, password }: MutationAuthenticateClientArgs): Promise<ReturnAuthenticate> => await authenticateClient.useCase.execute({ username, password }),
+        authenticateDeliveryman: async (_, { username, password }: MutationAuthenticateDeliverymanArgs): Promise<ReturnAuthenticate> => await authenticateDeliveryman.useCase.execute({ username, password }),
 
         // DELIVERYMAN
-        createDeliveryman: async (_, { username, password, email }: MutationCreateDeliverymanArgs) => {
+        createDeliveryman: async (_, { username, password, email }: MutationCreateDeliverymanArgs): Promise<ReturnDeliveryman> => {
             return await createDeliveryman.useCase.execute({
                 username, password, email
             })
         },
-        updateRegisterDeliveryman: async (_, { id_deliveryman, username, email }: MutationUpdateRegisterDeliverymanArgs) => await updateRegisterDeliveryman.useCase.execute({ id_deliveryman, updateDeliveryman: { username, email } }),
+        updateRegisterDeliveryman: async (_, { id_deliveryman, username, email }: MutationUpdateRegisterDeliverymanArgs): Promise<ReturnClient> => await updateRegisterDeliveryman.useCase.execute({ id_deliveryman, updateDeliveryman: { username, email } }),
 
         // DELIVERIES
-        createDelivery: async (_, { name, quantity, id_client, username }: MutationCreateDeliveryArgs) => {
+        createDelivery: async (_, { name, quantity, id_client, username }: MutationCreateDeliveryArgs): Promise<ReturnCreateDelivery> => {
             return await createDelivery.useCase.execute({
-                item: [{name: name, quantity: quantity}], id_client, username
+                item: [{ name: name, quantity: quantity }], id_client, username
             });
         },
-        deleteDelivery: async (_, { id_delivery, id_client }: MutationDeleteDeliveryArgs) => {
-           return await deleteDelivery.useCase.execute(id_delivery, id_client)
+        deleteDelivery: async (_, { id_delivery, id_client }: MutationDeleteDeliveryArgs): Promise<ReturnDeleteDelivery> => {
+            return await deleteDelivery.useCase.execute(id_delivery, id_client)
         }
 
     }
