@@ -8,9 +8,9 @@ export class DeleteDeliveryController {
     async handle(req: Request, res: Response): Promise<Response>{
         try {
             const { id_delivery } = req.body;
+            const id_client = req.id;
             const deleteDelivery = new DeleteDeliveryUseCase();
-            const result = await deleteDelivery.execute(id_delivery);
-            console.log(result);
+            const result = await deleteDelivery.execute(id_delivery, id_client);
             return res.json({
                  message: "Delete Success",
                  delete: result

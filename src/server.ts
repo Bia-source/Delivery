@@ -8,12 +8,21 @@ import MongoStore from 'rate-limit-mongo';
 import swaggerUi from 'swagger-ui-express';
 import swaggerFile from './swagger.json';
 import { routes } from './index.routes';
-import { ApolloServer, gql } from 'apollo-server';
+import { ApolloServer } from 'apollo-server';
 import { typeDefs } from './graphql/schemas';
 import { resolvers } from './graphql/resolvers';
 
 const app = express();
-const server = new ApolloServer({typeDefs, resolvers});
+const server = new ApolloServer({
+    typeDefs, 
+    resolvers,
+    formatError: (error) => {
+          return {
+            name: `${error.name}`,
+            message: `${error.message}`
+          };
+        }
+});
 
 app.use(express.json());
 app.use(cors());

@@ -129,8 +129,8 @@ export const resolvers = {
                 item: [{name: name, quantity: quantity}], id_client, username
             });
         },
-        deleteDelivery: async (_, { id_delivery }) => {
-           return await deleteDelivery.useCase.execute(id_delivery)
+        deleteDelivery: async (_, { id_delivery, id_client }) => {
+           return await deleteDelivery.useCase.execute(id_delivery, id_client)
         }
 
     }
