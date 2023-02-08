@@ -1,4 +1,5 @@
 import { prisma } from "../../../../database/prismaClient";
+import { ReturnClient } from "../../../../generated/schemas";
 
 interface IRequestUpdateRegisterDeliveryman{
     id_deliveryman: string,
@@ -9,7 +10,7 @@ interface IRequestUpdateRegisterDeliveryman{
 }
 
 export class UpdateRegisterDeliverymanUseCase {
-    async execute({id_deliveryman, updateDeliveryman}: IRequestUpdateRegisterDeliveryman){
+    async execute({id_deliveryman, updateDeliveryman}: IRequestUpdateRegisterDeliveryman): Promise<ReturnClient>{
           const deliveryman = await prisma.deliveryman.update({
               where: {
                   id: id_deliveryman

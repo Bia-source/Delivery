@@ -1,5 +1,6 @@
 import { hash } from "bcrypt";
 import { prisma } from "../../../../database/prismaClient";
+import { ReturnClient } from "../../../../generated/schemas";
 import { MessageNewUser, TitleNewUser } from "../../../../share/sendEmail/messages";
 import { sendMail } from "../../../../share/sendEmail/SendEmail";
 
@@ -10,7 +11,7 @@ interface IRequestDeliveryman {
 }
 
 export class CreateDeliverymanUseCase {
-    async execute({username, password, email}: IRequestDeliveryman): Promise<any> {
+    async execute({username, password, email}: IRequestDeliveryman): Promise<ReturnClient> {
         const deliveryman = await prisma.deliveryman.findFirst({
             where: {
                 username: {
