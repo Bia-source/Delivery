@@ -1,4 +1,4 @@
-import { Product, Clients } from './../generated/schemas';
+import { Product, Clients, Deliveryman } from './../generated/schemas';
 import { gql } from "apollo-server";
 
 export const typeDefs = gql`
@@ -31,6 +31,13 @@ scalar Date
     Deliveries:[Deliveries]
  }
 
+ type ReturnDeliveryman {
+    id:String      
+    username:String     
+    email:String 
+    Deliveries:[Deliveries]
+ }
+
  type Clients {
     id:String 
     username:String       
@@ -57,7 +64,7 @@ scalar Date
    username:String       
    email:String  
  }
- 
+
  type ReturnAuthenticate {
    client: ReturnInfoUser
    token: String
@@ -153,5 +160,7 @@ scalar Date
    updateRegisterClient(id_client: String!, username: String, email: String): ReturnClient,
    authenticateClient(username: String!, password: String!): ReturnAuthenticate,
    authenticateDeliveryman(username: String!, password: String!): ReturnAuthenticate,
+   createDeliveryman(username: String!,password: String!,email: String!): ReturnDeliveryman,
+   updateRegisterDeliveryman(id_deliveryman: String!, username: String, email: String): ReturnDeliveryman
  }
 `;

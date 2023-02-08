@@ -83,6 +83,7 @@ export type Mutation = {
   authenticateClient?: Maybe<ReturnAuthenticate>;
   authenticateDeliveryman?: Maybe<ReturnAuthenticate>;
   createClient?: Maybe<ReturnClient>;
+  createDeliveryman?: Maybe<Deliveryman>;
   createProduct?: Maybe<Product>;
   deleteClient?: Maybe<ReturnClient>;
   deleteProduct?: Maybe<Product>;
@@ -106,6 +107,13 @@ export type MutationAuthenticateDeliverymanArgs = {
 export type MutationCreateClientArgs = {
   adm?: InputMaybe<Scalars['Boolean']>;
   adress: Scalars['String'];
+  email: Scalars['String'];
+  password: Scalars['String'];
+  username: Scalars['String'];
+};
+
+
+export type MutationCreateDeliverymanArgs = {
   email: Scalars['String'];
   password: Scalars['String'];
   username: Scalars['String'];
@@ -433,6 +441,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   authenticateClient?: Resolver<Maybe<ResolversTypes['ReturnAuthenticate']>, ParentType, ContextType, RequireFields<MutationAuthenticateClientArgs, 'password' | 'username'>>;
   authenticateDeliveryman?: Resolver<Maybe<ResolversTypes['ReturnAuthenticate']>, ParentType, ContextType, RequireFields<MutationAuthenticateDeliverymanArgs, 'password' | 'username'>>;
   createClient?: Resolver<Maybe<ResolversTypes['ReturnClient']>, ParentType, ContextType, RequireFields<MutationCreateClientArgs, 'adress' | 'email' | 'password' | 'username'>>;
+  createDeliveryman?: Resolver<Maybe<ResolversTypes['Deliveryman']>, ParentType, ContextType, RequireFields<MutationCreateDeliverymanArgs, 'email' | 'password' | 'username'>>;
   createProduct?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<MutationCreateProductArgs, 'discount' | 'product_category' | 'product_name' | 'quantity_stock' | 'status_adm' | 'value'>>;
   deleteClient?: Resolver<Maybe<ResolversTypes['ReturnClient']>, ParentType, ContextType, RequireFields<MutationDeleteClientArgs, 'id_client'>>;
   deleteProduct?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<MutationDeleteProductArgs, 'id_product' | 'status_adm'>>;
