@@ -23,8 +23,7 @@ export class AuthenticateClientUseCase{
         const formatClient = {
             id: client.id,
             username: client.username,
-            email: client.email,
-            token: token
+            email: client.email
         };
         return {client:formatClient, token: token}
    }

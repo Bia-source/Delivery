@@ -1,21 +1,11 @@
 import {
-    MutationCreateProductArgs,
-    MutationDeleteProductArgs,
-    MutationUpdateProductAdmArgs,
-    QueryGetAllDeliveriesArgs,
-    QueryGetDeliveryStatusArgs,
+    MutationAuthenticateClientArgs,
+    MutationAuthenticateDeliverymanArgs, MutationCreateClientArgs, MutationCreateProductArgs, MutationDeleteClientArgs, MutationDeleteProductArgs,
+    MutationUpdateProductAdmArgs, MutationUpdateRegisterClientArgs, QueryGetAllDeliveriesArgs, QueryGetClientByIdArgs, QueryGetDeliveryStatusArgs,
     QueryGetProductByIdArgs,
-    QueryGetProductByNameArgs,
-    MutationCreateClientArgs,
-    MutationDeleteClientArgs,
-    MutationUpdateRegisterClientArgs,
-    QueryGetClientByIdArgs
+    QueryGetProductByNameArgs
 } from "../generated/schemas";
-import { FindByIdClientUseCase } from './../modules/clients/useCases/findByIdClient/FindByIdClientUseCase';
-import { UpdateRegisterClientUseCase } from './../modules/clients/useCases/updateClient/UpdateRegisterClientUseCase';
-import { DeleteClientUseCase } from './../modules/clients/useCases/deleteClient/DeleteClientUseCase';
-import { CreateClientUseCase } from './../modules/clients/useCases/createClient/CreateClientUseCase';
-import { UpdateProductUseCase } from './../modules/products/useCases/updateProduct/UpdateProductUseCase';
+import { AuthenticateDeliverymanUseCase } from '../modules/account/useCases/authenticateDeliveryman/AuthenticateDeliverymanUseCase';
 import { FindAllAvailableUseCase } from "../modules/deliveries/useCases/findAllAvailable/findAllAvailableUseCase";
 import { FindByStatusUseCase } from "../modules/deliveries/useCases/findByStatus/FindByStatusUseCase";
 import { CreateProductUseCase } from "../modules/products/useCases/createProduct/CreateProductUseCase";
@@ -24,6 +14,12 @@ import { FindAllProductsUseCase } from "../modules/products/useCases/findAllProd
 import { FindByIdProductUseCase } from "../modules/products/useCases/findByIdProduct/FindByIdProductUseCase";
 import { FindProductByNameUseCase } from "../modules/products/useCases/findProductByName/findProductByNameUseCase";
 import { instanceProviders } from "../share/providers";
+import { AuthenticateClientUseCase } from './../modules/account/useCases/authenticateClient/AuthenticateClientUseCase';
+import { CreateClientUseCase } from './../modules/clients/useCases/createClient/CreateClientUseCase';
+import { DeleteClientUseCase } from './../modules/clients/useCases/deleteClient/DeleteClientUseCase';
+import { FindByIdClientUseCase } from './../modules/clients/useCases/findByIdClient/FindByIdClientUseCase';
+import { UpdateRegisterClientUseCase } from './../modules/clients/useCases/updateClient/UpdateRegisterClientUseCase';
+import { UpdateProductUseCase } from './../modules/products/useCases/updateProduct/UpdateProductUseCase';
 
 // QUERYS
 const findAllProducts = instanceProviders(FindAllProductsUseCase);
@@ -40,6 +36,8 @@ const updateProductUseCase = instanceProviders(UpdateProductUseCase);
 const createClientUseCase = instanceProviders(CreateClientUseCase);
 const deleteClientUseCase = instanceProviders(DeleteClientUseCase);
 const updateRegisterClientUseCase = instanceProviders(UpdateRegisterClientUseCase);
+const authenticateClient = instanceProviders(AuthenticateClientUseCase);
+const authenticateDeliveryman = instanceProviders(AuthenticateDeliverymanUseCase);
 
 export const resolvers = {
     Query: {
@@ -53,7 +51,7 @@ export const resolvers = {
         getDeliveryStatus: async (_, { status }: QueryGetDeliveryStatusArgs) => await findByStatusUseCase.useCase.execute(status),
 
         // CLIENT
-        getClientById: async (_, {id_client}: QueryGetClientByIdArgs)=> await findClientById.useCase.execute(id_client)
+        getClientById: async (_, { id_client }: QueryGetClientByIdArgs) => await findClientById.useCase.execute(id_client)
     },
     Mutation: {
         // CLIENT 
@@ -62,10 +60,10 @@ export const resolvers = {
                 username, password, email, adm, adress
             })
         },
-        deleteClient: async (_, {id_client}: MutationDeleteClientArgs) => await deleteClientUseCase.useCase.execute(id_client),
-        updateRegisterClient: async (_, {id_client, username, email}: MutationUpdateRegisterClientArgs) => { 
+        deleteClient: async (_, { id_client }: MutationDeleteClientArgs) => await deleteClientUseCase.useCase.execute(id_client),
+        updateRegisterClient: async (_, { id_client, username, email }: MutationUpdateRegisterClientArgs) => {
             return await updateRegisterClientUseCase.useCase.execute({
-                id_client, updateClient: { username, email}
+                id_client, updateClient: { username, email }
             })
         },
 
@@ -104,6 +102,10 @@ export const resolvers = {
             })
         },
 
+        // ACCOUNT
+        authenticateClient: async (_, { username, password }: MutationAuthenticateClientArgs) => await authenticateClient.useCase.execute({ username, password }),
+        authenticateDeliveryman: async (_, { username, password }: MutationAuthenticateDeliverymanArgs) => await authenticateDeliveryman.useCase.execute({ username, password }),
 
+        
     }
 }

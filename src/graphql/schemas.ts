@@ -52,6 +52,17 @@ scalar Date
     Deliveries:[Deliveries]
  }
 
+ type ReturnInfoUser {
+   id:String 
+   username:String       
+   email:String  
+ }
+ 
+ type ReturnAuthenticate {
+   client: ReturnInfoUser
+   token: String
+ }
+
  type Deliveries {
   id:String           
   item_name:[Itens_Info_Product]
@@ -139,6 +150,8 @@ scalar Date
       adress: String!
    ): ReturnClient,
    deleteClient(id_client: String!): ReturnClient,
-   updateRegisterClient(id_client: String!, username: String, email: String): ReturnClient
+   updateRegisterClient(id_client: String!, username: String, email: String): ReturnClient,
+   authenticateClient(username: String!, password: String!): ReturnAuthenticate,
+   authenticateDeliveryman(username: String!, password: String!): ReturnAuthenticate,
  }
 `;
