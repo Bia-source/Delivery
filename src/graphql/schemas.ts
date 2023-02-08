@@ -162,11 +162,7 @@ type ReturnOrderCreateDelivery {
    order: [ReturnOrderCreateDelivery]
  }
 
- type ReturnDeleteDelivery {
-   delete: DeleteDeliveryInfoReturn
- }
-
-  type DeleteDeliveryInfoReturn {
+  type ReturnDeleteDelivery {
     id: String
     id_client: String
     id_deliveryman: String
@@ -222,6 +218,6 @@ type ReturnOrderCreateDelivery {
    createDeliveryman(username: String!,password: String!,email: String!): ReturnDeliveryman,
    updateRegisterDeliveryman(id_deliveryman: String!, username: String, email: String): ReturnDeliveryman,
    createDelivery(name: String!, quantity: Int!, id_client: String!, username: String!): ReturnCreateDelivery
-   deleteDelivery(id_delivery: String!): Deliveries
+   deleteDelivery(id_delivery: String!): ReturnDeleteDelivery
  }
 `;
