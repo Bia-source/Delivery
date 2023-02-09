@@ -1,4 +1,3 @@
-import { Product, Clients, Deliveryman, Deliveries } from './../generated/schemas';
 import { gql } from "apollo-server";
 
 export const typeDefs = gql`
@@ -203,6 +202,15 @@ type ReturnOrderCreateDelivery {
     value: Int
   }
 
+  type ReturnProductsByCategory {
+    id:String             
+    product_name:String
+    product_category:String
+    value:Int
+    discount:Int    
+    quantity_stock:Int    
+  }
+
  enum Status {
     AGUARDANDO
     TRANSITO
@@ -215,6 +223,7 @@ type ReturnOrderCreateDelivery {
     getDeliveryStatus(status: Status!): [ReturnDeliveries],
     getProductById(id_product: String!): Product,
     getProductByName(product_name: String!): Product,
+    getProductsByCategory(product_category: String!, sort: String!, nameSort: String!, amountOfResults: Int!): [ReturnProductsByCategory],
     getClientById(id_client: String!): Clients,
     getDeliveryByCreated(findDateInitial: String!, findDateEnd: String!): [ReturnDeliveryByIdAndDate],
     getDeliveryByEnd(findDateInitial: String!, findDateEnd: String!): [ReturnDeliveryByIdAndDate],

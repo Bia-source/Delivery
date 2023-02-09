@@ -270,6 +270,7 @@ export type Query = {
   getDeliveryStatus?: Maybe<Array<Maybe<ReturnDeliveries>>>;
   getProductById?: Maybe<Product>;
   getProductByName?: Maybe<Product>;
+  getProductsByCategory?: Maybe<Array<Maybe<ReturnProductsByCategory>>>;
 };
 
 
@@ -322,6 +323,14 @@ export type QueryGetProductByIdArgs = {
 
 export type QueryGetProductByNameArgs = {
   product_name: Scalars['String'];
+};
+
+
+export type QueryGetProductsByCategoryArgs = {
+  amountOfResults: Scalars['String'];
+  nameSort: Scalars['String'];
+  product_category: Scalars['String'];
+  sort: Scalars['String'];
 };
 
 export type ReturnAuthenticate = {
@@ -419,6 +428,16 @@ export type ReturnProductItemName = {
   id?: Maybe<Scalars['String']>;
   product_category?: Maybe<Scalars['String']>;
   product_name?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['Int']>;
+};
+
+export type ReturnProductsByCategory = {
+  __typename?: 'ReturnProductsByCategory';
+  discount?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['String']>;
+  product_category?: Maybe<Scalars['String']>;
+  product_name?: Maybe<Scalars['String']>;
+  quantity_stock?: Maybe<Scalars['Int']>;
   value?: Maybe<Scalars['Int']>;
 };
 
@@ -534,6 +553,7 @@ export type ResolversTypes = {
   ReturnItemNameInfoByIdClient: ResolverTypeWrapper<ReturnItemNameInfoByIdClient>;
   ReturnOrderCreateDelivery: ResolverTypeWrapper<ReturnOrderCreateDelivery>;
   ReturnProductItemName: ResolverTypeWrapper<ReturnProductItemName>;
+  ReturnProductsByCategory: ResolverTypeWrapper<ReturnProductsByCategory>;
   Status: Status;
   String: ResolverTypeWrapper<Scalars['String']>;
   UserInfo: ResolverTypeWrapper<UserInfo>;
@@ -572,6 +592,7 @@ export type ResolversParentTypes = {
   ReturnItemNameInfoByIdClient: ReturnItemNameInfoByIdClient;
   ReturnOrderCreateDelivery: ReturnOrderCreateDelivery;
   ReturnProductItemName: ReturnProductItemName;
+  ReturnProductsByCategory: ReturnProductsByCategory;
   String: Scalars['String'];
   UserInfo: UserInfo;
 };
@@ -729,6 +750,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   getDeliveryStatus?: Resolver<Maybe<Array<Maybe<ResolversTypes['ReturnDeliveries']>>>, ParentType, ContextType, RequireFields<QueryGetDeliveryStatusArgs, 'status'>>;
   getProductById?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<QueryGetProductByIdArgs, 'id_product'>>;
   getProductByName?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<QueryGetProductByNameArgs, 'product_name'>>;
+  getProductsByCategory?: Resolver<Maybe<Array<Maybe<ResolversTypes['ReturnProductsByCategory']>>>, ParentType, ContextType, RequireFields<QueryGetProductsByCategoryArgs, 'amountOfResults' | 'nameSort' | 'product_category' | 'sort'>>;
 };
 
 export type ReturnAuthenticateResolvers<ContextType = any, ParentType extends ResolversParentTypes['ReturnAuthenticate'] = ResolversParentTypes['ReturnAuthenticate']> = {
@@ -829,6 +851,16 @@ export type ReturnProductItemNameResolvers<ContextType = any, ParentType extends
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type ReturnProductsByCategoryResolvers<ContextType = any, ParentType extends ResolversParentTypes['ReturnProductsByCategory'] = ResolversParentTypes['ReturnProductsByCategory']> = {
+  discount?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  product_category?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  product_name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  quantity_stock?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  value?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type UserInfoResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserInfo'] = ResolversParentTypes['UserInfo']> = {
   id_client?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   username?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -864,6 +896,7 @@ export type Resolvers<ContextType = any> = {
   ReturnItemNameInfoByIdClient?: ReturnItemNameInfoByIdClientResolvers<ContextType>;
   ReturnOrderCreateDelivery?: ReturnOrderCreateDeliveryResolvers<ContextType>;
   ReturnProductItemName?: ReturnProductItemNameResolvers<ContextType>;
+  ReturnProductsByCategory?: ReturnProductsByCategoryResolvers<ContextType>;
   UserInfo?: UserInfoResolvers<ContextType>;
 };
 

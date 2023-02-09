@@ -1,3 +1,4 @@
+import { FindByCategoryProductsUseCase } from './../modules/products/useCases/findByCategoryProducts/findByCategoryProductsUseCase';
 import {
     Clients,
     MutationAuthenticateClientArgs,
@@ -10,7 +11,8 @@ import {
     ReturnClient,
     ReturnCreateDelivery,
     ReturnDeleteDelivery, ReturnDeliveries, ReturnDeliveryByIdAndDate, ReturnDeliveryman,
-    ReturnInsertDeliverymanInOrder
+    ReturnInsertDeliverymanInOrder,
+    ReturnProductsByCategory
 } from "../generated/schemas";
 import { AuthenticateDeliverymanUseCase } from '../modules/account/useCases/authenticateDeliveryman/AuthenticateDeliverymanUseCase';
 import { FindAllAvailableUseCase } from "../modules/deliveries/useCases/findAllAvailable/findAllAvailableUseCase";
@@ -23,7 +25,7 @@ import { FindAllProductsUseCase } from "../modules/products/useCases/findAllProd
 import { FindByIdProductUseCase } from "../modules/products/useCases/findByIdProduct/FindByIdProductUseCase";
 import { FindProductByNameUseCase } from "../modules/products/useCases/findProductByName/findProductByNameUseCase";
 import { instanceProviders } from "../share/providers";
-import { MutationDeliveredArgs, QueryGetDeliveryByIdArgs, QueryGetDeliveryByIdDeliverymanArgs } from './../generated/schemas';
+import { MutationDeliveredArgs, QueryGetDeliveryByIdArgs, QueryGetDeliveryByIdDeliverymanArgs, QueryGetProductsByCategoryArgs } from './../generated/schemas';
 import { AuthenticateClientUseCase } from './../modules/account/useCases/authenticateClient/AuthenticateClientUseCase';
 import { CreateClientUseCase } from './../modules/clients/useCases/createClient/CreateClientUseCase';
 import { DeleteClientUseCase } from './../modules/clients/useCases/deleteClient/DeleteClientUseCase';
@@ -46,12 +48,14 @@ const findAllAvailable = instanceProviders(FindAllAvailableUseCase);
 const findByStatus = instanceProviders(FindByStatusUseCase);
 const findProductById = instanceProviders(FindByIdProductUseCase);
 const findProductByName = instanceProviders(FindProductByNameUseCase);
+const findProductsByCategory = instanceProviders(FindByCategoryProductsUseCase);
 const findClientById = instanceProviders(FindByIdClientUseCase);
 const findDeliveryByCreated = instanceProviders(FindByCreatedUseCase);
 const findDeliveryByEndAt = instanceProviders(FindByEndAtUseCase);
 const findDeliveryByIdClient = instanceProviders(FindDeliveryByIdClientUseCase);
 const findDeliveryById = instanceProviders(FindByIdDeliveryUseCase);
 const findDeliveryByIdDeliveryman = instanceProviders(FindByIdDeliverymanUseCase);
+
 
 // MUTATIONS 
 const createProduct = instanceProviders(CreateProductUseCase);
@@ -75,6 +79,9 @@ export const resolvers = {
         getAllProducts: async (): Promise<[Product]> => await findAllProducts.useCase.execute(),
         getProductById: async (_, { id_product }: QueryGetProductByIdArgs): Promise<Product> => await findProductById.useCase.execute(id_product),
         getProductByName: async (_, { product_name }: QueryGetProductByNameArgs): Promise<Product> => await findProductByName.useCase.execute(product_name),
+        getProductsByCategory: async (_, { product_category, sort, nameSort, amountOfResults }: QueryGetProductsByCategoryArgs): Promise<[ReturnProductsByCategory]>=> {
+            return await findProductsByCategory.useCase.execute({ product_category, sort, nameSort, amountOfResults });
+        },
 
         // DELIVERY
         getAllDeliveries: async (_, { id_user }: QueryGetAllDeliveriesArgs): Promise<[ReturnDeliveries]> => await findAllAvailable.useCase.execute(id_user),
