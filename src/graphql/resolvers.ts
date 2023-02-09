@@ -86,7 +86,6 @@ export const resolvers = {
         getDeliveryByIdClient: async (_, { id_client }: QueryGetDeliveryByIdClientArgs): Promise<ReturnDeliveryById> => {
             return await findDeliveryByIdClient.useCase.execute(id_client);
         },
-        //TODO RETURN
         getDeliveryById: async (_, { id_delivery }: QueryGetDeliveryByIdArgs): Promise<ReturnDeliveryById> => {
             return await findDeliveryById.useCase.execute(id_delivery);
         },
@@ -167,7 +166,7 @@ export const resolvers = {
         deleteDelivery: async (_, { id_delivery, id_client }: MutationDeleteDeliveryArgs): Promise<ReturnDeleteDelivery> => {
             return await deleteDelivery.useCase.execute(id_delivery, id_client)
         },
-        insertDeliveryman: async (_, { id_delivery, id_deliveryman, username, email }: MutationInsertDeliverymanArgs): Promise<ReturnInsertDeliverymanInOrder> => {
+        insertDeliveryman: async (_, { id_delivery, id_deliveryman, username, email }: MutationInsertDeliverymanArgs) => {
             return await insertDeliverymanInOrder.useCase.execute({ id_delivery, id_deliveryman, username, email });
         }
 

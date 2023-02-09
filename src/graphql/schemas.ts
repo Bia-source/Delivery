@@ -181,8 +181,7 @@ type ReturnOrderCreateDelivery {
   }
 
   type ReturnInsertDeliverymanInOrder {
-    user: String
-    data: Deliveries
+    data: ReturnDeliveryById
   }
 
   type ReturnDeliveryById {
