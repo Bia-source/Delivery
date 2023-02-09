@@ -103,7 +103,7 @@ export const resolvers = {
         createClient: async (_, { username, password, email, adm, adress }: MutationCreateClientArgs): Promise<ReturnClient> => {
             return await createClient.useCase.execute({
                 username, password, email, adm, adress
-            })
+            });
         },
         deleteClient: async (_, { id_client }: MutationDeleteClientArgs): Promise<ReturnClient> => await deleteClient.useCase.execute(id_client),
         updateRegisterClient: async (_, { id_client, username, email }: MutationUpdateRegisterClientArgs): Promise<ReturnClient> => {
