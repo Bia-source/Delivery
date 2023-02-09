@@ -16,18 +16,34 @@ export class FindDeliveryByIdClientUseCase {
              where: { 
                 id_client
                 },
-                select: {
-                    id: true,
-                    client: true,
-                    item_name: true,
-                    id_deliveryman: true,
-                    created_at: true,
-                    end_at: true,
-                    status: true,
+                include: {
+                    client: {
+                        select: {
+                            username: true,
+                            adress: true,
+                            email: true
+                        }
+                    },
+                    item_name: {
+                        include: {
+                            produto: true
+                        }
+                    }
+                    
                 }
             });
             
            
-        return mapDeliveryFindClient(deliveries);
+        return deliveries;
     }
 }
+
+// select: {
+//     id: true,
+//     client: true,
+//     item_name: true,
+//     id_deliveryman: true,
+//     created_at: true,
+//     end_at: true,
+//     status: true,
+// }

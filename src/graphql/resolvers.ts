@@ -1,18 +1,21 @@
+import { QueryGetDeliveryByIdArgs, QueryGetDeliveryByIdDeliverymanArgs } from './../generated/schemas';
 import {
     Clients,
     MutationAuthenticateClientArgs,
     MutationAuthenticateDeliverymanArgs, MutationCreateClientArgs, MutationCreateDeliveryArgs, MutationCreateDeliverymanArgs, MutationCreateProductArgs, MutationDeleteClientArgs, MutationDeleteDeliveryArgs, MutationDeleteProductArgs,
-    MutationUpdateProductAdmArgs, MutationUpdateRegisterClientArgs, MutationUpdateRegisterDeliverymanArgs, Product, QueryGetAllDeliveriesArgs, QueryGetClientByIdArgs, QueryGetDeliveryByCreatedArgs, QueryGetDeliveryStatusArgs,
+    MutationInsertDeliverymanArgs,
+    MutationUpdateProductAdmArgs, MutationUpdateRegisterClientArgs, MutationUpdateRegisterDeliverymanArgs, Product, QueryGetAllDeliveriesArgs, QueryGetClientByIdArgs, QueryGetDeliveryByCreatedArgs, QueryGetDeliveryByIdClientArgs, QueryGetDeliveryStatusArgs,
     QueryGetProductByIdArgs,
     QueryGetProductByNameArgs,
     ReturnAuthenticate,
     ReturnClient,
     ReturnCreateDelivery,
-    ReturnDeleteDelivery, ReturnDeliveries, ReturnDeliveryByCreated,
-    ReturnDeliveryman
+    ReturnDeleteDelivery, ReturnDeliveries, ReturnDeliveryByCreated, ReturnDeliveryById, ReturnDeliveryman,
+    ReturnInsertDeliverymanInOrder
 } from "../generated/schemas";
 import { AuthenticateDeliverymanUseCase } from '../modules/account/useCases/authenticateDeliveryman/AuthenticateDeliverymanUseCase';
 import { FindAllAvailableUseCase } from "../modules/deliveries/useCases/findAllAvailable/findAllAvailableUseCase";
+import { FindByIdDeliveryUseCase } from '../modules/deliveries/useCases/findByIdDelivery/FindByIdDeliveryUseCase';
 import { FindByStatusUseCase } from "../modules/deliveries/useCases/findByStatus/FindByStatusUseCase";
 import { UpdateRegisterDeliverymanUseCase } from '../modules/deliveryman/useCases/updateDeliveryman/UpdateRegisterDeliverymanUseCase';
 import { CreateProductUseCase } from "../modules/products/useCases/createProduct/CreateProductUseCase";
@@ -29,6 +32,10 @@ import { UpdateRegisterClientUseCase } from './../modules/clients/useCases/updat
 import { CreateDeliveryUseCase } from './../modules/deliveries/useCases/createDelivery/CreateDeliveryUseCase';
 import { DeleteDeliveryUseCase } from './../modules/deliveries/useCases/deleteDelivery/DeleteDeliveryUseCase';
 import { FindByCreatedUseCase } from './../modules/deliveries/useCases/findByCreated/FindByCreatedUseCase';
+import { FindByEndAtUseCase } from './../modules/deliveries/useCases/findByEndAt/FindByEndAtUseCase';
+import { FindDeliveryByIdClientUseCase } from './../modules/deliveries/useCases/findByIdClient/FindDeliveryByIdClientUseCase';
+import { FindByIdDeliverymanUseCase } from './../modules/deliveries/useCases/findByIdDeliveryman/FindByIdDeliverymanUseCase';
+import { UpdateDeliverymanUseCase } from './../modules/deliveries/useCases/updateDeliveryman/UpdateDeliverymanUseCase';
 import { CreateDeliverymanUseCase } from './../modules/deliveryman/useCases/createDeliveryman/CreateDeliverymanUseCase';
 import { UpdateProductUseCase } from './../modules/products/useCases/updateProduct/UpdateProductUseCase';
 
@@ -39,7 +46,11 @@ const findByStatus = instanceProviders(FindByStatusUseCase);
 const findProductById = instanceProviders(FindByIdProductUseCase);
 const findProductByName = instanceProviders(FindProductByNameUseCase);
 const findClientById = instanceProviders(FindByIdClientUseCase);
-const findByCreated = instanceProviders(FindByCreatedUseCase);
+const findDeliveryByCreated = instanceProviders(FindByCreatedUseCase);
+const findDeliveryByEndAt = instanceProviders(FindByEndAtUseCase);
+const findDeliveryByIdClient = instanceProviders(FindDeliveryByIdClientUseCase);
+const findDeliveryById = instanceProviders(FindByIdDeliveryUseCase);
+const findDeliveryByIdDeliveryman = instanceProviders(FindByIdDeliverymanUseCase);
 
 // MUTATIONS 
 const createProduct = instanceProviders(CreateProductUseCase);
@@ -54,6 +65,7 @@ const createDeliveryman = instanceProviders(CreateDeliverymanUseCase);
 const updateRegisterDeliveryman = instanceProviders(UpdateRegisterDeliverymanUseCase);
 const createDelivery = instanceProviders(CreateDeliveryUseCase);
 const deleteDelivery = instanceProviders(DeleteDeliveryUseCase);
+const insertDeliverymanInOrder = instanceProviders(UpdateDeliverymanUseCase);
 
 export const resolvers = {
     Query: {
@@ -66,9 +78,22 @@ export const resolvers = {
         getAllDeliveries: async (_, { id_user }: QueryGetAllDeliveriesArgs): Promise<[ReturnDeliveries]> => await findAllAvailable.useCase.execute(id_user),
         getDeliveryStatus: async (_, { status }: QueryGetDeliveryStatusArgs): Promise<[ReturnDeliveries]> => await findByStatus.useCase.execute(status),
         getDeliveryByCreated: async (_, { findDateInitial, findDateEnd }: QueryGetDeliveryByCreatedArgs): Promise<[ReturnDeliveryByCreated]> => {
-            return await findByCreated.useCase.execute(findDateInitial, findDateEnd);
+            return await findDeliveryByCreated.useCase.execute(findDateInitial, findDateEnd);
         },
-
+        getDeliveryByEnd: async (_, { findDateInitial, findDateEnd }: QueryGetDeliveryByCreatedArgs): Promise<[ReturnDeliveryByCreated]> => {
+            return await findDeliveryByEndAt.useCase.execute(findDateInitial, findDateEnd);
+        },
+        getDeliveryByIdClient: async (_, { id_client }: QueryGetDeliveryByIdClientArgs): Promise<ReturnDeliveryById> => {
+            return await findDeliveryByIdClient.useCase.execute(id_client);
+        },
+        //TODO RETURN
+        getDeliveryById: async (_, { id_delivery }: QueryGetDeliveryByIdArgs): Promise<ReturnDeliveryById> => {
+            return await findDeliveryById.useCase.execute(id_delivery);
+        },
+        getDeliveryByIdDeliveryman: async (_, { id_deliveryman }: QueryGetDeliveryByIdDeliverymanArgs): Promise<ReturnDeliveryById> => {
+            return await findDeliveryByIdDeliveryman.useCase.execute(id_deliveryman);
+        },
+       
         // CLIENT
         getClientById: async (_, { id_client }: QueryGetClientByIdArgs): Promise<Clients> => await findClientById.useCase.execute(id_client)
     },
@@ -141,6 +166,9 @@ export const resolvers = {
         },
         deleteDelivery: async (_, { id_delivery, id_client }: MutationDeleteDeliveryArgs): Promise<ReturnDeleteDelivery> => {
             return await deleteDelivery.useCase.execute(id_delivery, id_client)
+        },
+        insertDeliveryman: async (_, { id_delivery, id_deliveryman, username, email }: MutationInsertDeliverymanArgs): Promise<ReturnInsertDeliverymanInOrder> => {
+            return await insertDeliverymanInOrder.useCase.execute({ id_delivery, id_deliveryman, username, email });
         }
 
     }

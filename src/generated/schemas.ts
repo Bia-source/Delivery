@@ -127,6 +127,7 @@ export type Mutation = {
   deleteClient?: Maybe<ReturnClient>;
   deleteDelivery?: Maybe<ReturnDeleteDelivery>;
   deleteProduct?: Maybe<Product>;
+  insertDeliveryman?: Maybe<ReturnInsertDeliverymanInOrder>;
   updateProductAdm?: Maybe<Product>;
   updateRegisterClient?: Maybe<ReturnClient>;
   updateRegisterDeliveryman?: Maybe<ReturnDeliveryman>;
@@ -196,6 +197,14 @@ export type MutationDeleteProductArgs = {
 };
 
 
+export type MutationInsertDeliverymanArgs = {
+  email: Scalars['String'];
+  id_delivery: Scalars['String'];
+  id_deliveryman: Scalars['String'];
+  username: Scalars['String'];
+};
+
+
 export type MutationUpdateProductAdmArgs = {
   discount?: InputMaybe<Scalars['Int']>;
   id_product: Scalars['String'];
@@ -245,6 +254,10 @@ export type Query = {
   getAllProducts?: Maybe<Array<Maybe<Product>>>;
   getClientById?: Maybe<Clients>;
   getDeliveryByCreated?: Maybe<Array<Maybe<ReturnDeliveryByCreated>>>;
+  getDeliveryByEnd?: Maybe<Array<Maybe<ReturnDeliveryByCreated>>>;
+  getDeliveryById?: Maybe<ReturnDeliveryById>;
+  getDeliveryByIdClient?: Maybe<Array<Maybe<ReturnDeliveryById>>>;
+  getDeliveryByIdDeliveryman?: Maybe<Array<Maybe<ReturnDeliveryById>>>;
   getDeliveryStatus?: Maybe<Array<Maybe<ReturnDeliveries>>>;
   getProductById?: Maybe<Product>;
   getProductByName?: Maybe<Product>;
@@ -264,6 +277,27 @@ export type QueryGetClientByIdArgs = {
 export type QueryGetDeliveryByCreatedArgs = {
   findDateEnd: Scalars['String'];
   findDateInitial: Scalars['String'];
+};
+
+
+export type QueryGetDeliveryByEndArgs = {
+  findDateEnd: Scalars['String'];
+  findDateInitial: Scalars['String'];
+};
+
+
+export type QueryGetDeliveryByIdArgs = {
+  id_delivery: Scalars['String'];
+};
+
+
+export type QueryGetDeliveryByIdClientArgs = {
+  id_client: Scalars['String'];
+};
+
+
+export type QueryGetDeliveryByIdDeliverymanArgs = {
+  id_deliveryman: Scalars['String'];
 };
 
 
@@ -330,6 +364,18 @@ export type ReturnDeliveryByCreated = {
   status?: Maybe<Scalars['String']>;
 };
 
+export type ReturnDeliveryById = {
+  __typename?: 'ReturnDeliveryById';
+  client?: Maybe<DeliveryClientInfoReturnCreateDelivery>;
+  created_at?: Maybe<Scalars['Date']>;
+  end_at?: Maybe<Scalars['Date']>;
+  id?: Maybe<Scalars['String']>;
+  id_client?: Maybe<Scalars['String']>;
+  id_deliveryman?: Maybe<Scalars['String']>;
+  item_name?: Maybe<Array<Maybe<ReturnItemNameInfoByIdClient>>>;
+  status?: Maybe<Scalars['String']>;
+};
+
 export type ReturnDeliveryman = {
   __typename?: 'ReturnDeliveryman';
   Deliveries?: Maybe<Array<Maybe<Deliveries>>>;
@@ -345,6 +391,21 @@ export type ReturnInfoUser = {
   username?: Maybe<Scalars['String']>;
 };
 
+export type ReturnInsertDeliverymanInOrder = {
+  __typename?: 'ReturnInsertDeliverymanInOrder';
+  data?: Maybe<Deliveries>;
+  user?: Maybe<Scalars['String']>;
+};
+
+export type ReturnItemNameInfoByIdClient = {
+  __typename?: 'ReturnItemNameInfoByIdClient';
+  id?: Maybe<Scalars['String']>;
+  id_delivery?: Maybe<Scalars['String']>;
+  id_product?: Maybe<Scalars['String']>;
+  produto?: Maybe<ReturnProductItemName>;
+  quantity?: Maybe<Scalars['Int']>;
+};
+
 export type ReturnOrderCreateDelivery = {
   __typename?: 'ReturnOrderCreateDelivery';
   delivery?: Maybe<DeliveryInfoReturnCreateDelivery>;
@@ -352,6 +413,15 @@ export type ReturnOrderCreateDelivery = {
   id_product?: Maybe<Scalars['String']>;
   produto?: Maybe<DeliveryProductInfoReturnCreateDelivery>;
   quantity?: Maybe<Scalars['Int']>;
+};
+
+export type ReturnProductItemName = {
+  __typename?: 'ReturnProductItemName';
+  discount?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['String']>;
+  product_category?: Maybe<Scalars['String']>;
+  product_name?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['Int']>;
 };
 
 export enum Status {
@@ -460,9 +530,13 @@ export type ResolversTypes = {
   ReturnDeleteDelivery: ResolverTypeWrapper<ReturnDeleteDelivery>;
   ReturnDeliveries: ResolverTypeWrapper<ReturnDeliveries>;
   ReturnDeliveryByCreated: ResolverTypeWrapper<ReturnDeliveryByCreated>;
+  ReturnDeliveryById: ResolverTypeWrapper<ReturnDeliveryById>;
   ReturnDeliveryman: ResolverTypeWrapper<ReturnDeliveryman>;
   ReturnInfoUser: ResolverTypeWrapper<ReturnInfoUser>;
+  ReturnInsertDeliverymanInOrder: ResolverTypeWrapper<ReturnInsertDeliverymanInOrder>;
+  ReturnItemNameInfoByIdClient: ResolverTypeWrapper<ReturnItemNameInfoByIdClient>;
   ReturnOrderCreateDelivery: ResolverTypeWrapper<ReturnOrderCreateDelivery>;
+  ReturnProductItemName: ResolverTypeWrapper<ReturnProductItemName>;
   Status: Status;
   String: ResolverTypeWrapper<Scalars['String']>;
   UserInfo: ResolverTypeWrapper<UserInfo>;
@@ -495,9 +569,13 @@ export type ResolversParentTypes = {
   ReturnDeleteDelivery: ReturnDeleteDelivery;
   ReturnDeliveries: ReturnDeliveries;
   ReturnDeliveryByCreated: ReturnDeliveryByCreated;
+  ReturnDeliveryById: ReturnDeliveryById;
   ReturnDeliveryman: ReturnDeliveryman;
   ReturnInfoUser: ReturnInfoUser;
+  ReturnInsertDeliverymanInOrder: ReturnInsertDeliverymanInOrder;
+  ReturnItemNameInfoByIdClient: ReturnItemNameInfoByIdClient;
   ReturnOrderCreateDelivery: ReturnOrderCreateDelivery;
+  ReturnProductItemName: ReturnProductItemName;
   String: Scalars['String'];
   UserInfo: UserInfo;
 };
@@ -617,6 +695,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   deleteClient?: Resolver<Maybe<ResolversTypes['ReturnClient']>, ParentType, ContextType, RequireFields<MutationDeleteClientArgs, 'id_client'>>;
   deleteDelivery?: Resolver<Maybe<ResolversTypes['ReturnDeleteDelivery']>, ParentType, ContextType, RequireFields<MutationDeleteDeliveryArgs, 'id_client' | 'id_delivery'>>;
   deleteProduct?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<MutationDeleteProductArgs, 'id_product' | 'status_adm'>>;
+  insertDeliveryman?: Resolver<Maybe<ResolversTypes['ReturnInsertDeliverymanInOrder']>, ParentType, ContextType, RequireFields<MutationInsertDeliverymanArgs, 'email' | 'id_delivery' | 'id_deliveryman' | 'username'>>;
   updateProductAdm?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<MutationUpdateProductAdmArgs, 'id_product' | 'status_adm'>>;
   updateRegisterClient?: Resolver<Maybe<ResolversTypes['ReturnClient']>, ParentType, ContextType, RequireFields<MutationUpdateRegisterClientArgs, 'id_client'>>;
   updateRegisterDeliveryman?: Resolver<Maybe<ResolversTypes['ReturnDeliveryman']>, ParentType, ContextType, RequireFields<MutationUpdateRegisterDeliverymanArgs, 'id_deliveryman'>>;
@@ -646,6 +725,10 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   getAllProducts?: Resolver<Maybe<Array<Maybe<ResolversTypes['Product']>>>, ParentType, ContextType>;
   getClientById?: Resolver<Maybe<ResolversTypes['Clients']>, ParentType, ContextType, RequireFields<QueryGetClientByIdArgs, 'id_client'>>;
   getDeliveryByCreated?: Resolver<Maybe<Array<Maybe<ResolversTypes['ReturnDeliveryByCreated']>>>, ParentType, ContextType, RequireFields<QueryGetDeliveryByCreatedArgs, 'findDateEnd' | 'findDateInitial'>>;
+  getDeliveryByEnd?: Resolver<Maybe<Array<Maybe<ResolversTypes['ReturnDeliveryByCreated']>>>, ParentType, ContextType, RequireFields<QueryGetDeliveryByEndArgs, 'findDateEnd' | 'findDateInitial'>>;
+  getDeliveryById?: Resolver<Maybe<ResolversTypes['ReturnDeliveryById']>, ParentType, ContextType, RequireFields<QueryGetDeliveryByIdArgs, 'id_delivery'>>;
+  getDeliveryByIdClient?: Resolver<Maybe<Array<Maybe<ResolversTypes['ReturnDeliveryById']>>>, ParentType, ContextType, RequireFields<QueryGetDeliveryByIdClientArgs, 'id_client'>>;
+  getDeliveryByIdDeliveryman?: Resolver<Maybe<Array<Maybe<ResolversTypes['ReturnDeliveryById']>>>, ParentType, ContextType, RequireFields<QueryGetDeliveryByIdDeliverymanArgs, 'id_deliveryman'>>;
   getDeliveryStatus?: Resolver<Maybe<Array<Maybe<ResolversTypes['ReturnDeliveries']>>>, ParentType, ContextType, RequireFields<QueryGetDeliveryStatusArgs, 'status'>>;
   getProductById?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<QueryGetProductByIdArgs, 'id_product'>>;
   getProductByName?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<QueryGetProductByNameArgs, 'product_name'>>;
@@ -700,6 +783,18 @@ export type ReturnDeliveryByCreatedResolvers<ContextType = any, ParentType exten
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type ReturnDeliveryByIdResolvers<ContextType = any, ParentType extends ResolversParentTypes['ReturnDeliveryById'] = ResolversParentTypes['ReturnDeliveryById']> = {
+  client?: Resolver<Maybe<ResolversTypes['DeliveryClientInfoReturnCreateDelivery']>, ParentType, ContextType>;
+  created_at?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  end_at?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id_client?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id_deliveryman?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  item_name?: Resolver<Maybe<Array<Maybe<ResolversTypes['ReturnItemNameInfoByIdClient']>>>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type ReturnDeliverymanResolvers<ContextType = any, ParentType extends ResolversParentTypes['ReturnDeliveryman'] = ResolversParentTypes['ReturnDeliveryman']> = {
   Deliveries?: Resolver<Maybe<Array<Maybe<ResolversTypes['Deliveries']>>>, ParentType, ContextType>;
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -715,12 +810,36 @@ export type ReturnInfoUserResolvers<ContextType = any, ParentType extends Resolv
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type ReturnInsertDeliverymanInOrderResolvers<ContextType = any, ParentType extends ResolversParentTypes['ReturnInsertDeliverymanInOrder'] = ResolversParentTypes['ReturnInsertDeliverymanInOrder']> = {
+  data?: Resolver<Maybe<ResolversTypes['Deliveries']>, ParentType, ContextType>;
+  user?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ReturnItemNameInfoByIdClientResolvers<ContextType = any, ParentType extends ResolversParentTypes['ReturnItemNameInfoByIdClient'] = ResolversParentTypes['ReturnItemNameInfoByIdClient']> = {
+  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id_delivery?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id_product?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  produto?: Resolver<Maybe<ResolversTypes['ReturnProductItemName']>, ParentType, ContextType>;
+  quantity?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type ReturnOrderCreateDeliveryResolvers<ContextType = any, ParentType extends ResolversParentTypes['ReturnOrderCreateDelivery'] = ResolversParentTypes['ReturnOrderCreateDelivery']> = {
   delivery?: Resolver<Maybe<ResolversTypes['DeliveryInfoReturnCreateDelivery']>, ParentType, ContextType>;
   id_delivery?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id_product?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   produto?: Resolver<Maybe<ResolversTypes['DeliveryProductInfoReturnCreateDelivery']>, ParentType, ContextType>;
   quantity?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ReturnProductItemNameResolvers<ContextType = any, ParentType extends ResolversParentTypes['ReturnProductItemName'] = ResolversParentTypes['ReturnProductItemName']> = {
+  discount?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  product_category?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  product_name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  value?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -753,9 +872,13 @@ export type Resolvers<ContextType = any> = {
   ReturnDeleteDelivery?: ReturnDeleteDeliveryResolvers<ContextType>;
   ReturnDeliveries?: ReturnDeliveriesResolvers<ContextType>;
   ReturnDeliveryByCreated?: ReturnDeliveryByCreatedResolvers<ContextType>;
+  ReturnDeliveryById?: ReturnDeliveryByIdResolvers<ContextType>;
   ReturnDeliveryman?: ReturnDeliverymanResolvers<ContextType>;
   ReturnInfoUser?: ReturnInfoUserResolvers<ContextType>;
+  ReturnInsertDeliverymanInOrder?: ReturnInsertDeliverymanInOrderResolvers<ContextType>;
+  ReturnItemNameInfoByIdClient?: ReturnItemNameInfoByIdClientResolvers<ContextType>;
   ReturnOrderCreateDelivery?: ReturnOrderCreateDeliveryResolvers<ContextType>;
+  ReturnProductItemName?: ReturnProductItemNameResolvers<ContextType>;
   UserInfo?: UserInfoResolvers<ContextType>;
 };
 

@@ -5,6 +5,7 @@ import { DeleteDeliveryController } from "./useCases/deleteDelivery/DeleteDelive
 import { FindAllAvailableController } from "./useCases/findAllAvailable/FindAllAvailableController";
 import { FindByCreatedController } from "./useCases/findByCreated/FindByCreatedController";
 import { FindDeliveryByIdClientController } from "./useCases/findByIdClient/FindDeliveryByIdClientController";
+import { FindDeliveryByIdController } from "./useCases/findByIdDelivery/FindByIdDeliveryController";
 import { FindByIdDeliverymanController } from "./useCases/findByIdDeliveryman/FindByIdDeliverymanController";
 import { FindByStatusController } from "./useCases/findByStatus/FindByStatusControlles";
 import { UpdateDeliverymanController } from "./useCases/updateDeliveryman/UpdateDeliverymanController";
@@ -20,6 +21,7 @@ const findByIdDeliveryman = new FindByIdDeliverymanController();
 const endDelivery = new UpdateEndDeliveryController();
 const findByStatus = new FindByStatusController();
 const deleteDelivery = new DeleteDeliveryController();
+const findDeliveryById = new FindDeliveryByIdController();
 
 delivery.post("/", ensureAuthenticateUser, createDelivery.handle);
 delivery.get("/", ensureAuthenticateUser, getAllDelivery.handle);
@@ -29,6 +31,7 @@ delivery.get("/finByDate", ensureAuthenticateUser, findByDate.handle);
 delivery.get("/finByIdDeliveryman", ensureAuthenticateUser, findByIdDeliveryman.handle);
 delivery.put("/updateEnd", ensureAuthenticateUser, endDelivery.handle);
 delivery.get("/findByStatus", ensureAuthenticateUser, findByStatus.handle);
+delivery.get("/findOrdersById", ensureAuthenticateUser, findDeliveryById.handle);
 delivery.delete("/", ensureAuthenticateUser, deleteDelivery.handle);
 
 export { delivery }

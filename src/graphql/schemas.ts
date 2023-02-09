@@ -134,7 +134,7 @@ type ReturnOrderCreateDelivery {
    id: String
    product_category: String
    product_name: String
-	discount: Int
+	 discount: Int
    value: Int
  }
 
@@ -180,6 +180,39 @@ type ReturnOrderCreateDelivery {
      status: String
   }
 
+  type ReturnInsertDeliverymanInOrder {
+    user: String
+    data: Deliveries
+  }
+
+  type ReturnDeliveryById {
+     id: String
+     id_client: String
+     id_deliveryman: String
+     created_at: Date
+     end_at: Date
+     status: String
+     client: DeliveryClientInfoReturnCreateDelivery
+     item_name: [ReturnItemNameInfoByIdClient]
+  }
+  
+
+  type ReturnItemNameInfoByIdClient {
+    id: String
+    id_product: String
+    id_delivery: String
+    quantity: Int
+    produto: ReturnProductItemName
+  }
+
+  type ReturnProductItemName {
+    id: String
+    product_name: String
+    product_category: String
+	  discount: Int
+    value: Int
+  }
+
  enum Status {
     AGUARDANDO
     TRANSITO
@@ -193,7 +226,11 @@ type ReturnOrderCreateDelivery {
     getProductById(id_product: String!): Product,
     getProductByName(product_name: String!): Product,
     getClientById(id_client: String!): Clients,
-    getDeliveryByCreated(findDateInitial: String!, findDateEnd: String!): [ReturnDeliveryByCreated]
+    getDeliveryByCreated(findDateInitial: String!, findDateEnd: String!): [ReturnDeliveryByCreated],
+    getDeliveryByEnd(findDateInitial: String!, findDateEnd: String!): [ReturnDeliveryByCreated],
+    getDeliveryByIdClient(id_client: String!): [ReturnDeliveryById],
+    getDeliveryById(id_delivery: String!): ReturnDeliveryById,
+    getDeliveryByIdDeliveryman(id_deliveryman: String!): [ReturnDeliveryById],
  }
 
  type Mutation {
@@ -228,6 +265,7 @@ type ReturnOrderCreateDelivery {
    createDeliveryman(username: String!,password: String!,email: String!): ReturnDeliveryman,
    updateRegisterDeliveryman(id_deliveryman: String!, username: String, email: String): ReturnDeliveryman,
    createDelivery(name: String!, quantity: Int!, id_client: String!, username: String!): ReturnCreateDelivery
-   deleteDelivery(id_delivery: String!, id_client: String!): ReturnDeleteDelivery
+   deleteDelivery(id_delivery: String!, id_client: String!): ReturnDeleteDelivery,
+   insertDeliveryman(id_delivery: String!, id_deliveryman: String!, username: String!, email: String!): ReturnInsertDeliverymanInOrder  
  }
 `;
