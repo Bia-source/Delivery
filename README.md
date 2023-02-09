@@ -65,7 +65,6 @@ http://localhost:2022/delivery-docs <br> <br>
 <img width="905" alt="Captura de Tela 2022-02-28 às 02 15 09" src="https://user-images.githubusercontent.com/60610706/155927970-1b81ed54-0406-4eda-9a89-35e637436428.png">
 
 ## Melhorias futuras
-☑️ TODO personalizar retornos de filtros de acordo com tipo de usuario <br>
 ☑️ TODO terminar a implementação do Swagger<br>
 ☑️ TODO criar dashboard store<br>
 
@@ -77,7 +76,8 @@ http://localhost:2022/delivery-docs <br> <br>
 ✅ Tratamento de respostas de erro e criação de erros personalizados <br>
 ✅ Criado testes unitários <br>
 ✅ Inserir avatar de usuario<br>
-✅ implementar GraphQL <br>
+✅ Implementar GraphQL <br>
+✅ Personalizar retornos de filtros de acordo com tipo de usuario <br>
 
 
 # Autora
