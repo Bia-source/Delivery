@@ -1,8 +1,9 @@
 import { prisma } from "../../../../database/prismaClient";
+import { ReturnDeliveryByIdAndDate } from "../../../../generated/schemas";
 
 
 export class FindByIdDeliverymanUseCase {
-    async execute(id_deliveryman: string){
+    async execute(id_deliveryman: string): Promise<ReturnDeliveryByIdAndDate[]> {
         const deliveries = await prisma.deliveries.findMany({
             where: {
                 id_deliveryman
@@ -20,7 +21,7 @@ export class FindByIdDeliverymanUseCase {
                         produto: true
                     }
                 }
-                
+
             }
         });
         return deliveries;

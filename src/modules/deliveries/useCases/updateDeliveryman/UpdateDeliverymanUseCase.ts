@@ -3,9 +3,10 @@ import { deliveryAlreadyExist } from "../../../../share/validators";
 import { IRequestUpdateDelivery } from "../../../../share/interfaces";
 import { MessageStatusDelivery, TitleStatusDelivery } from "../../../../share/sendEmail/messages";
 import { sendMail } from "../../../../share/sendEmail/SendEmail";
+import { ReturnInsertDeliverymanInOrder } from "../../../../generated/schemas";
 
 export class UpdateDeliverymanUseCase {
-    async execute({id_delivery, id_deliveryman, username, email}: IRequestUpdateDelivery){
+    async execute({id_delivery, id_deliveryman, username, email}: IRequestUpdateDelivery): Promise<ReturnInsertDeliverymanInOrder>{
         try {
             const delivery = await prisma.deliveries.update({
                 where:{

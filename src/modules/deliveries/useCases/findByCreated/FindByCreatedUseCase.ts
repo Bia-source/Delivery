@@ -1,8 +1,8 @@
 import { prisma } from "../../../../database/prismaClient"
-import { ReturnDeliveryByCreated } from "../../../../generated/schemas";
+import { ReturnDeliveryByIdAndDate } from "../../../../generated/schemas";
 
 export class FindByCreatedUseCase {
-    async execute(findDateInitial: string, findDateEnd: string): Promise<ReturnDeliveryByCreated[]>{
+    async execute(findDateInitial: string, findDateEnd: string): Promise<ReturnDeliveryByIdAndDate[]>{
         const deliveries = await prisma.deliveries.findMany({ where:{
             created_at: {
                 gte: new Date(findDateInitial.toString()),

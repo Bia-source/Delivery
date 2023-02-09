@@ -1,9 +1,10 @@
 import { prisma } from "../../../../database/prismaClient";
+import { ReturnDeliveryByIdAndDate } from "../../../../generated/schemas";
 import { mapDeliveryFindClient } from "../../../../share/FormatReturn/map";
 
 
 export class FindDeliveryByIdClientUseCase {
-    async execute(id_client: string){
+    async execute(id_client: string): Promise<ReturnDeliveryByIdAndDate[]>{
         const user = await prisma.clients.findUnique({
             where: {
                 id: id_client

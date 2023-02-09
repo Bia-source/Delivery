@@ -1,8 +1,9 @@
 import { prisma } from "../../../../database/prismaClient";
+import { ReturnDeliveryByIdAndDate } from "../../../../generated/schemas";
 
 
 export class FindByEndAtUseCase {
-    async execute(findDateInitial: string, findDateEnd: string){
+    async execute(findDateInitial: string, findDateEnd: string): Promise<ReturnDeliveryByIdAndDate[]>{
         const deliveries = await prisma.deliveries.findMany({ where:{
             end_at: {
                 gte: new Date(findDateInitial.toString()),

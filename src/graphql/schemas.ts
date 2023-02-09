@@ -171,15 +171,6 @@ type ReturnOrderCreateDelivery {
     status: String
   }
 
-  type ReturnDeliveryByCreated {
-     id: String
-     id_client: String
-     id_deliveryman: String
-     created_at: Date
-     end_at: Date 
-     status: String
-  }
-
   type ReturnInsertDeliverymanInOrder {
     data: ReturnDeliveryByIdAndDate
   }
