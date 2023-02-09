@@ -1,5 +1,3 @@
-import { UpdateEndDeliveryUseCase } from './../modules/deliveries/useCases/updateEnd/UpdateEndDeliveryUseCase';
-import { QueryGetDeliveryByIdArgs, QueryGetDeliveryByIdDeliverymanArgs, MutationDeliveredArgs } from './../generated/schemas';
 import {
     Clients,
     MutationAuthenticateClientArgs,
@@ -11,7 +9,7 @@ import {
     ReturnAuthenticate,
     ReturnClient,
     ReturnCreateDelivery,
-    ReturnDeleteDelivery, ReturnDeliveries, ReturnDeliveryByCreated, ReturnDeliveryById, ReturnDeliveryman,
+    ReturnDeleteDelivery, ReturnDeliveries, ReturnDeliveryByIdAndDate, ReturnDeliveryman,
     ReturnInsertDeliverymanInOrder
 } from "../generated/schemas";
 import { AuthenticateDeliverymanUseCase } from '../modules/account/useCases/authenticateDeliveryman/AuthenticateDeliverymanUseCase';
@@ -25,6 +23,7 @@ import { FindAllProductsUseCase } from "../modules/products/useCases/findAllProd
 import { FindByIdProductUseCase } from "../modules/products/useCases/findByIdProduct/FindByIdProductUseCase";
 import { FindProductByNameUseCase } from "../modules/products/useCases/findProductByName/findProductByNameUseCase";
 import { instanceProviders } from "../share/providers";
+import { MutationDeliveredArgs, QueryGetDeliveryByIdArgs, QueryGetDeliveryByIdDeliverymanArgs } from './../generated/schemas';
 import { AuthenticateClientUseCase } from './../modules/account/useCases/authenticateClient/AuthenticateClientUseCase';
 import { CreateClientUseCase } from './../modules/clients/useCases/createClient/CreateClientUseCase';
 import { DeleteClientUseCase } from './../modules/clients/useCases/deleteClient/DeleteClientUseCase';
@@ -37,6 +36,7 @@ import { FindByEndAtUseCase } from './../modules/deliveries/useCases/findByEndAt
 import { FindDeliveryByIdClientUseCase } from './../modules/deliveries/useCases/findByIdClient/FindDeliveryByIdClientUseCase';
 import { FindByIdDeliverymanUseCase } from './../modules/deliveries/useCases/findByIdDeliveryman/FindByIdDeliverymanUseCase';
 import { UpdateDeliverymanUseCase } from './../modules/deliveries/useCases/updateDeliveryman/UpdateDeliverymanUseCase';
+import { UpdateEndDeliveryUseCase } from './../modules/deliveries/useCases/updateEnd/UpdateEndDeliveryUseCase';
 import { CreateDeliverymanUseCase } from './../modules/deliveryman/useCases/createDeliveryman/CreateDeliverymanUseCase';
 import { UpdateProductUseCase } from './../modules/products/useCases/updateProduct/UpdateProductUseCase';
 
@@ -79,22 +79,22 @@ export const resolvers = {
         // DELIVERY
         getAllDeliveries: async (_, { id_user }: QueryGetAllDeliveriesArgs): Promise<[ReturnDeliveries]> => await findAllAvailable.useCase.execute(id_user),
         getDeliveryStatus: async (_, { status }: QueryGetDeliveryStatusArgs): Promise<[ReturnDeliveries]> => await findByStatus.useCase.execute(status),
-        getDeliveryByCreated: async (_, { findDateInitial, findDateEnd }: QueryGetDeliveryByCreatedArgs): Promise<[ReturnDeliveryByCreated]> => {
+        getDeliveryByCreated: async (_, { findDateInitial, findDateEnd }: QueryGetDeliveryByCreatedArgs): Promise<[ReturnDeliveryByIdAndDate]> => {
             return await findDeliveryByCreated.useCase.execute(findDateInitial, findDateEnd);
         },
-        getDeliveryByEnd: async (_, { findDateInitial, findDateEnd }: QueryGetDeliveryByCreatedArgs): Promise<[ReturnDeliveryByCreated]> => {
+        getDeliveryByEnd: async (_, { findDateInitial, findDateEnd }: QueryGetDeliveryByCreatedArgs): Promise<[ReturnDeliveryByIdAndDate]> => {
             return await findDeliveryByEndAt.useCase.execute(findDateInitial, findDateEnd);
         },
-        getDeliveryByIdClient: async (_, { id_client }: QueryGetDeliveryByIdClientArgs): Promise<ReturnDeliveryById> => {
+        getDeliveryByIdClient: async (_, { id_client }: QueryGetDeliveryByIdClientArgs): Promise<ReturnDeliveryByIdAndDate> => {
             return await findDeliveryByIdClient.useCase.execute(id_client);
         },
-        getDeliveryById: async (_, { id_delivery }: QueryGetDeliveryByIdArgs): Promise<ReturnDeliveryById> => {
+        getDeliveryById: async (_, { id_delivery }: QueryGetDeliveryByIdArgs): Promise<ReturnDeliveryByIdAndDate> => {
             return await findDeliveryById.useCase.execute(id_delivery);
         },
-        getDeliveryByIdDeliveryman: async (_, { id_deliveryman }: QueryGetDeliveryByIdDeliverymanArgs): Promise<ReturnDeliveryById> => {
+        getDeliveryByIdDeliveryman: async (_, { id_deliveryman }: QueryGetDeliveryByIdDeliverymanArgs): Promise<ReturnDeliveryByIdAndDate> => {
             return await findDeliveryByIdDeliveryman.useCase.execute(id_deliveryman);
         },
-       
+
         // CLIENT
         getClientById: async (_, { id_client }: QueryGetClientByIdArgs): Promise<Clients> => await findClientById.useCase.execute(id_client)
     },

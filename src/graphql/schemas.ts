@@ -181,10 +181,10 @@ type ReturnOrderCreateDelivery {
   }
 
   type ReturnInsertDeliverymanInOrder {
-    data: ReturnDeliveryById
+    data: ReturnDeliveryByIdAndDate
   }
 
-  type ReturnDeliveryById {
+  type ReturnDeliveryByIdAndDate {
      id: String
      id_client: String
      id_deliveryman: String
@@ -225,11 +225,11 @@ type ReturnOrderCreateDelivery {
     getProductById(id_product: String!): Product,
     getProductByName(product_name: String!): Product,
     getClientById(id_client: String!): Clients,
-    getDeliveryByCreated(findDateInitial: String!, findDateEnd: String!): [ReturnDeliveryByCreated],
-    getDeliveryByEnd(findDateInitial: String!, findDateEnd: String!): [ReturnDeliveryByCreated],
-    getDeliveryByIdClient(id_client: String!): [ReturnDeliveryById],
-    getDeliveryById(id_delivery: String!): ReturnDeliveryById,
-    getDeliveryByIdDeliveryman(id_deliveryman: String!): [ReturnDeliveryById],
+    getDeliveryByCreated(findDateInitial: String!, findDateEnd: String!): [ReturnDeliveryByIdAndDate],
+    getDeliveryByEnd(findDateInitial: String!, findDateEnd: String!): [ReturnDeliveryByIdAndDate],
+    getDeliveryByIdClient(id_client: String!): [ReturnDeliveryByIdAndDate],
+    getDeliveryById(id_delivery: String!): ReturnDeliveryByIdAndDate,
+    getDeliveryByIdDeliveryman(id_deliveryman: String!): [ReturnDeliveryByIdAndDate],
  }
 
  type Mutation {

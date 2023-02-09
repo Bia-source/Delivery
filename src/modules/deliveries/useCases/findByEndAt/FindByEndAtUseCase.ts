@@ -9,6 +9,20 @@ export class FindByEndAtUseCase {
                 lt: new Date(findDateEnd.toString())
             }, 
             
+        },
+        include: {
+            client: {
+                select: {
+                    username: true,
+                    adress: true,
+                    email: true
+                }
+            },
+            item_name: {
+                include: {
+                    produto: true
+                }
+            }                 
         }})
         return deliveries;
     }
