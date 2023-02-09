@@ -66,7 +66,6 @@ http://localhost:2022/delivery-docs <br> <br>
 
 ## Melhorias futuras
 ☑️ TODO personalizar retornos de filtros de acordo com tipo de usuario <br>
-☑️ TODO implementar GraphQL <br>
 ☑️ TODO terminar a implementação do Swagger<br>
 ☑️ TODO criar dashboard store<br>
 
@@ -78,6 +77,7 @@ http://localhost:2022/delivery-docs <br> <br>
 ✅ Tratamento de respostas de erro e criação de erros personalizados <br>
 ✅ Criado testes unitários <br>
 ✅ Inserir avatar de usuario<br>
+✅ implementar GraphQL <br>
 
 
 # Autora
