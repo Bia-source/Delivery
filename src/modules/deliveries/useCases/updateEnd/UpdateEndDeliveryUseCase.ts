@@ -14,6 +14,20 @@ export class UpdateEndDeliveryUseCase {
                 data: {
                     end_at: new Date(),
                     status: "ENTREGUE"
+                },
+                include: {
+                    client: {
+                        select: {
+                            username: true,
+                            adress: true,
+                            email: true
+                        }
+                    },
+                    item_name: {
+                        include: {
+                            produto: true
+                        }
+                    }                 
                 }
             });
             // sendMail({
@@ -22,7 +36,7 @@ export class UpdateEndDeliveryUseCase {
             //     messageText: `seu pedido código ${id_delivery} ${MessageStatusDelivery.ENTREGUE}`, 
             //     titleEmail: TitleStatusDelivery.STATUS  
             // })
-            return {user: username, data: delivery};
+            return {data: delivery};
         } catch (error) {
             deliveryAlreadyExist();
         }

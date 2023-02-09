@@ -127,6 +127,7 @@ export type Mutation = {
   deleteClient?: Maybe<ReturnClient>;
   deleteDelivery?: Maybe<ReturnDeleteDelivery>;
   deleteProduct?: Maybe<Product>;
+  delivered?: Maybe<ReturnInsertDeliverymanInOrder>;
   insertDeliveryman?: Maybe<ReturnInsertDeliverymanInOrder>;
   updateProductAdm?: Maybe<Product>;
   updateRegisterClient?: Maybe<ReturnClient>;
@@ -194,6 +195,14 @@ export type MutationDeleteDeliveryArgs = {
 export type MutationDeleteProductArgs = {
   id_product: Scalars['String'];
   status_adm: Scalars['Boolean'];
+};
+
+
+export type MutationDeliveredArgs = {
+  email: Scalars['String'];
+  id_delivery: Scalars['String'];
+  id_deliveryman: Scalars['String'];
+  username: Scalars['String'];
 };
 
 
@@ -393,8 +402,7 @@ export type ReturnInfoUser = {
 
 export type ReturnInsertDeliverymanInOrder = {
   __typename?: 'ReturnInsertDeliverymanInOrder';
-  data?: Maybe<Deliveries>;
-  user?: Maybe<Scalars['String']>;
+  data?: Maybe<ReturnDeliveryById>;
 };
 
 export type ReturnItemNameInfoByIdClient = {
@@ -695,6 +703,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   deleteClient?: Resolver<Maybe<ResolversTypes['ReturnClient']>, ParentType, ContextType, RequireFields<MutationDeleteClientArgs, 'id_client'>>;
   deleteDelivery?: Resolver<Maybe<ResolversTypes['ReturnDeleteDelivery']>, ParentType, ContextType, RequireFields<MutationDeleteDeliveryArgs, 'id_client' | 'id_delivery'>>;
   deleteProduct?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<MutationDeleteProductArgs, 'id_product' | 'status_adm'>>;
+  delivered?: Resolver<Maybe<ResolversTypes['ReturnInsertDeliverymanInOrder']>, ParentType, ContextType, RequireFields<MutationDeliveredArgs, 'email' | 'id_delivery' | 'id_deliveryman' | 'username'>>;
   insertDeliveryman?: Resolver<Maybe<ResolversTypes['ReturnInsertDeliverymanInOrder']>, ParentType, ContextType, RequireFields<MutationInsertDeliverymanArgs, 'email' | 'id_delivery' | 'id_deliveryman' | 'username'>>;
   updateProductAdm?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<MutationUpdateProductAdmArgs, 'id_product' | 'status_adm'>>;
   updateRegisterClient?: Resolver<Maybe<ResolversTypes['ReturnClient']>, ParentType, ContextType, RequireFields<MutationUpdateRegisterClientArgs, 'id_client'>>;
@@ -811,8 +820,7 @@ export type ReturnInfoUserResolvers<ContextType = any, ParentType extends Resolv
 };
 
 export type ReturnInsertDeliverymanInOrderResolvers<ContextType = any, ParentType extends ResolversParentTypes['ReturnInsertDeliverymanInOrder'] = ResolversParentTypes['ReturnInsertDeliverymanInOrder']> = {
-  data?: Resolver<Maybe<ResolversTypes['Deliveries']>, ParentType, ContextType>;
-  user?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  data?: Resolver<Maybe<ResolversTypes['ReturnDeliveryById']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

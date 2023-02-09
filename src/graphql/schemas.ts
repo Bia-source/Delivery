@@ -265,6 +265,7 @@ type ReturnOrderCreateDelivery {
    updateRegisterDeliveryman(id_deliveryman: String!, username: String, email: String): ReturnDeliveryman,
    createDelivery(name: String!, quantity: Int!, id_client: String!, username: String!): ReturnCreateDelivery
    deleteDelivery(id_delivery: String!, id_client: String!): ReturnDeleteDelivery,
-   insertDeliveryman(id_delivery: String!, id_deliveryman: String!, username: String!, email: String!): ReturnInsertDeliverymanInOrder  
+   insertDeliveryman(id_delivery: String!, id_deliveryman: String!, username: String!, email: String!): ReturnInsertDeliverymanInOrder,
+   delivered(id_delivery: String!, id_deliveryman: String!, username: String!, email: String!): ReturnInsertDeliverymanInOrder, 
  }
 `;

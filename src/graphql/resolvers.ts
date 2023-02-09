@@ -1,4 +1,5 @@
-import { QueryGetDeliveryByIdArgs, QueryGetDeliveryByIdDeliverymanArgs } from './../generated/schemas';
+import { UpdateEndDeliveryUseCase } from './../modules/deliveries/useCases/updateEnd/UpdateEndDeliveryUseCase';
+import { QueryGetDeliveryByIdArgs, QueryGetDeliveryByIdDeliverymanArgs, MutationDeliveredArgs } from './../generated/schemas';
 import {
     Clients,
     MutationAuthenticateClientArgs,
@@ -66,6 +67,7 @@ const updateRegisterDeliveryman = instanceProviders(UpdateRegisterDeliverymanUse
 const createDelivery = instanceProviders(CreateDeliveryUseCase);
 const deleteDelivery = instanceProviders(DeleteDeliveryUseCase);
 const insertDeliverymanInOrder = instanceProviders(UpdateDeliverymanUseCase);
+const delivered = instanceProviders(UpdateEndDeliveryUseCase);
 
 export const resolvers = {
     Query: {
@@ -166,8 +168,11 @@ export const resolvers = {
         deleteDelivery: async (_, { id_delivery, id_client }: MutationDeleteDeliveryArgs): Promise<ReturnDeleteDelivery> => {
             return await deleteDelivery.useCase.execute(id_delivery, id_client)
         },
-        insertDeliveryman: async (_, { id_delivery, id_deliveryman, username, email }: MutationInsertDeliverymanArgs) => {
+        insertDeliveryman: async (_, { id_delivery, id_deliveryman, username, email }: MutationInsertDeliverymanArgs): Promise<ReturnInsertDeliverymanInOrder> => {
             return await insertDeliverymanInOrder.useCase.execute({ id_delivery, id_deliveryman, username, email });
+        },
+        delivered: async (_, { id_delivery, id_deliveryman, username, email }: MutationDeliveredArgs): Promise<ReturnInsertDeliverymanInOrder> => {
+            return await delivered.useCase.execute({ id_delivery, id_deliveryman, username, email });
         }
 
     }
