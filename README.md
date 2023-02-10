@@ -15,8 +15,15 @@ Um sistema backend de entregas, onde o cliente pré cadastrado e logado faz seu 
 ✅ Busca de informações não sensiveis sobre os cliente por id <br>
 ✅ Pedidos feitos pelo solicitante busca pelo pedido por data <br>
 ✅ Pedidos feitos pelo solicitante busca pelo pedido por status <br>
+✅ Busca de pedidos pelo numero de identificação do deliveryman(somente adm)<br>
+✅ Busca de pedidos pelo numero de identificação do delivery<br>
 ✅ Deletar pedido feito apenas com status AGUARDANDO<br>
 ✅ Update dos dados cadastrais<br>
+✅ Busca de todos os produtos<br>
+✅ Busca de produtos por categoria<br>
+✅ Busca de produtos por nome<br>
+✅ Busca de produtos por numero de identificação<br>
+✅ Busca de produtos em ordem crescente e decrescente de forma alfabetica e por valor<br>
 
 ### Deliveryman🛵
 ✅ Cadastro de usuário <br>
@@ -27,12 +34,39 @@ Um sistema backend de entregas, onde o cliente pré cadastrado e logado faz seu 
 ✅ Busca de todos os pedidos disponiveis <br>
 ✅ Busca de pedidos por data <br>
 ✅ Busca de pedidos por status<br>
+✅ Busca de pedidos pela data de criação<br>
+✅ Busca de pedidos pela data de entrega<br>
+✅ Busca de pedidos pelo numero de identificação do deliveryman<br>
+✅ Busca de pedidos pelo numero de identificação do cliente<br>
+✅ Busca de pedidos pelo numero de identificação do delivery<br>
 ✅ Busca de informações não sensiveis sobre os deliverymans por id <br>
 ✅ Alteração de status do pedido <br>
 ✅ Envio de email para o usuario da alteração do status do pedido<br>
 ✅ Deletar o proprio usuario deliveryman <br>
 ✅ Update dos dados cadastrais<br>
 
+## ADM
+✅ Cadastro de usuário <br>
+✅ Criptografia de senha <br>
+✅ Envio de email ao criar usuario <br>
+✅ Autenticação por token <br>
+✅ Login <br>
+✅ Criar pedido <br>
+✅ Busca de todos os pedidos disponiveis <br>
+✅ Busca de pedidos por data <br>
+✅ Busca de pedidos por status<br>
+✅ Busca de pedidos pela data de criação<br>
+✅ Busca de pedidos pela data de entrega<br>
+✅ Busca de pedidos pelo numero de identificação do deliveryman<br>
+✅ Busca de pedidos pelo numero de identificação do cliente<br>
+✅ Busca de pedidos pelo numero de identificação do delivery<br>
+✅ Busca de informações não sensiveis sobre os deliverymans por id <br>
+✅ Busca de informações não sensiveis sobre os cliente por id <br>
+✅ Alteração de status do pedido <br>
+✅ Deletar pedido em qualquer status<br>
+✅ Envio de email para o usuario da alteração do status do pedido<br>
+✅ Deletar usuarios(cliente e deliveryman)<br>
+✅ Update dos dados cadastrais<br>
 
 ## Version Engines
 
