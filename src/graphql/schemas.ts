@@ -202,7 +202,7 @@ type ReturnOrderCreateDelivery {
     value: Int
   }
 
-  type ReturnProductsByCategory {
+  type ReturnProducts {
     id:String             
     product_name:String
     product_category:String
@@ -223,13 +223,15 @@ type ReturnOrderCreateDelivery {
     getDeliveryStatus(status: Status!): [ReturnDeliveries],
     getProductById(id_product: String!): Product,
     getProductByName(product_name: String!): Product,
-    getProductsByCategory(product_category: String!, sort: String!, nameSort: String!, amountOfResults: Int!): [ReturnProductsByCategory],
+    getProductsByCategory(product_category: String!, sort: String!, nameSort: String!, amountOfResults: Int!): [ReturnProducts],
     getClientById(id_client: String!): Clients,
     getDeliveryByCreated(findDateInitial: String!, findDateEnd: String!): [ReturnDeliveryByIdAndDate],
     getDeliveryByEnd(findDateInitial: String!, findDateEnd: String!): [ReturnDeliveryByIdAndDate],
     getDeliveryByIdClient(id_client: String!): [ReturnDeliveryByIdAndDate],
     getDeliveryById(id_delivery: String!): ReturnDeliveryByIdAndDate,
     getDeliveryByIdDeliveryman(id_deliveryman: String!): [ReturnDeliveryByIdAndDate],
+    getDiscountAllProducts(amountOfResults: Int!): [ReturnProducts],
+    getDiscountNameProductsAll(amountOfResults: Int!, product_name: String!): [ReturnProducts],
  }
 
  type Mutation {

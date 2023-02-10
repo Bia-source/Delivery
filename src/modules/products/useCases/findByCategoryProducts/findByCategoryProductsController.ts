@@ -2,7 +2,7 @@ import { FindByCategoryProductsUseCase } from './findByCategoryProductsUseCase';
 import { Request, Response } from "express";
 
 export class FindByCategoryProductsController {
-    async handle(req: Request, res: Response) {
+    async handle(req: Request, res: Response): Promise<Response> {
         try {
             const { product_category, sort, nameSort, amountOfResults } = req.body;
             const findByCategoryUseCase = new FindByCategoryProductsUseCase();

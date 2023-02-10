@@ -1,5 +1,6 @@
 
 import { prisma } from "../../../../database/prismaClient";
+import { ReturnProductsByCategory } from "../../../../generated/schemas";
 
 interface IRequestFindByCategory {
     product_category: string;
@@ -20,7 +21,7 @@ enum TypeNameSort {
 }
 
 export class FindByCategoryProductsUseCase{
-    async execute({ product_category, sort, nameSort, amountOfResults = 20 }: IRequestFindByCategory){
+    async execute({ product_category, sort, nameSort, amountOfResults = 20 }: IRequestFindByCategory): Promise<ReturnProductsByCategory[]>{
         return await prisma.product.findMany({
             where: {
                 product_category: product_category

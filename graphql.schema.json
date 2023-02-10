@@ -2262,6 +2262,88 @@
             "deprecationReason": null
           },
           {
+            "name": "getDiscountAllProducts",
+            "description": null,
+            "args": [
+              {
+                "name": "amountOfResults",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ReturnProducts",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "getDiscountNameProductsAll",
+            "description": null,
+            "args": [
+              {
+                "name": "amountOfResults",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "product_name",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ReturnProducts",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "getProductById",
             "description": null,
             "args": [
@@ -2331,7 +2413,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "SCALAR",
-                    "name": "String",
+                    "name": "Int",
                     "ofType": null
                   }
                 },
@@ -2393,7 +2475,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "ReturnProductsByCategory",
+                "name": "ReturnProducts",
                 "ofType": null
               }
             },
@@ -3156,7 +3238,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "ReturnProductsByCategory",
+        "name": "ReturnProducts",
         "description": null,
         "fields": [
           {
