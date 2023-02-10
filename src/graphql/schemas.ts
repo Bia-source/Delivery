@@ -222,7 +222,7 @@ type ReturnOrderCreateDelivery {
     getAllDeliveries(id_user: String!): [ReturnDeliveries],
     getDeliveryStatus(status: Status!): [ReturnDeliveries],
     getProductById(id_product: String!): Product,
-    getProductByName(product_name: String!): Product,
+    getProductByName(product_name: String!): [ReturnProducts],
     getProductsByCategory(product_category: String!, sort: String!, nameSort: String!, amountOfResults: Int!): [ReturnProducts],
     getClientById(id_client: String!): Clients,
     getDeliveryByCreated(findDateInitial: String!, findDateEnd: String!): [ReturnDeliveryByIdAndDate],

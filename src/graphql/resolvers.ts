@@ -12,7 +12,7 @@ import {
     ReturnCreateDelivery,
     ReturnDeleteDelivery, ReturnDeliveries, ReturnDeliveryByIdAndDate, ReturnDeliveryman,
     ReturnInsertDeliverymanInOrder,
-    ReturnProductsByCategory
+    ReturnProducts
 } from "../generated/schemas";
 import { AuthenticateDeliverymanUseCase } from '../modules/account/useCases/authenticateDeliveryman/AuthenticateDeliverymanUseCase';
 import { FindAllAvailableUseCase } from "../modules/deliveries/useCases/findAllAvailable/findAllAvailableUseCase";
@@ -50,13 +50,14 @@ const findByStatus = instanceProviders(FindByStatusUseCase);
 const findProductById = instanceProviders(FindByIdProductUseCase);
 const findProductByName = instanceProviders(FindProductByNameUseCase);
 const findProductsByCategory = instanceProviders(FindByCategoryProductsUseCase);
+const findProductsAllDiscount = instanceProviders(FindDiscountProductsUseCase);
 const findClientById = instanceProviders(FindByIdClientUseCase);
 const findDeliveryByCreated = instanceProviders(FindByCreatedUseCase);
 const findDeliveryByEndAt = instanceProviders(FindByEndAtUseCase);
 const findDeliveryByIdClient = instanceProviders(FindDeliveryByIdClientUseCase);
 const findDeliveryById = instanceProviders(FindByIdDeliveryUseCase);
 const findDeliveryByIdDeliveryman = instanceProviders(FindByIdDeliverymanUseCase);
-const findProductsAllDiscount = instanceProviders(FindDiscountProductsUseCase);
+
 
 // MUTATIONS 
 const createProduct = instanceProviders(CreateProductUseCase);
@@ -79,8 +80,8 @@ export const resolvers = {
         // PRODUCT
         getAllProducts: async (): Promise<[Product]> => await findAllProducts.useCase.execute(),
         getProductById: async (_, { id_product }: QueryGetProductByIdArgs): Promise<Product> => await findProductById.useCase.execute(id_product),
-        getProductByName: async (_, { product_name }: QueryGetProductByNameArgs): Promise<Product> => await findProductByName.useCase.execute(product_name),
-        getProductsByCategory: async (_, { product_category, sort, nameSort, amountOfResults }: QueryGetProductsByCategoryArgs): Promise<[ReturnProductsByCategory]>=> {
+        getProductByName: async (_, { product_name }: QueryGetProductByNameArgs): Promise<[ReturnProducts]> => await findProductByName.useCase.execute(product_name),
+        getProductsByCategory: async (_, { product_category, sort, nameSort, amountOfResults }: QueryGetProductsByCategoryArgs): Promise<[ReturnProducts]>=> {
             return await findProductsByCategory.useCase.execute({ product_category, sort, nameSort, amountOfResults });
         },
         getDiscountAllProducts: async (_, { amountOfResults })=> await findProductsAllDiscount.useCase.allProducts(amountOfResults),

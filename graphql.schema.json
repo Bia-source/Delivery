@@ -2394,9 +2394,13 @@
               }
             ],
             "type": {
-              "kind": "OBJECT",
-              "name": "Product",
-              "ofType": null
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ReturnProducts",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null

@@ -271,7 +271,7 @@ export type Query = {
   getDiscountAllProducts?: Maybe<Array<Maybe<ReturnProducts>>>;
   getDiscountNameProductsAll?: Maybe<Array<Maybe<ReturnProducts>>>;
   getProductById?: Maybe<Product>;
-  getProductByName?: Maybe<Product>;
+  getProductByName?: Maybe<Array<Maybe<ReturnProducts>>>;
   getProductsByCategory?: Maybe<Array<Maybe<ReturnProducts>>>;
 };
 
@@ -764,7 +764,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   getDiscountAllProducts?: Resolver<Maybe<Array<Maybe<ResolversTypes['ReturnProducts']>>>, ParentType, ContextType, RequireFields<QueryGetDiscountAllProductsArgs, 'amountOfResults'>>;
   getDiscountNameProductsAll?: Resolver<Maybe<Array<Maybe<ResolversTypes['ReturnProducts']>>>, ParentType, ContextType, RequireFields<QueryGetDiscountNameProductsAllArgs, 'amountOfResults' | 'product_name'>>;
   getProductById?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<QueryGetProductByIdArgs, 'id_product'>>;
-  getProductByName?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<QueryGetProductByNameArgs, 'product_name'>>;
+  getProductByName?: Resolver<Maybe<Array<Maybe<ResolversTypes['ReturnProducts']>>>, ParentType, ContextType, RequireFields<QueryGetProductByNameArgs, 'product_name'>>;
   getProductsByCategory?: Resolver<Maybe<Array<Maybe<ResolversTypes['ReturnProducts']>>>, ParentType, ContextType, RequireFields<QueryGetProductsByCategoryArgs, 'amountOfResults' | 'nameSort' | 'product_category' | 'sort'>>;
 };
 
