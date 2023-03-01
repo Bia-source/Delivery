@@ -17,7 +17,7 @@ model Deliveryman {
   Deliveries Deliveries[]
 
   @@map("deliveryman")
-}
+}                             
 
 model Clients {
   id         String       @id @default(uuid())
